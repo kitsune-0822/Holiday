@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { Link, Outlet, useLocation } from 'react-router';
 import { Dot, IconButton, Logo, Sidebar } from '@/components';
 import { mobileQuery, tabletQuery, useMediaQuery } from '@/hooks/useMediaQuery';
+import { useI18n } from '@/i18n';
 import { MobileDrawer } from './MobileDrawer';
 import { useNavigationModel } from './useNavigationModel';
 import styles from './AppShell.module.css';
@@ -26,6 +27,7 @@ export function AppShell() {
   const isMobile = useMediaQuery(mobileQuery);
   const isTablet = useMediaQuery(tabletQuery);
   const location = useLocation();
+  const { m } = useI18n();
   const { primaryAction, menu, footer, sheetState, unreadAlertCount } = useNavigationModel();
   const [desktopCollapsed, setDesktopCollapsed] = useState(readCollapsed);
   const [tabletPinned, setTabletPinned] = useState(false);
@@ -50,22 +52,22 @@ export function AppShell() {
   return (
     <div className={styles.shell} data-sheet-background>
       <a className={styles.skip} href="#main">
-        본문으로 건너뛰기
+        {m.nav.skip}
       </a>
       {isMobile ? (
         <>
           <header className={styles.topBar}>
-            <IconButton variant="ghost" size="sm" label="메뉴 열기" icon={<Menu />} onClick={() => setDrawerOpen(true)} />
-            <Link to="/vacations" className={styles.topLogo} aria-label="Holiday 홈">
+            <IconButton variant="ghost" size="sm" label={m.nav.openMenu} icon={<Menu />} onClick={() => setDrawerOpen(true)} />
+            <Link to="/vacations" className={styles.topLogo} aria-label={m.nav.home}>
               <Logo size="sm" />
             </Link>
             <div className={styles.topActions}>
-              <IconButton variant="ghost" size="sm" label="휴가 신청하기" icon={<Plus />} onClick={primaryAction.onClick} />
+              <IconButton variant="ghost" size="sm" label={m.nav.request} icon={<Plus />} onClick={primaryAction.onClick} />
               <Link
                 to="/alerts"
                 state={sheetState}
                 className={styles.bell}
-                aria-label={unreadAlertCount ? `알림, 읽지 않은 알림 ${unreadAlertCount}건` : '알림'}
+                aria-label={unreadAlertCount ? m.nav.alertsUnread(unreadAlertCount) : m.nav.alerts}
               >
                 <Bell aria-hidden="true" />
                 {unreadAlertCount > 0 && <Dot className={styles.bellDot} />}

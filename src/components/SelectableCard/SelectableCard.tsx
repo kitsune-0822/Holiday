@@ -13,7 +13,7 @@ export interface SelectableCardProps extends Omit<ButtonHTMLAttributes<HTMLButto
 /** 선택 가능한 카드. 선택되면 2px 테두리와 체크 아이콘이 함께 나타난다. */
 export function SelectableCard({ title, description, isSelected, children, className, ...rest }: SelectableCardProps) {
   return (
-    <button
+    <button data-component="SelectableCard"
       type="button"
       aria-pressed={isSelected}
       className={cx(styles.card, isSelected && styles.selected, className)}

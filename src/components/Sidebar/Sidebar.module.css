@@ -35,7 +35,7 @@
   justify-content: space-between;
   gap: var(--semantic-spacing-sm);
   min-height: var(--semantic-size-logo-md);
-  padding-inline: calc(var(--semantic-padding-lg) * 2);
+  padding-inline: var(--semantic-padding-lg);
   white-space: nowrap;
 }
 .collapsed .header { justify-content: center; padding-inline: var(--semantic-padding-lg); }

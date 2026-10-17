@@ -28,7 +28,7 @@ export function DateField({ label, required, description, error, disabled, value
   };
 
   return (
-    <Field label={label} required={required} description={description} error={error} className={className}>
+    <Field data-component="DateField" id={rest.id} label={label} required={required} description={description} error={error} className={className}>
       {(fieldProps) => (
         <div
           className={cx(control.box, error ? control.invalid : undefined, disabled && control.disabled)}

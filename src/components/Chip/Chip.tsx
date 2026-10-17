@@ -11,7 +11,7 @@ export interface ChipProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>,
 
 export function Chip({ isSelected, children, className, ...rest }: ChipProps) {
   return (
-    <button type="button" aria-pressed={isSelected} className={cx(styles.chip, isSelected && styles.selected, className)} {...rest}>
+    <button data-component="Chip" type="button" aria-pressed={isSelected} className={cx(styles.chip, isSelected && styles.selected, className)} {...rest}>
       {isSelected && <Check className={styles.icon} aria-hidden="true" />}
       <span className="text-body-lg">{children}</span>
     </button>

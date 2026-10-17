@@ -1,12 +1,26 @@
 /// <reference types="vitest/config" />
+import { execSync } from 'node:child_process';
 import { fileURLToPath, URL } from 'node:url';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
 const src = fileURLToPath(new URL('./src', import.meta.url));
 
+function gitCommit() {
+  try {
+    return execSync('git rev-parse --short HEAD').toString().trim();
+  } catch {
+    return 'local';
+  }
+}
+
 export default defineConfig({
   plugins: [react()],
+  // 포트폴리오 패널에 보일 빌드 정보
+  define: {
+    __APP_COMMIT__: JSON.stringify(gitCommit()),
+    __APP_BUILD_DATE__: JSON.stringify(new Date().toISOString().slice(0, 10)),
+  },
   resolve: { alias: { '@': src } },
   build: {
     rollupOptions: {

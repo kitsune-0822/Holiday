@@ -1,7 +1,6 @@
 import {
   Bell,
   CalendarCheck,
-  CalendarClock,
   ClipboardCheck,
   LayoutDashboard,
   LogOut,
@@ -15,7 +14,7 @@ import { NavGroup, NavGroupItem, NavItem, Sidebar } from '@/components';
 import styles from '../showcase.module.css';
 import { Demo, DemoGrid, PropMap, Section, ToggleControl } from '../ui';
 
-type MenuKey = 'alerts' | 'history' | 'balance' | 'approvals' | 'settings';
+type MenuKey = 'alerts' | 'history' | 'approvals' | 'settings';
 
 /** 사이드바 전체 예시. 쇼케이스와 반응형 미리보기에서 같이 쓴다. */
 export function SidebarExample({ collapsed, onCollapsedChange }: { collapsed: boolean; onCollapsedChange?: (v: boolean) => void }) {
@@ -51,10 +50,7 @@ export function SidebarExample({ collapsed, onCollapsedChange }: { collapsed: bo
       </NavGroup>
       <NavGroup title="휴가">
         <NavGroupItem>
-          <NavItem icon={<CalendarCheck />} label="휴가 신청 내역" {...item('history')} />
-        </NavGroupItem>
-        <NavGroupItem>
-          <NavItem icon={<CalendarClock />} label="남은 휴가" {...item('balance')} />
+          <NavItem icon={<CalendarCheck />} label="휴가 현황" {...item('history')} />
         </NavGroupItem>
       </NavGroup>
       <NavGroup title="관리자 메뉴">
@@ -99,7 +95,7 @@ export function Navigation() {
         </Demo>
         <Demo label="collapsed NavItem">
           <NavItem icon={<Bell />} label="알림" count={4} collapsed />
-          <NavItem icon={<CalendarCheck />} label="휴가 신청 내역" collapsed selected />
+          <NavItem icon={<CalendarCheck />} label="휴가 현황" collapsed selected />
         </Demo>
       </DemoGrid>
       <PropMap

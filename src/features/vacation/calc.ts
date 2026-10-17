@@ -1,5 +1,7 @@
 import { unitDays, type Balance, type VacationType, type VacationUnit } from './types';
 
+// 화면 표기(일수, 상대 시간)는 i18n의 Formatters(f.days, f.relative)를 쓴다.
+
 const DAY_MS = 24 * 60 * 60 * 1000;
 
 function parse(date: string): Date {
@@ -27,25 +29,7 @@ export function remainingAfter(balance: Balance, type: VacationType, days: numbe
   return { ...balance, [type]: balance[type] - days };
 }
 
-/** 13.25 → '13.25일', 3 → '3일' */
-export function formatDays(days: number): string {
-  return `${Number(days.toFixed(2))}일`;
-}
-
 /** 'YYYY-MM-DD' 두 날짜의 차이(일) */
 export function daysBetween(from: string, to: string): number {
   return Math.round((parse(to).getTime() - parse(from).getTime()) / DAY_MS);
-}
-
-const rtf = new Intl.RelativeTimeFormat('ko', { numeric: 'auto' });
-
-/** '3시간 전', '어제' 같은 상대 시간 */
-export function relativeTime(iso: string, now = new Date()): string {
-  const diffSec = Math.round((new Date(iso).getTime() - now.getTime()) / 1000);
-  const abs = Math.abs(diffSec);
-  if (abs < 60) return '방금 전';
-  if (abs < 3600) return rtf.format(Math.round(diffSec / 60), 'minute');
-  if (abs < 86400) return rtf.format(Math.round(diffSec / 3600), 'hour');
-  if (abs < 86400 * 30) return rtf.format(Math.round(diffSec / 86400), 'day');
-  return new Date(iso).toLocaleDateString('ko-KR');
 }

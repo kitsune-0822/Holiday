@@ -12,7 +12,7 @@ export interface LogoProps {
 
 export function Logo({ size = 'md', showName = true, className }: LogoProps) {
   return (
-    <span className={cx(styles.logo, styles[size], className)}>
+    <span data-component="Logo" className={cx(styles.logo, styles[size], className)}>
       <TreePalm className={styles.mark} aria-hidden="true" strokeWidth={2.25} />
       {showName ? (
         <span className={cx(styles.name, size === 'md' ? 'text-heading-xl' : 'text-title-lg')}>Holiday</span>

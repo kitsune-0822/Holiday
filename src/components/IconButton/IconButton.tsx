@@ -22,7 +22,7 @@ export function IconButton({
   ...rest
 }: IconButtonProps) {
   return (
-    <button
+    <button data-component="IconButton"
       type={type}
       aria-label={label}
       title={label}

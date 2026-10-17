@@ -1,4 +1,5 @@
 import { X } from 'lucide-react';
+import { useI18n } from '@/i18n';
 import { useEffect, useId, useLayoutEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import { useFocusTrap } from '@/hooks/useFocusTrap';
@@ -24,10 +25,15 @@ export interface SheetProps {
   footer?: ReactNode;
   /** 본문. 길어지면 이 영역만 스크롤된다. */
   children: ReactNode;
+  /** 태블릿·데스크탑 최대 폭: md 800 · wide 1200 (넓은 표·타임라인) */
+  size?: 'md' | 'wide';
   className?: string;
 }
 
 type Phase = 'closed' | 'entering' | 'open' | 'exiting';
+
+/** 열려 있는 시트 순서. Esc는 맨 위 시트만 닫는다. */
+const openStack: string[] = [];
 
 /** 아래로 이만큼(px) 끌거나, 이 속도(px/ms) 이상으로 튕기면 닫는다. */
 const DISMISS_DISTANCE_RATIO = 0.25;
@@ -51,9 +57,11 @@ export function Sheet({
   showDismissButton = true,
   footer,
   children,
+  size = 'md',
   className,
 }: SheetProps) {
   const isMobile = useIsMobile();
+  const { m } = useI18n();
   const [phase, setPhase] = useState<Phase>(open ? 'entering' : 'closed');
   const panelRef = useRef<HTMLDivElement>(null);
   const titleId = useId();
@@ -94,14 +102,25 @@ export function Sheet({
   useFocusTrap(panelRef, visible);
 
   // 열린 동안: 배경 스크롤 잠금, iOS 배경 축소 효과용 표시
+  const stackId = useId();
   useEffect(() => {
     if (!visible) return;
-    const html = document.documentElement;
-    html.dataset.sheetOpen = phase === 'open' || phase === 'entering' ? 'true' : 'closing';
+    openStack.push(stackId);
     return () => {
-      delete html.dataset.sheetOpen;
+      openStack.splice(openStack.indexOf(stackId), 1);
     };
-  }, [visible, phase]);
+  }, [visible, stackId]);
+
+  // 맨 아래 시트가 iOS 배경 축소 효과를 맡는다
+  const closing = phase === 'exiting';
+  useEffect(() => {
+    if (!visible || openStack[0] !== stackId) return;
+    const html = document.documentElement;
+    html.dataset.sheetOpen = closing ? 'closing' : 'true';
+    return () => {
+      if (openStack.length <= 1) delete html.dataset.sheetOpen;
+    };
+  }, [visible, closing, stackId]);
 
   useEffect(() => {
     if (visible) return lockBodyScroll();
@@ -110,14 +129,14 @@ export function Sheet({
   useEffect(() => {
     if (!visible) return;
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
+      if (e.key === 'Escape' && openStack[openStack.length - 1] === stackId) {
         e.stopPropagation();
         onClose();
       }
     };
     document.addEventListener('keydown', onKeyDown);
     return () => document.removeEventListener('keydown', onKeyDown);
-  }, [visible, onClose]);
+  }, [visible, onClose, stackId]);
 
   if (!visible) return null;
 
@@ -174,12 +193,13 @@ export function Sheet({
       <div className={styles.backdrop} onClick={onClose} aria-hidden="true" />
       <div
         ref={panelRef}
+        data-component="Sheet"
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
         aria-describedby={description ? descriptionId : undefined}
         tabIndex={-1}
-        className={cx(styles.panel, className)}
+        className={cx(styles.panel, size === 'wide' && styles.wide, className)}
       >
         <div className={styles.dragArea} {...dragHandlers}>
           {isMobile && <div className={styles.grabber} aria-hidden="true" />}
@@ -194,7 +214,7 @@ export function Sheet({
                 </p>
               )}
             </div>
-            {showDismissButton && <IconButton label="닫기" icon={<X />} size="md" onClick={onClose} />}
+            {showDismissButton && <IconButton label={m.common.close} icon={<X />} size="md" onClick={onClose} />}
           </header>
         </div>
         <ScrollArea className={styles.scroll}>

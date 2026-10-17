@@ -22,6 +22,14 @@
   animation: enter var(--semantic-motion-duration-normal) var(--semantic-motion-easing-sheet);
 }
 
+.action {
+  margin-left: var(--semantic-spacing-xs);
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--semantic-color-timeline-half);
+}
+.action:hover { text-decoration: underline; }
 .icon { width: var(--semantic-size-icon-md); height: var(--semantic-size-icon-md); }
 .success { color: var(--semantic-color-icon-success); }
 .danger { color: var(--semantic-color-icon-danger); }

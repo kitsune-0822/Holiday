@@ -13,7 +13,7 @@ export interface DotProps {
 
 export function Dot({ tone = 'danger', size = 'md', label, className }: DotProps) {
   return (
-    <span
+    <span data-component="Dot"
       className={cx(styles.dot, styles[tone], styles[size], className)}
       role={label ? 'img' : undefined}
       aria-label={label}

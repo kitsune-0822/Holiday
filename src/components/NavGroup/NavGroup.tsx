@@ -17,7 +17,7 @@ export function NavGroup({ title, collapsed: collapsedProp, children, className 
   const collapsed = useSidebarCollapsed(collapsedProp);
   const id = useId();
   return (
-    <div role="group" aria-labelledby={title ? id : undefined} className={cx(styles.group, className)}>
+    <div data-component="NavGroup" role="group" aria-labelledby={title ? id : undefined} className={cx(styles.group, className)}>
       {title && (
         <div id={id} className={cx(collapsed ? 'visually-hidden' : styles.title, 'text-body-sm')}>
           {title}

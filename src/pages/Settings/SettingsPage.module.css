@@ -1,0 +1,11 @@
+.page { display: flex; flex-direction: column; gap: var(--semantic-spacing-xl); max-width: var(--semantic-size-layout-sheet-max-width); }
+.section { display: flex; flex-direction: column; gap: var(--semantic-spacing-lg); }
+.preview {
+  display: flex;
+  flex-direction: column;
+  gap: var(--semantic-spacing-xs);
+  padding: var(--semantic-padding-lg);
+  border-radius: var(--semantic-radius-lg);
+  background: var(--semantic-color-bg-subtle);
+}
+.row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--semantic-spacing-sm); }

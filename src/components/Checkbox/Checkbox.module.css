@@ -34,8 +34,10 @@
   opacity: 0;
 }
 
-input:checked + .box::after { background: var(--semantic-color-primary-default); box-shadow: none; }
-input:checked + .box .mark { opacity: 1; }
+input:checked + .box::after,
+input:indeterminate + .box::after { background: var(--semantic-color-primary-default); box-shadow: none; }
+input:checked + .box .mark,
+input:indeterminate + .box .mark { opacity: 1; }
 input:focus-visible + .box::after {
   outline: var(--semantic-border-width-focus) solid var(--semantic-color-border-focus);
   outline-offset: 2px;

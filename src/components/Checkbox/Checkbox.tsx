@@ -1,5 +1,5 @@
-import { Check } from 'lucide-react';
-import type { InputHTMLAttributes, ReactNode } from 'react';
+import { Check, Minus } from 'lucide-react';
+import { useEffect, useRef, type InputHTMLAttributes, type ReactNode } from 'react';
 import { cx } from '@/lib/cx';
 import styles from './Checkbox.module.css';
 
@@ -7,13 +7,22 @@ export interface CheckboxProps extends Omit<InputHTMLAttributes<HTMLInputElement
   label: ReactNode;
   /** Figma의 `isSelected` */
   checked: boolean;
+  /** 일부만 선택됨 (표의 전체 선택 칸) */
+  indeterminate?: boolean;
+  /** 라벨을 화면에서 숨긴다 (표 안의 선택 칸처럼 맥락이 분명할 때) */
+  hideLabel?: boolean;
   onChange: (checked: boolean) => void;
 }
 
-export function Checkbox({ label, checked, onChange, disabled, className, ...rest }: CheckboxProps) {
+export function Checkbox({ label, checked, indeterminate = false, hideLabel = false, onChange, disabled, className, ...rest }: CheckboxProps) {
+  const ref = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    if (ref.current) ref.current.indeterminate = indeterminate;
+  }, [indeterminate]);
   return (
-    <label className={cx(styles.checkbox, disabled && styles.disabled, className)}>
+    <label data-component="Checkbox" className={cx(styles.checkbox, disabled && styles.disabled, className)} onClick={(e) => e.stopPropagation()}>
       <input
+        ref={ref}
         type="checkbox"
         className="visually-hidden"
         checked={checked}
@@ -22,9 +31,9 @@ export function Checkbox({ label, checked, onChange, disabled, className, ...res
         {...rest}
       />
       <span className={styles.box} aria-hidden="true">
-        <Check className={styles.mark} strokeWidth={3} />
+        {indeterminate ? <Minus className={styles.mark} strokeWidth={3} /> : <Check className={styles.mark} strokeWidth={3} />}
       </span>
-      <span className="text-body-lg">{label}</span>
+      <span className={cx(hideLabel && 'visually-hidden', 'text-body-lg')}>{label}</span>
     </label>
   );
 }
@@ -42,7 +51,7 @@ export interface CheckboxGroupProps<V extends string> {
 export function CheckboxGroup<V extends string>({ legend, hideLegend, options, value, onChange, className }: CheckboxGroupProps<V>) {
   const toggle = (v: V, on: boolean) => onChange(on ? [...value, v] : value.filter((x) => x !== v));
   return (
-    <fieldset className={cx(styles.group, className)}>
+    <fieldset data-component="CheckboxGroup" className={cx(styles.group, className)}>
       <legend className={cx(hideLegend ? 'visually-hidden' : styles.legend, 'text-body-lg')}>{legend}</legend>
       <div className={styles.options}>
         {options.map((o) => (

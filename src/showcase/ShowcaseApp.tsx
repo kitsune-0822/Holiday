@@ -1,5 +1,6 @@
 import { Logo, ScrollArea } from '@/components';
 import { Actions } from './demos/Actions';
+import { Additions } from './demos/Additions';
 import { Data } from './demos/Data';
 import { Display } from './demos/Display';
 import { Foundations } from './demos/Foundations';
@@ -34,6 +35,10 @@ const toc: Array<{ group: string; items: Array<[id: string, label: string]> }> =
       ['sidebar', 'NavItem · Sidebar'],
       ['data-table', 'FilterGrid · DataTable'],
       ['sheet', 'Sheet'],
+      ['page-header', 'PageHeader'],
+      ['avatar-tag', 'Avatar · Tag'],
+      ['meter-callout', 'Meter · Callout'],
+      ['toolbar-fields', 'Select · 검색 · 토스트'],
     ],
   },
   { group: '확인', items: [['responsive', '반응형 미리보기']] },
@@ -101,6 +106,7 @@ export function ShowcaseApp() {
         <Navigation />
         <Data />
         <Overlay />
+        <Additions />
         <Responsive />
       </main>
     </div>

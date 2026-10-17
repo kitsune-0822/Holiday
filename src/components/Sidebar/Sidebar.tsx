@@ -1,4 +1,5 @@
 import { PanelLeftClose, PanelLeftOpen } from 'lucide-react';
+import { useI18n } from '@/i18n';
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { cx } from '@/lib/cx';
 import { Button } from '../Button/Button';
@@ -40,6 +41,7 @@ export interface SidebarProps {
  */
 export function Sidebar({ collapsed, onCollapsedChange, primaryAction, children, footer, className }: SidebarProps) {
   const [peek, setPeek] = useState(false);
+  const { m } = useI18n();
   const rootRef = useRef<HTMLElement>(null);
   const pointerType = useRef<string>('mouse');
   const visuallyCollapsed = collapsed && !peek;
@@ -101,9 +103,10 @@ export function Sidebar({ collapsed, onCollapsedChange, primaryAction, children,
   return (
     <SidebarCollapsedContext.Provider value={visuallyCollapsed}>
       <aside
+        data-component="Sidebar"
         ref={rootRef}
         className={cx(styles.sidebar, collapsed && styles.collapsedSlot, className)}
-        aria-label="주 메뉴"
+        aria-label={m.components.sidebar}
         {...handlers}
       >
         <div className={cx(styles.panel, visuallyCollapsed && styles.collapsed, peek && styles.peek)}>
@@ -114,7 +117,7 @@ export function Sidebar({ collapsed, onCollapsedChange, primaryAction, children,
                 data-sidebar-pin=""
                 variant="ghost"
                 size="xs"
-                label={collapsed ? '메뉴 펼친 채로 고정' : '메뉴 접기'}
+                label={collapsed ? m.components.sidebarPin : m.components.sidebarCollapse}
                 icon={collapsed ? <PanelLeftOpen /> : <PanelLeftClose />}
                 onClick={() => {
                   setPeek(false);

@@ -1,7 +1,6 @@
 import {
   Bell,
   CalendarCheck,
-  CalendarClock,
   ClipboardCheck,
   LayoutDashboard,
   LogOut,
@@ -12,8 +11,9 @@ import {
 } from 'lucide-react';
 import { Link, useLocation, useNavigate, type Location } from 'react-router';
 import { NavGroup, NavGroupItem, NavItem, useToast, type SidebarAction } from '@/components';
-import { pendingApprovalCount } from '@/data/mock';
+import { useApprovals } from '@/features/approvals/ApprovalsContext';
 import { useVacation } from '@/features/vacation/VacationContext';
+import { useI18n } from '@/i18n';
 
 export interface SheetLocationState {
   /** 시트를 열 때 뒤에 깔려 있던 화면 */
@@ -25,7 +25,10 @@ export function useNavigationModel() {
   const location = useLocation();
   const navigate = useNavigate();
   const toast = useToast();
+  const { m } = useI18n();
+  const n = m.nav;
   const { unreadAlertCount } = useVacation();
+  const { pending } = useApprovals();
 
   // 시트가 열려 있으면 뒤 화면 기준으로 선택 상태를 정한다
   const base = (location.state as SheetLocationState | null)?.background ?? location;
@@ -33,10 +36,9 @@ export function useNavigationModel() {
   const sheetState: SheetLocationState = { background };
 
   const isStatus = base.pathname === '/vacations';
-  const isBalance = isStatus && base.hash === '#balance';
 
   const primaryAction: SidebarAction = {
-    label: '휴가 신청하기',
+    label: n.request,
     icon: <Plus />,
     onClick: () => navigate('/vacation-request', { state: sheetState }),
   };
@@ -45,33 +47,30 @@ export function useNavigationModel() {
     <>
       <NavGroup>
         <NavGroupItem>
-          <NavItem as={Link} to="/alerts" state={sheetState} icon={<Bell />} label="알림" count={unreadAlertCount} />
+          <NavItem as={Link} to="/alerts" state={sheetState} icon={<Bell />} label={n.alerts} count={unreadAlertCount} />
         </NavGroupItem>
         <NavGroupItem>
-          <NavItem icon={<LayoutDashboard />} label="대시보드" disabled />
+          <NavItem icon={<LayoutDashboard />} label={n.dashboard} disabled />
         </NavGroupItem>
       </NavGroup>
-      <NavGroup title="휴가">
+      <NavGroup title={n.vacationGroup}>
         <NavGroupItem>
-          <NavItem as={Link} to="/vacations" icon={<CalendarCheck />} label="휴가 신청 내역" selected={isStatus && !isBalance} />
-        </NavGroupItem>
-        <NavGroupItem>
-          <NavItem as={Link} to="/vacations#balance" icon={<CalendarClock />} label="남은 휴가" selected={isBalance} />
+          <NavItem as={Link} to="/vacations" icon={<CalendarCheck />} label={n.status} selected={isStatus} />
         </NavGroupItem>
       </NavGroup>
-      <NavGroup title="관리자 메뉴">
+      <NavGroup title={n.adminGroup}>
         <NavGroupItem>
           <NavItem
             as={Link}
             to="/approvals"
             icon={<ClipboardCheck />}
-            label="결재 대기 신청"
-            count={pendingApprovalCount}
+            label={n.approvals}
+            count={pending.length}
             selected={base.pathname === '/approvals'}
           />
         </NavGroupItem>
         <NavGroupItem>
-          <NavItem icon={<Users />} label="구성원 관리" disabled />
+          <NavItem icon={<Users />} label={n.members} disabled />
         </NavGroupItem>
       </NavGroup>
     </>
@@ -80,17 +79,17 @@ export function useNavigationModel() {
   const footer = (
     <NavGroup>
       <NavGroupItem>
-        <NavItem icon={<User />} label="내 정보" disabled />
+        <NavItem icon={<User />} label={n.profile} disabled />
       </NavGroupItem>
       <NavGroupItem>
-        <NavItem as={Link} to="/settings" icon={<Settings />} label="설정" selected={base.pathname === '/settings'} />
+        <NavItem as={Link} to="/settings" icon={<Settings />} label={n.settings} selected={base.pathname === '/settings'} />
       </NavGroupItem>
       <NavGroupItem>
         <NavItem
           icon={<LogOut />}
-          label="로그아웃"
+          label={n.logout}
           tone="danger"
-          onClick={() => toast({ tone: 'danger', message: '로그인 기능이 아직 연결되지 않았어요.' })}
+          onClick={() => toast({ tone: 'danger', message: n.logoutUnavailable })}
         />
       </NavGroupItem>
     </NavGroup>

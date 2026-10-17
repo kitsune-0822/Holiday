@@ -42,7 +42,6 @@
 /* 표 폭이 좁으면(화면이 아니라 표 자체의 폭 기준) 필드가 한 줄에 하나씩 */
 @container (max-width: 1199px) {
   .row { flex-direction: column; }
-  .label { flex-basis: var(--semantic-size-layout-filter-label-compact); }
 }
 
 /* 모바일: 표 모양을 풀고 라벨 위, 입력 아래 */

@@ -8,6 +8,8 @@ export type ButtonSize = 'sm' | 'md' | 'lg';
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /** primary: 주요 행동 / secondary: 브랜드 색 보조 / tertiary: 중립 보조 */
   hierarchy?: ButtonHierarchy;
+  /** danger: 반려·삭제처럼 되돌리기 어려운 행동. primary는 빨간 배경, 나머지는 빨간 글자. */
+  tone?: 'default' | 'danger';
   /** 높이 sm 40 · md 48 · lg 56 */
   size?: ButtonSize;
   /** 라벨 앞 아이콘 (24px) */
@@ -22,6 +24,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
  */
 export function Button({
   hierarchy = 'primary',
+  tone = 'default',
   size = 'md',
   icon,
   fullWidth = false,
@@ -31,9 +34,9 @@ export function Button({
   ...rest
 }: ButtonProps) {
   return (
-    <button
+    <button data-component="Button"
       type={type}
-      className={cx(styles.button, styles[hierarchy], styles[size], fullWidth && styles.fullWidth, className)}
+      className={cx(styles.button, styles[hierarchy], tone === 'danger' && styles.danger, styles[size], fullWidth && styles.fullWidth, className)}
       {...rest}
     >
       {icon && (

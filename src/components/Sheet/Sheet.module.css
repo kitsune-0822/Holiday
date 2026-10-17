@@ -63,6 +63,7 @@
     transform var(--semantic-motion-duration-normal) var(--semantic-motion-easing-default);
 }
 .desktop[data-state='open'] .panel { opacity: 1; transform: none; }
+.desktop .wide { max-width: var(--semantic-size-layout-sheet-max-width-wide); }
 
 /* ── 모바일: iOS bottom sheet ── */
 .mobile { align-items: flex-end; }
