@@ -19,7 +19,7 @@ const icons = { success: CircleCheck, danger: CircleX, info: Info };
 export function AlertItem({ tone, title, message, time, dateTime }: AlertItemProps) {
   const Icon = icons[tone];
   return (
-    <article className={styles.item}>
+    <article data-component="AlertItem" className={styles.item}>
       <Icon className={cx(styles.icon, styles[tone])} aria-hidden="true" />
       <div className={styles.content}>
         <h3 className="text-title-xl">{title}</h3>

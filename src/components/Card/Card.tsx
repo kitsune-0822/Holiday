@@ -17,7 +17,7 @@ export interface CardProps extends Omit<HTMLAttributes<HTMLElement>, 'title'> {
 export function Card({ title, description, action, children, headingLevel = 2, className, ...rest }: CardProps) {
   const Heading = `h${headingLevel}` as const;
   return (
-    <section className={cx(styles.card, className)} {...rest}>
+    <section data-component="Card" className={cx(styles.card, className)} {...rest}>
       {(title || action) && (
         <header className={styles.header}>
           <div className={styles.titles}>

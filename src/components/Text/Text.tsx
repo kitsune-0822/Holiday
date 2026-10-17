@@ -28,5 +28,5 @@ export function Text<T extends ElementType = 'span'>({
   ...rest
 }: TextProps<T>) {
   const Component: ElementType = as ?? 'span';
-  return <Component className={cx(`text-${variant}`, styles[tone], className)} {...rest} />;
+  return <Component data-component="Text" className={cx(`text-${variant}`, styles[tone], className)} {...rest} />;
 }

@@ -20,9 +20,14 @@
 .th { background: var(--semantic-color-bg-subtle); font-weight: inherit; }
 .td { background: var(--semantic-color-bg-default); }
 tbody tr:hover .td { background: var(--semantic-color-bg-subtle); }
+.selectCol { width: var(--semantic-size-control-lg); }
+.clickable { cursor: pointer; }
+tr.selected .td { background: var(--semantic-color-primary-subtle); }
+tr.selected:hover .td { background: var(--semantic-color-primary-subtle-hover); }
 
 .center { text-align: center; }
 .start { text-align: start; }
+.end { text-align: end; }
 
 .cards { display: flex; flex-direction: column; gap: var(--semantic-spacing-xs); }
 .card {
@@ -33,7 +38,10 @@ tbody tr:hover .td { background: var(--semantic-color-bg-subtle); }
   border: var(--semantic-border-width-default) solid var(--semantic-color-border-default);
   border-radius: var(--semantic-radius-xl);
 }
+.cardTitle { display: flex; align-items: center; gap: var(--semantic-spacing-2xs); }
+.card.selected { border-color: var(--semantic-color-border-focus); background: var(--semantic-color-primary-subtle); }
 .cardList { display: flex; flex-direction: column; gap: var(--semantic-spacing-3xs); }
+.cardFull { margin-top: var(--semantic-spacing-2xs); }
 .cardRow { display: flex; align-items: baseline; gap: var(--semantic-spacing-sm); }
 .cardLabel { flex: 0 0 var(--semantic-size-layout-mobile-label); color: var(--semantic-color-text-tertiary); }
 

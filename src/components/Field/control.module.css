@@ -38,5 +38,11 @@
 
 .icon { width: var(--semantic-size-icon-lg); height: var(--semantic-size-icon-lg); color: var(--semantic-color-icon-subtle); }
 
+.sm { min-height: var(--semantic-size-control-sm); padding-inline: var(--semantic-padding-md); }
+.sm .input { padding-block: var(--semantic-padding-sm); }
+.sm .icon { width: var(--semantic-size-icon-md); height: var(--semantic-size-icon-md); }
+
+.select { appearance: none; cursor: pointer; }
+
 .textarea { align-items: stretch; }
 .textarea .input { min-height: var(--semantic-size-textarea-min-height); resize: vertical; }

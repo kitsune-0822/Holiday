@@ -1,3 +1,4 @@
+import { beforeEach } from 'vitest';
 import '@testing-library/jest-dom/vitest';
 
 // jsdom에는 matchMedia가 없다. 테스트에서 setViewport로 폭을 바꾼다.
@@ -24,3 +25,16 @@ export function setViewport(width: number) {
   viewportWidth = width;
   listeners.forEach((cb) => cb());
 }
+
+// jsdom에는 ResizeObserver가 없다. 크기를 재지 않는 빈 구현으로 둔다.
+globalThis.ResizeObserver ??= class {
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+} as unknown as typeof ResizeObserver;
+
+// 테스트 환경의 브라우저 언어는 영어라서, 기본 테스트는 한국어로 고정한다.
+beforeEach(() => {
+  localStorage.setItem('holiday.locale', 'ko');
+  localStorage.removeItem('holiday.tweaks.visible');
+});

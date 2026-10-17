@@ -15,7 +15,7 @@ export interface KeyValueListProps {
 /** '연차 ··· 13.25일' 같은 좌우 정렬 목록 */
 export function KeyValueList({ items, className }: KeyValueListProps) {
   return (
-    <dl className={cx(styles.list, className)}>
+    <dl data-component="KeyValueList" className={cx(styles.list, className)}>
       {items.map((item, i) => (
         <div key={i} className={styles.row}>
           <dt className={cx(styles.label, 'text-body-list')}>{item.label}</dt>

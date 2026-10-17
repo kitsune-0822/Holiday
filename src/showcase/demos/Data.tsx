@@ -20,11 +20,11 @@ export const requestColumns: DataTableColumn<SampleRequest>[] = [
   { key: 'type', header: '휴가 유형', render: (r) => r.type },
   { key: 'unit', header: '휴가 단위', render: (r) => r.unit },
   { key: 'period', header: '시간대', render: (r) => r.period },
-  { key: 'requestedAt', header: '신청일', width: 'var(--semantic-size-layout-filter-label-compact)', render: (r) => r.requestedAt },
-  { key: 'startDate', header: '휴가 시작일', width: 'var(--semantic-size-layout-filter-label-compact)', render: (r) => r.startDate },
-  { key: 'endDate', header: '휴가 종료일', width: 'var(--semantic-size-layout-filter-label-compact)', render: (r) => r.endDate },
+  { key: 'requestedAt', header: '신청일', width: 'var(--semantic-size-layout-column-sm)', render: (r) => r.requestedAt },
+  { key: 'startDate', header: '휴가 시작일', width: 'var(--semantic-size-layout-column-sm)', render: (r) => r.startDate },
+  { key: 'endDate', header: '휴가 종료일', width: 'var(--semantic-size-layout-column-sm)', render: (r) => r.endDate },
   { key: 'status', header: '상태', render: (r) => <Badge status={r.status} /> },
-  { key: 'reason', header: '사유', width: 'var(--semantic-size-layout-filter-label)', align: 'start', render: (r) => r.reason },
+  { key: 'reason', header: '사유', width: 'var(--semantic-size-layout-column-md)', align: 'start', render: (r) => r.reason },
 ];
 
 const all = <V extends string>(o: { value: V }[]) => o.map((x) => x.value);

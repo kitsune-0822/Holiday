@@ -1,0 +1,15 @@
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--semantic-spacing-3xs);
+  padding: var(--semantic-padding-badge-y) var(--semantic-padding-badge-x);
+  border-radius: var(--semantic-radius-pill);
+  white-space: nowrap;
+}
+.icon { display: inline-flex; width: var(--semantic-size-icon-xs); height: var(--semantic-size-icon-xs); }
+.icon svg { width: 100%; height: 100%; }
+.neutral { background: var(--semantic-color-bg-muted); color: var(--semantic-color-text-secondary); }
+.primary { background: var(--semantic-color-primary-subtle); color: var(--semantic-color-primary-on-subtle); }
+.success { background: var(--semantic-color-status-success-subtle); color: var(--semantic-color-text-success); }
+.danger { background: var(--semantic-color-status-danger-subtle); color: var(--semantic-color-text-danger); }
+.warning { background: var(--semantic-color-status-warning-subtle); color: var(--semantic-color-text-warning); }

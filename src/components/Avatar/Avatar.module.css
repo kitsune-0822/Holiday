@@ -1,0 +1,13 @@
+.avatar {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--semantic-radius-full);
+  color: var(--semantic-color-text-inverse);
+  white-space: nowrap;
+}
+.sm { width: var(--semantic-size-avatar-sm); height: var(--semantic-size-avatar-sm); font-size: var(--semantic-typography-caption-sm-font-size); }
+.md { width: var(--semantic-size-avatar-md); height: var(--semantic-size-avatar-md); }
+.lg { width: var(--semantic-size-avatar-lg); height: var(--semantic-size-avatar-lg); }
+.xl { width: var(--semantic-size-avatar-xl); height: var(--semantic-size-avatar-xl); }

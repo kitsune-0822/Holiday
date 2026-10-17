@@ -86,7 +86,7 @@ primitive = {
     "border-width": nums([0, 1, 2, 4]),
     "opacity": nums([0, 8, 16, 24, 40, 64, 80, 100]),
     # 레이아웃 고정 치수 (사이드바, 시트 폭 등). 모두 4의 배수.
-    "size": nums([44, 88, 120, 160, 200, 300, 480, 800, 960]),
+    "size": nums([44, 88, 120, 150, 160, 200, 250, 300, 480, 800, 960, 1200]),
     "z-index": nums([0, 100, 200, 300, 400, 500]),
     # 아래 셋은 Figma에서 쓰이지 않지만 코드와 값을 맞추기 위해 같이 관리한다.
     "duration": nums([150, 250, 400]),
@@ -223,6 +223,8 @@ semantic = {
         },
         "status": {
             "danger": c("red.500", ANY_FILL),
+            "danger-hover": c("red.600", ANY_FILL),
+            "danger-pressed": c("red.700", ANY_FILL),
             "danger-subtle": c("red.50", ANY_FILL),
             "success": c("green.500", ANY_FILL),
             "success-subtle": c("green.50", ANY_FILL),
@@ -230,6 +232,22 @@ semantic = {
             "warning-subtle": c("orange.50", ANY_FILL),
             "info": c("blue.500", ANY_FILL),
             "info-subtle": c("blue.50", ANY_FILL),
+        },
+        # 사람마다 다른 아바타 배경 (흰 글자와 대비 4.5 이상)
+        "avatar": {
+            "1": c("blue.700", FILL), "2": c("green.700", FILL), "3": c("orange.700", FILL),
+            "4": c("gray.600", FILL), "5": c("red.700", FILL), "6": c("blue.900", FILL),
+        },
+        # 주간 휴가 타임라인 막대
+        "timeline": {
+            "annual": c("blue.500", FILL),
+            "half": c("blue.300", FILL),
+            "on-half": c("blue.900", TEXT),
+            "sick": c("red.500", FILL),
+            "comp": c("green.500", FILL),
+            "pending": c("blue.50", FILL),
+            "pending-border": c("blue.500", STROKE),
+            "today": c("blue.50", FILL),
         },
         "scrollbar": {
             "thumb": c("alpha.black.24", FILL),
@@ -283,13 +301,18 @@ semantic = {
         "textarea-min-height": layout(120),
         "logo": {"sm": size(24), "md": layout(44)},
         "layout": {
-            "sidebar-expanded": layout(300),
+            "sidebar-expanded": layout(250),
             "sidebar-collapsed": layout(88),
             "sheet-max-width": layout(800),
+            # 넓은 내용(주간 타임라인 등)을 크게 볼 때
+            "sheet-max-width-wide": layout(1200),
             "topbar-height": size(56),
             "table-min-width": layout(960),
-            "filter-label": layout(200),
-            "filter-label-compact": layout(160),
+            # 검색 조건 표의 라벨 칸 (표 본문의 열 폭과는 따로 관리)
+            "filter-label": layout(150),
+            # 표 열·목록 라벨 등에 쓰는 고정 폭
+            "column-sm": layout(160),
+            "column-md": layout(200),
             "mobile-label": layout(88),
         },
     },

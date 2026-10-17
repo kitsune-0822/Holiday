@@ -1329,6 +1329,13 @@
           "com.figma.scopes": []
         }
       },
+      "150": {
+        "$type": "number",
+        "$value": 150,
+        "$extensions": {
+          "com.figma.scopes": []
+        }
+      },
       "160": {
         "$type": "number",
         "$value": 160,
@@ -1339,6 +1346,13 @@
       "200": {
         "$type": "number",
         "$value": 200,
+        "$extensions": {
+          "com.figma.scopes": []
+        }
+      },
+      "250": {
+        "$type": "number",
+        "$value": 250,
         "$extensions": {
           "com.figma.scopes": []
         }
@@ -1367,6 +1381,13 @@
       "960": {
         "$type": "number",
         "$value": 960,
+        "$extensions": {
+          "com.figma.scopes": []
+        }
+      },
+      "1200": {
+        "$type": "number",
+        "$value": 1200,
         "$extensions": {
           "com.figma.scopes": []
         }
@@ -2168,6 +2189,26 @@
             ]
           }
         },
+        "danger-hover": {
+          "$type": "color",
+          "$value": "{primitive.color.red.600}",
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_FILLS",
+              "STROKE_COLOR"
+            ]
+          }
+        },
+        "danger-pressed": {
+          "$type": "color",
+          "$value": "{primitive.color.red.700}",
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_FILLS",
+              "STROKE_COLOR"
+            ]
+          }
+        },
         "danger-subtle": {
           "$type": "color",
           "$value": "{primitive.color.red.50}",
@@ -2235,6 +2276,148 @@
             "com.figma.scopes": [
               "ALL_FILLS",
               "STROKE_COLOR"
+            ]
+          }
+        }
+      },
+      "avatar": {
+        "1": {
+          "$type": "color",
+          "$value": "{primitive.color.blue.700}",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ]
+          }
+        },
+        "2": {
+          "$type": "color",
+          "$value": "{primitive.color.green.700}",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ]
+          }
+        },
+        "3": {
+          "$type": "color",
+          "$value": "{primitive.color.orange.700}",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ]
+          }
+        },
+        "4": {
+          "$type": "color",
+          "$value": "{primitive.color.gray.600}",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ]
+          }
+        },
+        "5": {
+          "$type": "color",
+          "$value": "{primitive.color.red.700}",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ]
+          }
+        },
+        "6": {
+          "$type": "color",
+          "$value": "{primitive.color.blue.900}",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ]
+          }
+        }
+      },
+      "timeline": {
+        "annual": {
+          "$type": "color",
+          "$value": "{primitive.color.blue.500}",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ]
+          }
+        },
+        "half": {
+          "$type": "color",
+          "$value": "{primitive.color.blue.300}",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ]
+          }
+        },
+        "on-half": {
+          "$type": "color",
+          "$value": "{primitive.color.blue.900}",
+          "$extensions": {
+            "com.figma.scopes": [
+              "TEXT_FILL"
+            ]
+          }
+        },
+        "sick": {
+          "$type": "color",
+          "$value": "{primitive.color.red.500}",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ]
+          }
+        },
+        "comp": {
+          "$type": "color",
+          "$value": "{primitive.color.green.500}",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ]
+          }
+        },
+        "pending": {
+          "$type": "color",
+          "$value": "{primitive.color.blue.50}",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ]
+          }
+        },
+        "pending-border": {
+          "$type": "color",
+          "$value": "{primitive.color.blue.500}",
+          "$extensions": {
+            "com.figma.scopes": [
+              "STROKE_COLOR"
+            ]
+          }
+        },
+        "today": {
+          "$type": "color",
+          "$value": "{primitive.color.blue.50}",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
             ]
           }
         }
@@ -3036,7 +3219,7 @@
       "layout": {
         "sidebar-expanded": {
           "$type": "number",
-          "$value": "{primitive.size.300}",
+          "$value": "{primitive.size.250}",
           "$extensions": {
             "com.figma.scopes": [
               "WIDTH_HEIGHT"
@@ -3055,6 +3238,15 @@
         "sheet-max-width": {
           "$type": "number",
           "$value": "{primitive.size.800}",
+          "$extensions": {
+            "com.figma.scopes": [
+              "WIDTH_HEIGHT"
+            ]
+          }
+        },
+        "sheet-max-width-wide": {
+          "$type": "number",
+          "$value": "{primitive.size.1200}",
           "$extensions": {
             "com.figma.scopes": [
               "WIDTH_HEIGHT"
@@ -3081,16 +3273,25 @@
         },
         "filter-label": {
           "$type": "number",
-          "$value": "{primitive.size.200}",
+          "$value": "{primitive.size.150}",
           "$extensions": {
             "com.figma.scopes": [
               "WIDTH_HEIGHT"
             ]
           }
         },
-        "filter-label-compact": {
+        "column-sm": {
           "$type": "number",
           "$value": "{primitive.size.160}",
+          "$extensions": {
+            "com.figma.scopes": [
+              "WIDTH_HEIGHT"
+            ]
+          }
+        },
+        "column-md": {
+          "$type": "number",
+          "$value": "{primitive.size.200}",
           "$extensions": {
             "com.figma.scopes": [
               "WIDTH_HEIGHT"

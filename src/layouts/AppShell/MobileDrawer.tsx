@@ -3,6 +3,7 @@ import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import { IconButton } from '@/components';
 import { useFocusTrap } from '@/hooks/useFocusTrap';
+import { useI18n } from '@/i18n';
 import { lockBodyScroll } from '@/lib/scrollbars';
 import styles from './MobileDrawer.module.css';
 
@@ -13,6 +14,7 @@ export function MobileDrawer({ open, onClose, children }: { open: boolean; onClo
   const [mounted, setMounted] = useState(open);
   const [shown, setShown] = useState(false);
   const panelRef = useRef<HTMLDivElement>(null);
+  const { m } = useI18n();
 
   useEffect(() => {
     if (open) {
@@ -40,8 +42,8 @@ export function MobileDrawer({ open, onClose, children }: { open: boolean; onClo
   return createPortal(
     <div className={styles.root} data-state={shown ? 'open' : 'closed'}>
       <div className={styles.backdrop} onClick={onClose} aria-hidden="true" />
-      <div ref={panelRef} className={styles.panel} role="dialog" aria-modal="true" aria-label="메뉴" tabIndex={-1}>
-        <IconButton className={styles.close} variant="ghost" size="xs" label="메뉴 닫기" icon={<X />} onClick={onClose} />
+      <div ref={panelRef} className={styles.panel} role="dialog" aria-modal="true" aria-label={m.nav.menu} tabIndex={-1}>
+        <IconButton className={styles.close} variant="ghost" size="xs" label={m.nav.closeMenu} icon={<X />} onClick={onClose} />
         {children}
       </div>
     </div>,

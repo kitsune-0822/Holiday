@@ -1,11 +1,13 @@
 import { useId, type ReactNode } from 'react';
+import { useI18n } from '@/i18n';
 import { cx } from '@/lib/cx';
 import styles from './FilterGrid.module.css';
 
 /** 검색 조건 표. 데스크탑은 Figma처럼 '라벨 칸 | 입력 칸'이 이어진 표, 모바일은 라벨 위·입력 아래로 쌓인다. */
-export function FilterGrid({ children, className, label = '검색 조건' }: { children: ReactNode; className?: string; label?: string }) {
+export function FilterGrid({ children, className, label }: { children: ReactNode; className?: string; label?: string }) {
+  const { m } = useI18n();
   return (
-    <div role="group" aria-label={label} className={cx(styles.grid, className)}>
+    <div data-component="FilterGrid" role="group" aria-label={label ?? m.components.filterGroup} className={cx(styles.grid, className)}>
       {children}
     </div>
   );
@@ -13,7 +15,7 @@ export function FilterGrid({ children, className, label = '검색 조건' }: { c
 
 /** 데스크탑에서 한 줄에 놓일 필드 묶음. 좁아지면 필드가 한 줄에 하나씩 내려간다. */
 export function FilterRow({ children }: { children: ReactNode }) {
-  return <div className={styles.row}>{children}</div>;
+  return <div data-component="FilterRow" className={styles.row}>{children}</div>;
 }
 
 export interface FilterFieldProps {
@@ -25,7 +27,7 @@ export interface FilterFieldProps {
 
 export function FilterField({ label, htmlFor, children }: FilterFieldProps) {
   return (
-    <div className={styles.field}>
+    <div data-component="FilterField" className={styles.field}>
       {htmlFor ? (
         <label htmlFor={htmlFor} className={cx(styles.label, 'text-body-lg')}>
           {label}
@@ -45,19 +47,20 @@ export function FilterTextInput({
   id,
   value,
   onChange,
-  placeholder = '입력',
+  placeholder,
 }: {
   id: string;
   value: string;
   onChange: (value: string) => void;
   placeholder?: string;
 }) {
+  const { m } = useI18n();
   return (
-    <input
+    <input data-component="FilterTextInput"
       id={id}
       className={cx(styles.input, 'text-body-lg')}
       value={value}
-      placeholder={placeholder}
+      placeholder={placeholder ?? m.common.input}
       onChange={(e) => onChange(e.target.value)}
     />
   );
@@ -71,12 +74,13 @@ export interface DateRange {
 /** 'YYYY-MM-DD ~ YYYY-MM-DD' 기간 입력 */
 export function FilterDateRange({ label, value, onChange }: { label: string; value: DateRange; onChange: (value: DateRange) => void }) {
   const id = useId();
+  const { m } = useI18n();
   return (
-    <div className={styles.range}>
+    <div data-component="FilterDateRange" className={styles.range}>
       <input
         id={`${id}-from`}
         type="date"
-        aria-label={`${label} 시작`}
+        aria-label={m.components.rangeFrom(label)}
         className={cx(styles.input, styles.date, !value.from && styles.empty, 'text-body-lg')}
         value={value.from}
         max={value.to || undefined}
@@ -88,7 +92,7 @@ export function FilterDateRange({ label, value, onChange }: { label: string; val
       <input
         id={`${id}-to`}
         type="date"
-        aria-label={`${label} 끝`}
+        aria-label={m.components.rangeTo(label)}
         className={cx(styles.input, styles.date, !value.to && styles.empty, 'text-body-lg')}
         value={value.to}
         min={value.from || undefined}

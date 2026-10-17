@@ -10,5 +10,5 @@ export interface ButtonGroupProps {
 }
 
 export function ButtonGroup({ direction = 'horizontal', children, className }: ButtonGroupProps) {
-  return <div className={cx(styles.group, styles[direction], className)}>{children}</div>;
+  return <div data-component="ButtonGroup" className={cx(styles.group, styles[direction], className)}>{children}</div>;
 }

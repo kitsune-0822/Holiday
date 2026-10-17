@@ -1,0 +1,6 @@
+.header { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--semantic-spacing-sm); }
+.titles { display: flex; min-width: 0; flex-direction: column; gap: var(--semantic-spacing-3xs); }
+.eyebrow { color: var(--semantic-color-text-tertiary); }
+.description { color: var(--semantic-color-text-secondary); }
+.description strong { color: var(--semantic-color-text-primary); font-weight: var(--semantic-typography-title-md-font-weight); }
+.actions { display: flex; flex-wrap: wrap; gap: var(--semantic-spacing-2xs); }

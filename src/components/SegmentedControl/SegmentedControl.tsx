@@ -1,4 +1,5 @@
 import { useId, type ReactNode } from 'react';
+import { useI18n } from '@/i18n';
 import { cx } from '@/lib/cx';
 import { Dot } from '../Dot/Dot';
 import styles from './SegmentedControl.module.css';
@@ -34,9 +35,10 @@ export function SegmentedControl<V extends string>({
   className,
 }: SegmentedControlProps<V>) {
   const name = useId();
+  const { m } = useI18n();
   const errorId = `${name}-error`;
   return (
-    <fieldset
+    <fieldset data-component="SegmentedControl"
       className={cx(styles.fieldset, className)}
       disabled={disabled}
       aria-describedby={error ? errorId : undefined}
@@ -46,7 +48,7 @@ export function SegmentedControl<V extends string>({
         {required && (
           <>
             <Dot size="sm" tone="danger" />
-            <span className="visually-hidden">(필수)</span>
+            <span className="visually-hidden">{m.common.required}</span>
           </>
         )}
       </legend>

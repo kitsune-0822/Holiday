@@ -1,5 +1,13 @@
 import { describe, expect, it } from 'vitest';
-import { countWeekdays, formatDays, relativeTime, remainingAfter, requestedDays } from './calc';
+import { createFormatters } from '@/i18n';
+import { en } from '@/i18n/messages/en';
+import { ja } from '@/i18n/messages/ja';
+import { ko } from '@/i18n/messages/ko';
+import { countWeekdays, remainingAfter, requestedDays } from './calc';
+
+const f = createFormatters(ko);
+const formatDays = f.days;
+const relativeTime = f.relative;
 
 describe('휴가 일수 계산', () => {
   it('주말을 빼고 센다 (2026-10-19 월 ~ 10-25 일 → 5일)', () => {
@@ -28,5 +36,20 @@ describe('휴가 일수 계산', () => {
     const now = new Date('2026-10-17T12:00:00+09:00');
     expect(relativeTime('2026-10-17T09:00:00+09:00', now)).toBe('3시간 전');
     expect(relativeTime('2026-10-16T12:00:00+09:00', now)).toBe('어제');
+  });
+});
+
+describe('언어별 표기', () => {
+  it('일수와 날짜를 언어 규칙대로 쓴다', () => {
+    const fe = createFormatters(en);
+    const fj = createFormatters(ja);
+    expect(fe.days(1)).toBe('1 day');
+    expect(fe.days(2.5)).toBe('2.5 days');
+    expect(fj.days(3)).toBe('3日');
+    expect(f.monthDay('2026-10-20')).toBe('10/20(화)');
+    expect(fe.monthDay('2026-10-20')).toBe('Tue, 10/20');
+    expect(fj.monthDay('2026-10-20')).toBe('10/20(火)');
+    expect(f.longDate('2026-10-18')).toBe('2026년 10월 18일 일요일');
+    expect(fe.longDate('2026-10-18')).toBe('Sunday, October 18, 2026');
   });
 });

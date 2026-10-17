@@ -1,0 +1,185 @@
+.page { display: flex; flex-direction: column; gap: var(--semantic-spacing-xl); container-type: inline-size; }
+
+.count { color: var(--semantic-color-primary-default); }
+.sub { color: var(--semantic-color-text-tertiary); }
+.stack { display: inline-flex; flex-direction: column; align-items: flex-start; gap: var(--semantic-spacing-3xs); }
+
+/* ── 개요: 오늘 · 이번 주 ── */
+.overview { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--semantic-spacing-sm); }
+@container (min-width: 1080px) {
+  .overview { grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); align-items: stretch; }
+}
+.overviewCard { justify-content: flex-start; min-width: 0; }
+
+/* ── 주간 미리보기 ── */
+.weekActions { display: flex; align-items: center; gap: var(--semantic-spacing-2xs); }
+/* 좁은 화면에서는 범례를 숨겨 제목이 꺾이지 않게 한다 (크게 보기에서 보여준다) */
+@container (max-width: 599px) {
+  .weekActions .legend { display: none; }
+}
+.weekCard { min-height: 0; }
+.weekPreview {
+  position: relative;
+  flex: 1;
+  /* 쌓여 보일 때(좁은 화면): 머리글 + 약 3명 */
+  height: calc(var(--semantic-size-control-md) * 5);
+}
+.weekPreviewInner { height: 100%; overflow: hidden; }
+.weekFade {
+  position: absolute;
+  inset: auto 0 0 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  height: calc(var(--semantic-size-control-md) * 1.5);
+  padding-bottom: var(--semantic-spacing-3xs);
+  background: linear-gradient(to bottom, transparent, var(--semantic-color-bg-default) 70%);
+  pointer-events: none;
+}
+.weekFade > * { pointer-events: auto; }
+
+/* 나란히 놓일 때: 미리보기는 행 높이에 영향을 주지 않고 오늘 휴가자 카드 높이를 따른다 */
+@container (min-width: 1080px) {
+  .weekPreview { height: auto; min-height: calc(var(--semantic-size-control-md) * 5); }
+  .weekPreviewInner { position: absolute; inset: 0; }
+}
+
+/* ── 주간 크게 보기 ── */
+.weekSheet { display: flex; flex-direction: column; gap: var(--semantic-spacing-sm); }
+.weekNav { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--semantic-spacing-xs); }
+.weekNavButtons { display: flex; align-items: center; gap: var(--semantic-spacing-2xs); }
+
+.todayList { display: flex; flex-direction: column; gap: var(--semantic-spacing-sm); }
+.todayList li { display: flex; align-items: center; gap: var(--semantic-spacing-xs); }
+.todayList li > :last-child { margin-left: auto; }
+.emptyText { padding-block: var(--semantic-spacing-lg); text-align: center; }
+
+.split {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--semantic-spacing-2xs);
+  margin-top: auto;
+  padding-top: var(--semantic-padding-lg);
+  border-top: var(--semantic-border-width-default) solid var(--semantic-color-border-subtle);
+}
+.split dt { color: var(--semantic-color-text-tertiary); }
+
+.legend { display: flex; flex-wrap: wrap; gap: var(--semantic-spacing-sm); color: var(--semantic-color-text-tertiary); }
+.legend span { display: inline-flex; align-items: center; gap: var(--semantic-spacing-3xs); }
+.swatch {
+  display: inline-block;
+  width: var(--semantic-size-icon-sm);
+  height: var(--semantic-size-dot-md);
+  border-radius: var(--semantic-radius-xs);
+  background: var(--semantic-color-timeline-annual);
+}
+.swatchPending {
+  border: var(--semantic-border-width-default) dashed var(--semantic-color-timeline-pending-border);
+  background: var(--semantic-color-timeline-pending);
+}
+
+/* ── 결재 대기 ── */
+.pendingPanel { display: flex; flex-direction: column; gap: var(--semantic-spacing-sm); }
+.panelHead { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: var(--semantic-spacing-2xs); }
+.panelTitle { display: flex; align-items: baseline; gap: var(--semantic-spacing-2xs); }
+
+.toolbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--semantic-spacing-xs); }
+.kinds { display: flex; flex-wrap: wrap; gap: var(--semantic-spacing-2xs); }
+.chipCount { color: var(--semantic-color-text-tertiary); }
+.toolbarFields { display: flex; flex-wrap: wrap; gap: var(--semantic-spacing-2xs); }
+.toolbarFields > :first-child { width: var(--semantic-size-layout-column-sm); }
+.toolbarFields > :last-child { width: calc(var(--semantic-size-layout-sidebar-expanded) - var(--semantic-spacing-xl)); }
+
+.bulkbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--semantic-spacing-xs);
+  padding: var(--semantic-padding-sm) var(--semantic-padding-lg);
+  border-radius: var(--semantic-radius-lg);
+  background: var(--semantic-color-primary-subtle);
+  color: var(--semantic-color-primary-on-subtle);
+}
+.bulkActions { display: flex; flex-wrap: wrap; gap: var(--semantic-spacing-2xs); }
+
+.person { display: inline-flex; align-items: center; gap: var(--semantic-spacing-xs); }
+.personText { display: flex; min-width: 0; flex-direction: column; align-items: flex-start; }
+.nameButton {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--semantic-color-text-primary);
+  text-align: start;
+}
+.nameButton:hover { color: var(--semantic-color-text-link); text-decoration: underline; }
+.reason {
+  display: block;
+  max-width: var(--semantic-size-layout-column-md);
+  overflow: hidden;
+  color: var(--semantic-color-text-secondary);
+  text-overflow: ellipsis;
+}
+.rowActions { display: inline-flex; gap: var(--semantic-spacing-2xs); }
+
+/* ── 상세 시트 ── */
+.detail { display: flex; flex-direction: column; gap: var(--semantic-spacing-lg); }
+.detailPerson { display: flex; align-items: center; gap: var(--semantic-spacing-sm); }
+.detailList {
+  display: grid;
+  grid-template-columns: var(--semantic-size-layout-mobile-label) 1fr;
+  gap: var(--semantic-spacing-xs) var(--semantic-spacing-sm);
+}
+.detailList dt { color: var(--semantic-color-text-tertiary); }
+.detailSection { display: flex; flex-direction: column; gap: var(--semantic-spacing-xs); }
+.balanceBox {
+  display: flex;
+  flex-direction: column;
+  gap: var(--semantic-spacing-xs);
+  padding: var(--semantic-padding-lg);
+  border-radius: var(--semantic-radius-lg);
+  background: var(--semantic-color-bg-subtle);
+}
+.balanceTotal {
+  display: flex;
+  justify-content: space-between;
+  padding-top: var(--semantic-padding-sm);
+  border-top: var(--semantic-border-width-default) solid var(--semantic-color-border-default);
+}
+.overlapList { display: flex; flex-direction: column; gap: var(--semantic-spacing-2xs); }
+.overlapList li { display: flex; flex-wrap: wrap; align-items: center; gap: var(--semantic-spacing-2xs); }
+.overlapWhen { margin-left: auto; }
+.log { display: flex; flex-direction: column; gap: var(--semantic-spacing-xs); padding: 0; list-style: none; }
+.log li {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding-left: var(--semantic-padding-lg);
+  color: var(--semantic-color-text-secondary);
+}
+.log li::before {
+  content: '';
+  position: absolute;
+  top: var(--semantic-spacing-3xs);
+  left: 0;
+  width: var(--semantic-size-dot-md);
+  height: var(--semantic-size-dot-md);
+  border-radius: var(--semantic-radius-full);
+  background: var(--semantic-color-border-strong);
+}
+.log time { color: var(--semantic-color-text-tertiary); }
+.log li.logNow::before { background: var(--semantic-color-status-warning); }
+
+/* ── 반려 시트 ── */
+.reject { display: flex; flex-direction: column; gap: var(--semantic-spacing-sm); }
+.presets { display: flex; flex-wrap: wrap; gap: var(--semantic-spacing-2xs); }
+
+@media (max-width: 767px) {
+  .toolbar { flex-direction: column; align-items: stretch; }
+  .kinds { flex-wrap: nowrap; overflow-x: auto; padding-bottom: var(--semantic-spacing-3xs); }
+  .kinds > * { flex-shrink: 0; }
+  .toolbarFields { display: grid; grid-template-columns: 1fr; }
+  .toolbarFields > :first-child,
+  .toolbarFields > :last-child { width: auto; }
+  .rowActions { display: grid; grid-template-columns: 1fr 1fr; width: 100%; }
+}

@@ -49,4 +49,12 @@
 .tertiary:hover:not(:disabled) { background: var(--semantic-color-bg-muted); }
 .tertiary:active:not(:disabled) { background: var(--semantic-color-bg-selected-hover); }
 
+.primary.danger { background: var(--semantic-color-status-danger); color: var(--semantic-color-text-inverse); }
+.primary.danger:hover:not(:disabled) { background: var(--semantic-color-status-danger-hover); }
+.primary.danger:active:not(:disabled) { background: var(--semantic-color-status-danger-pressed); }
+.secondary.danger,
+.tertiary.danger { color: var(--semantic-color-text-danger); }
+.secondary.danger:hover:not(:disabled),
+.tertiary.danger:hover:not(:disabled) { background: var(--semantic-color-status-danger-subtle); }
+
 .button:disabled { opacity: var(--semantic-opacity-disabled); }

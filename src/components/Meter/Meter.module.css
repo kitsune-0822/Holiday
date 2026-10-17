@@ -1,0 +1,9 @@
+.track {
+  display: flex;
+  height: var(--semantic-size-dot-md);
+  overflow: hidden;
+  border-radius: var(--semantic-radius-pill);
+  background: var(--semantic-color-border-default);
+}
+.strong { background: var(--semantic-color-primary-default); }
+.light { background: var(--semantic-color-timeline-half); }

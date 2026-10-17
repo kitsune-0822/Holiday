@@ -10,35 +10,71 @@
   background: var(--semantic-color-bg-default);
   color: var(--semantic-color-text-primary);
   text-align: left;
-  transition: background-color var(--semantic-motion-duration-fast) var(--semantic-motion-easing-default);
+  transition: background-color var(--semantic-motion-duration-fast)
+    var(--semantic-motion-easing-default);
 }
-.item:hover { background: var(--semantic-color-bg-subtle); }
-.item:active { background: var(--semantic-color-bg-muted); }
+.item:hover {
+  background: var(--semantic-color-bg-subtle);
+}
+.item:active {
+  background: var(--semantic-color-bg-muted);
+}
 
 /* 선택: bg-selected. 선택+hover는 한 단계 진하게 해서 선택 표시를 유지한다. */
 .selected,
-.item[aria-current='page'] { background: var(--semantic-color-bg-selected); font-weight: var(--semantic-typography-title-md-font-weight); }
+.item[aria-current="page"] {
+  background: var(--semantic-color-bg-selected);
+  font-weight: var(--semantic-typography-title-md-font-weight);
+}
 .selected:hover,
-.item[aria-current='page']:hover { background: var(--semantic-color-bg-selected-hover); }
+.item[aria-current="page"]:hover {
+  background: var(--semantic-color-bg-selected-hover);
+}
 
 .item:disabled,
-.item[aria-disabled='true'] { opacity: var(--semantic-opacity-disabled); cursor: not-allowed; }
+.item[aria-disabled="true"] {
+  opacity: var(--semantic-opacity-disabled);
+  cursor: not-allowed;
+}
 .item:disabled:hover,
-.item[aria-disabled='true']:hover { background: var(--semantic-color-bg-default); }
+.item[aria-disabled="true"]:hover {
+  background: var(--semantic-color-bg-default);
+}
 
 .icon {
   position: relative;
   display: inline-flex;
-  width: var(--semantic-size-icon-lg);
-  height: var(--semantic-size-icon-lg);
+  width: var(--semantic-size-icon-md);
+  height: var(--semantic-size-icon-md);
   color: var(--semantic-color-icon-default);
 }
-.icon svg { width: 100%; height: 100%; }
-.dot { position: absolute; top: 0; right: 0; }
+.icon svg {
+  width: 100%;
+  height: 100%;
+}
+.dot {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
 
-.label { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.label {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 
-.danger { color: var(--semantic-color-text-danger); }
-.danger .icon { color: var(--semantic-color-icon-danger); }
+.danger {
+  color: var(--semantic-color-text-danger);
+}
+.danger .icon {
+  color: var(--semantic-color-icon-danger);
+}
 
-.collapsed { justify-content: center; width: var(--semantic-size-control-lg); padding: var(--semantic-padding-md); }
+.collapsed {
+  justify-content: center;
+  width: var(--semantic-size-control-lg);
+  padding: var(--semantic-padding-md);
+}
