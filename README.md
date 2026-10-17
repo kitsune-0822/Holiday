@@ -11,6 +11,12 @@ npm test           # 컴포넌트 테스트
 npm run build      # 타입 검사 + 빌드 (dist/)
 ```
 
+## 배포
+
+- 프로덕션: https://holiday-shiftee.vercel.app (쇼케이스: `/showcase/`)
+- `vercel.json`: 모든 주소를 앱(`index.html`)으로, `/showcase/*`는 쇼케이스로 보낸다 (새로고침·직접 진입 시 404 방지)
+- 수동 배포: `vercel build --prod && vercel deploy --prebuilt --prod` (로컬 빌드라 커밋 해시가 패널에 표시된다)
+
 ## 디자인 토큰
 
 ```

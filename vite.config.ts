@@ -7,6 +7,8 @@ import react from '@vitejs/plugin-react';
 const src = fileURLToPath(new URL('./src', import.meta.url));
 
 function gitCommit() {
+  // Vercel Git 연동 빌드는 .git 없이 이 값을 준다
+  if (process.env.VERCEL_GIT_COMMIT_SHA) return process.env.VERCEL_GIT_COMMIT_SHA.slice(0, 7);
   try {
     return execSync('git rev-parse --short HEAD').toString().trim();
   } catch {
