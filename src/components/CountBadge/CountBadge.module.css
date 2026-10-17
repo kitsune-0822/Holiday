@@ -1,0 +1,13 @@
+.badge {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--semantic-size-count-badge);
+  height: var(--semantic-size-count-badge);
+  padding-inline: var(--semantic-padding-xs);
+  border-radius: var(--semantic-radius-pill);
+  background: var(--semantic-color-status-danger);
+  color: var(--semantic-color-text-inverse);
+  font-variant-numeric: tabular-nums;
+}

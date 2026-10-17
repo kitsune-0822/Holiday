@@ -1,0 +1,28 @@
+.item {
+  display: grid;
+  grid-template-columns: var(--semantic-size-icon-xl) 1fr auto;
+  align-items: start;
+  column-gap: var(--semantic-spacing-sm);
+}
+.icon { width: var(--semantic-size-icon-xl); height: var(--semantic-size-icon-xl); }
+.success { color: var(--semantic-color-icon-success); }
+.danger { color: var(--semantic-color-icon-danger); }
+.info { color: var(--semantic-color-icon-primary); }
+.content { display: flex; min-width: 0; flex-direction: column; gap: var(--semantic-spacing-2xs); }
+.message { color: var(--semantic-color-text-secondary); }
+.time { color: var(--semantic-color-text-secondary); text-align: right; white-space: nowrap; }
+
+/* 모바일: 시간을 본문 아래로 내린다 */
+@media (max-width: 767px) {
+  .item { grid-template-columns: var(--semantic-size-icon-xl) 1fr; row-gap: var(--semantic-spacing-3xs); }
+  .content :global(.text-title-xl) {
+    font-size: var(--semantic-typography-title-lg-font-size);
+    line-height: var(--semantic-typography-title-lg-line-height);
+  }
+  .time {
+    grid-column: 2;
+    text-align: start;
+    font-size: var(--semantic-typography-body-md-font-size);
+    line-height: var(--semantic-typography-body-md-line-height);
+  }
+}

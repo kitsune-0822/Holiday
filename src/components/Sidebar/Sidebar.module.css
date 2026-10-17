@@ -1,0 +1,55 @@
+/* 바깥: 레이아웃에서 차지하는 자리. 접혀 있으면 접힌 폭만 차지한다. */
+.sidebar {
+  position: relative;
+  flex-shrink: 0;
+  width: var(--semantic-size-layout-sidebar-expanded);
+  height: 100%;
+  transition: width var(--semantic-motion-duration-normal) var(--semantic-motion-easing-default);
+}
+.collapsedSlot { width: var(--semantic-size-layout-sidebar-collapsed); }
+
+/* 안쪽: 실제로 보이는 패널. 잠깐 펼쳐질 때는 본문 위로 겹친다. */
+.panel {
+  position: absolute;
+  inset: 0 auto 0 0;
+  z-index: var(--semantic-z-index-drawer);
+  display: flex;
+  flex-direction: column;
+  gap: var(--semantic-spacing-xl);
+  width: var(--semantic-size-layout-sidebar-expanded);
+  padding-top: var(--semantic-padding-2xl);
+  border-right: var(--semantic-border-width-default) solid var(--semantic-color-border-default);
+  background: var(--semantic-color-bg-default);
+  overflow: hidden;
+  transition:
+    width var(--semantic-motion-duration-normal) var(--semantic-motion-easing-default),
+    box-shadow var(--semantic-motion-duration-normal) var(--semantic-motion-easing-default);
+}
+.collapsed { width: var(--semantic-size-layout-sidebar-collapsed); }
+.peek { box-shadow: var(--semantic-shadow-lg); }
+
+.header {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--semantic-spacing-sm);
+  min-height: var(--semantic-size-logo-md);
+  padding-inline: calc(var(--semantic-padding-lg) * 2);
+  white-space: nowrap;
+}
+.collapsed .header { justify-content: center; padding-inline: var(--semantic-padding-lg); }
+
+.scroll { flex: 1; }
+.body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--semantic-spacing-xl);
+  min-height: 100%;
+  padding: 0 var(--semantic-padding-lg) var(--semantic-padding-2xl);
+}
+.top { display: flex; flex-direction: column; gap: var(--semantic-spacing-lg); }
+.collapsed .top { gap: var(--semantic-spacing-sm); }
+.action { display: flex; justify-content: center; }
+.footer { display: flex; flex-direction: column; }

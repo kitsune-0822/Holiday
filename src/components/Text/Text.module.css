@@ -1,0 +1,8 @@
+.primary { color: var(--semantic-color-text-primary); }
+.secondary { color: var(--semantic-color-text-secondary); }
+.tertiary { color: var(--semantic-color-text-tertiary); }
+.inverse { color: var(--semantic-color-text-inverse); }
+.brand { color: var(--semantic-color-brand-default); }
+.danger { color: var(--semantic-color-text-danger); }
+.success { color: var(--semantic-color-text-success); }
+.inherit { color: inherit; }

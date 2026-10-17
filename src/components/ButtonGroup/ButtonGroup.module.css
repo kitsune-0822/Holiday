@@ -1,0 +1,4 @@
+.group { display: flex; gap: var(--semantic-spacing-sm); width: 100%; }
+.horizontal > * { flex: 1 1 0; }
+.vertical { flex-direction: column; }
+.vertical > * { width: 100%; }

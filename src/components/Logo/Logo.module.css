@@ -1,0 +1,10 @@
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--semantic-spacing-xs);
+  color: var(--semantic-color-brand-default);
+}
+.sm .mark { width: var(--semantic-size-logo-sm); height: var(--semantic-size-logo-sm); }
+.md .mark { width: var(--semantic-size-logo-md); height: var(--semantic-size-logo-md); }
+.sm { gap: var(--semantic-spacing-2xs); }
+.name { white-space: nowrap; }

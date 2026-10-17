@@ -1,0 +1,17 @@
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--semantic-spacing-2xs);
+  min-height: var(--semantic-size-control-sm);
+  padding: var(--semantic-padding-sm) var(--semantic-padding-md);
+  border: 0;
+  border-radius: var(--semantic-radius-pill);
+  background: var(--semantic-color-bg-subtle);
+  color: var(--semantic-color-text-primary);
+  transition: background-color var(--semantic-motion-duration-fast) var(--semantic-motion-easing-default);
+}
+.chip:hover:not(:disabled) { background: var(--semantic-color-bg-muted); }
+.selected { background: var(--semantic-color-bg-selected); }
+.selected:hover:not(:disabled) { background: var(--semantic-color-bg-selected-hover); }
+.chip:disabled { opacity: var(--semantic-opacity-disabled); }
+.icon { width: var(--semantic-size-icon-lg); height: var(--semantic-size-icon-lg); color: var(--semantic-color-icon-default); }

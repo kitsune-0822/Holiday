@@ -1,0 +1,6 @@
+.field { display: flex; min-width: 0; flex-direction: column; gap: var(--semantic-spacing-2xs); }
+.label { display: inline-flex; align-items: center; gap: var(--semantic-spacing-3xs); color: var(--semantic-color-text-primary); }
+.message { display: flex; align-items: flex-start; gap: var(--semantic-spacing-3xs); color: var(--semantic-color-text-secondary); }
+.error { color: var(--semantic-color-text-danger); }
+.errorIcon { width: var(--semantic-size-icon-sm); height: var(--semantic-size-icon-sm); /* 첫 줄 가운데에 맞춘다 */
+  margin-top: calc((var(--semantic-typography-body-md-line-height) - var(--semantic-size-icon-sm)) / 2); }

@@ -1,0 +1,192 @@
+.app {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  min-height: 100dvh;
+  background: var(--semantic-color-bg-default);
+}
+
+.nav {
+  position: sticky;
+  top: 0;
+  height: 100dvh;
+  border-right: var(--semantic-border-width-default) solid var(--semantic-color-border-default);
+}
+.navInner { padding: var(--semantic-padding-xl) var(--semantic-padding-lg); }
+.navTitle { display: flex; flex-direction: column; gap: var(--semantic-spacing-3xs); margin-bottom: var(--semantic-spacing-lg); }
+.navGroup { margin-top: var(--semantic-spacing-lg); padding-inline: var(--semantic-padding-sm); color: var(--semantic-color-text-tertiary); }
+.navLink {
+  display: block;
+  padding: var(--semantic-padding-xs) var(--semantic-padding-sm);
+  border-radius: var(--semantic-radius-md);
+  color: var(--semantic-color-text-secondary);
+}
+.navLink:hover { background: var(--semantic-color-bg-subtle); color: var(--semantic-color-text-primary); }
+
+.mobileNav { display: none; }
+
+.main { min-width: 0; padding: var(--semantic-padding-2xl); }
+.intro { display: flex; flex-direction: column; gap: var(--semantic-spacing-xs); max-width: 760px; margin-bottom: var(--semantic-spacing-3xl); }
+.muted { color: var(--semantic-color-text-secondary); }
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--semantic-spacing-lg);
+  padding-block: var(--semantic-spacing-3xl);
+  border-top: var(--semantic-border-width-default) solid var(--semantic-color-border-subtle);
+  scroll-margin-top: var(--semantic-spacing-lg);
+}
+.sectionHeader { display: flex; flex-direction: column; gap: var(--semantic-spacing-2xs); max-width: 760px; }
+.subTitle { margin-top: var(--semantic-spacing-sm); }
+
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr)); gap: var(--semantic-spacing-sm); }
+
+.demo {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  border: var(--semantic-border-width-default) solid var(--semantic-color-border-subtle);
+  border-radius: var(--semantic-radius-xl);
+  overflow: hidden;
+}
+.wide { grid-column: 1 / -1; }
+.demoStage {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--semantic-spacing-sm);
+  min-height: 120px;
+  padding: var(--semantic-padding-xl);
+  background-color: var(--semantic-color-bg-default);
+  background-image: radial-gradient(var(--semantic-color-border-subtle) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+.demoStage > * { max-width: 100%; }
+.demoLabel {
+  padding: var(--semantic-padding-sm) var(--semantic-padding-md);
+  border-top: var(--semantic-border-width-default) solid var(--semantic-color-border-subtle);
+  background: var(--semantic-color-bg-subtle);
+  color: var(--semantic-color-text-secondary);
+}
+
+.playground {
+  display: grid;
+  grid-template-columns: 1fr 260px;
+  border: var(--semantic-border-width-default) solid var(--semantic-color-border-default);
+  border-radius: var(--semantic-radius-xl);
+  overflow: hidden;
+}
+.playStage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  min-height: 200px;
+  padding: var(--semantic-padding-xl);
+}
+.playControls {
+  display: flex;
+  flex-direction: column;
+  gap: var(--semantic-spacing-sm);
+  padding: var(--semantic-padding-lg);
+  border-left: var(--semantic-border-width-default) solid var(--semantic-color-border-default);
+  background: var(--semantic-color-bg-subtle);
+}
+.control { display: flex; flex-direction: column; gap: var(--semantic-spacing-3xs); }
+.select {
+  min-height: var(--semantic-size-control-sm);
+  padding: 0 var(--semantic-padding-sm);
+  border: var(--semantic-border-width-default) solid var(--semantic-color-border-default);
+  border-radius: var(--semantic-radius-md);
+  background: var(--semantic-color-bg-default);
+}
+.toggle { display: flex; align-items: center; gap: var(--semantic-spacing-2xs); }
+.toggle input { width: 18px; height: 18px; accent-color: var(--semantic-color-primary-default); }
+
+.propMap { border: var(--semantic-border-width-default) solid var(--semantic-color-border-subtle); border-radius: var(--semantic-radius-lg); }
+.propMap summary { padding: var(--semantic-padding-sm) var(--semantic-padding-md); cursor: pointer; }
+.propMap table { width: 100%; border-collapse: collapse; }
+.propMap th,
+.propMap td {
+  padding: var(--semantic-padding-sm) var(--semantic-padding-md);
+  border-top: var(--semantic-border-width-default) solid var(--semantic-color-border-subtle);
+  text-align: left;
+  vertical-align: top;
+}
+.propMap th { color: var(--semantic-color-text-tertiary); font-weight: inherit; }
+.propMap code { font-family: var(--semantic-typography-code-md-font-family); font-size: var(--semantic-typography-code-sm-font-size); }
+
+/* 토큰 */
+.swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr)); gap: var(--semantic-spacing-xs); }
+.swatch { display: flex; align-items: center; gap: var(--semantic-spacing-xs); min-width: 0; }
+.chip {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--semantic-radius-md);
+  box-shadow: inset 0 0 0 1px var(--semantic-color-border-subtle);
+}
+.swatchText { display: flex; min-width: 0; flex-direction: column; }
+.swatchText code { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--semantic-color-text-tertiary); font-size: 11px; }
+
+.typeRow {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  align-items: baseline;
+  gap: var(--semantic-spacing-sm);
+  padding-block: var(--semantic-padding-sm);
+  border-bottom: var(--semantic-border-width-default) solid var(--semantic-color-border-subtle);
+}
+.typeMeta { display: flex; flex-direction: column; color: var(--semantic-color-text-tertiary); }
+
+.scale { display: flex; flex-wrap: wrap; align-items: flex-end; gap: var(--semantic-spacing-sm); }
+.scaleItem { display: flex; flex-direction: column; align-items: center; gap: var(--semantic-spacing-3xs); color: var(--semantic-color-text-tertiary); }
+.spaceBar { background: var(--semantic-color-primary-subtle-hover); box-shadow: inset 0 0 0 1px var(--semantic-color-primary-default); }
+.radiusBox { width: 64px; height: 64px; background: var(--semantic-color-bg-muted); box-shadow: inset 0 0 0 1px var(--semantic-color-border-strong); }
+.shadowBox { width: 120px; height: 80px; border-radius: var(--semantic-radius-lg); background: var(--semantic-color-bg-default); }
+
+/* 반응형 미리보기 */
+.frames { display: flex; flex-wrap: wrap; gap: var(--semantic-spacing-lg); align-items: flex-start; }
+.frame { display: flex; flex-direction: column; gap: var(--semantic-spacing-2xs); }
+.frame iframe {
+  border: 0;
+  border-radius: 32px;
+  box-shadow: 0 0 0 8px var(--semantic-color-bg-inverse), var(--semantic-shadow-lg);
+  background: var(--semantic-color-bg-default);
+}
+.frameLabel { color: var(--semantic-color-text-secondary); }
+
+.frameRoot { min-height: 100dvh; padding: var(--semantic-padding-lg); background: var(--semantic-color-bg-default); }
+.frameRootFlush { min-height: 100dvh; background: var(--semantic-color-bg-default); }
+
+.sidebarStage {
+  position: relative;
+  display: flex;
+  height: 720px;
+  border: var(--semantic-border-width-default) solid var(--semantic-color-border-default);
+  border-radius: var(--semantic-radius-xl);
+  overflow: hidden;
+}
+.sidebarFill { flex: 1; padding: var(--semantic-padding-xl); background: var(--semantic-color-bg-subtle); }
+
+@media (max-width: 1023px) {
+  .app { grid-template-columns: 1fr; }
+  .nav { display: none; }
+  .mobileNav {
+    position: sticky;
+    top: 0;
+    z-index: var(--semantic-z-index-sticky);
+    display: flex;
+    gap: var(--semantic-spacing-2xs);
+    padding: var(--semantic-padding-sm) var(--semantic-padding-page-mobile);
+    border-bottom: var(--semantic-border-width-default) solid var(--semantic-color-border-default);
+    background: var(--semantic-color-bg-default);
+  }
+  .mobileNav select { flex: 1; }
+  .main { padding: var(--semantic-padding-lg) var(--semantic-padding-page-mobile); }
+  .playground { grid-template-columns: 1fr; }
+  .playControls { border-left: 0; border-top: var(--semantic-border-width-default) solid var(--semantic-color-border-default); }
+  .typeRow { grid-template-columns: 1fr; }
+}
