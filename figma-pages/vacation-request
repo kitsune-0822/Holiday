@@ -1,0 +1,153 @@
+<div data-hasfooter="true" data-hasheader="true" style={{width: 800, padding: 24, background: 'white', overflow: 'hidden', borderRadius: 24, flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 32, display: 'inline-flex'}}>
+  <div data-hasdescription="false" data-hasdissmissbutton="false" style={{width: 332, justifyContent: 'flex-start', alignItems: 'flex-start', gap: 8, display: 'inline-flex'}}>
+    <div style={{flex: '1 1 0', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 8, display: 'inline-flex'}}>
+      <div style={{alignSelf: 'stretch', color: 'var(--semantic-color-text-primary, #16191D)', fontSize: 32, fontFamily: 'Pretendard', fontWeight: '700', wordWrap: 'break-word'}}>휴가 신청하기</div>
+    </div>
+  </div>
+  <div style={{alignSelf: 'stretch', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 48, display: 'inline-flex'}}>
+    <div style={{flex: '1 1 0', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 16, display: 'inline-flex'}}>
+      <div style={{alignSelf: 'stretch', color: 'var(--semantic-color-text-primary, #16191D)', fontSize: 20, fontFamily: 'Pretendard', fontWeight: '700', wordWrap: 'break-word'}}>휴가 종류 선택</div>
+      <div style={{alignSelf: 'stretch', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 16, display: 'flex'}}>
+        <div style={{alignSelf: 'stretch', color: 'var(--semantic-color-text-primary, #16191D)', fontSize: 16, fontFamily: 'Pretendard', fontWeight: '500', wordWrap: 'break-word'}}>잔여 휴가</div>
+        <div style={{alignSelf: 'stretch', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 8, display: 'flex'}}>
+          <div style={{alignSelf: 'stretch', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 8, display: 'inline-flex'}}>
+            <div style={{flex: '1 1 0', color: 'var(--semantic-color-text-tertiary, #6B7480)', fontSize: 15, fontFamily: 'Pretendard', fontWeight: '400', wordWrap: 'break-word'}}>연차</div>
+            <div style={{textAlign: 'right', color: 'var(--semantic-color-text-primary, #16191D)', fontSize: 15, fontFamily: 'Pretendard', fontWeight: '400', wordWrap: 'break-word'}}>13.25일</div>
+          </div>
+          <div style={{alignSelf: 'stretch', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 8, display: 'inline-flex'}}>
+            <div style={{flex: '1 1 0', color: 'var(--semantic-color-text-tertiary, #6B7480)', fontSize: 15, fontFamily: 'Pretendard', fontWeight: '400', wordWrap: 'break-word'}}>병가</div>
+            <div style={{textAlign: 'right', color: 'var(--semantic-color-text-primary, #16191D)', fontSize: 15, fontFamily: 'Pretendard', fontWeight: '400', wordWrap: 'break-word'}}>30일</div>
+          </div>
+          <div style={{alignSelf: 'stretch', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 8, display: 'inline-flex'}}>
+            <div style={{flex: '1 1 0', color: 'var(--semantic-color-text-tertiary, #6B7480)', fontSize: 15, fontFamily: 'Pretendard', fontWeight: '400', wordWrap: 'break-word'}}>대휴</div>
+            <div style={{textAlign: 'right', color: 'var(--semantic-color-text-primary, #16191D)', fontSize: 15, fontFamily: 'Pretendard', fontWeight: '400', wordWrap: 'break-word'}}>3일</div>
+          </div>
+        </div>
+      </div>
+      <div style={{alignSelf: 'stretch', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 16, display: 'flex'}}>
+        <div style={{alignSelf: 'stretch', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 8, display: 'flex'}}>
+          <div data-showrequiredbadge="true" style={{alignSelf: 'stretch', justifyContent: 'flex-start', alignItems: 'center', gap: 4, display: 'inline-flex'}}>
+            <div style={{color: 'var(--semantic-color-text-primary, #16191D)', fontSize: 16, fontFamily: 'Pretendard', fontWeight: '400', wordWrap: 'break-word'}}>휴가 유형</div>
+            <div data-size="small" data-tone="red" style={{width: 4, height: 4, position: 'relative'}}>
+              <div style={{width: 4, height: 4, left: 0, top: 0, position: 'absolute', background: 'var(--semantic-color-icon-danger, #F03E3E)', borderRadius: 999}} />
+            </div>
+          </div>
+          <div style={{alignSelf: 'stretch', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 8, display: 'inline-flex'}}>
+            <div data-isactive="true" data-isdisabled="false" style={{flex: '1 1 0', paddingLeft: 16, paddingRight: 16, paddingTop: 12, paddingBottom: 12, background: 'var(--semantic-color-bg-muted, #EEF0F3)', borderRadius: 16, justifyContent: 'center', alignItems: 'center', gap: 10, display: 'flex'}}>
+              <div style={{color: 'var(--semantic-color-text-primary, #16191D)', fontSize: 16, fontFamily: 'Pretendard', fontWeight: '400', lineHeight: 24, wordWrap: 'break-word'}}>연차</div>
+            </div>
+            <div data-isactive="false" data-isdisabled="false" style={{flex: '1 1 0', paddingLeft: 16, paddingRight: 16, paddingTop: 12, paddingBottom: 12, background: 'var(--semantic-color-bg-subtle, #F7F8FA)', borderRadius: 16, justifyContent: 'center', alignItems: 'center', gap: 10, display: 'flex'}}>
+              <div style={{color: 'var(--semantic-color-text-primary, #16191D)', fontSize: 16, fontFamily: 'Pretendard', fontWeight: '400', lineHeight: 24, wordWrap: 'break-word'}}>병가</div>
+            </div>
+            <div data-isactive="false" data-isdisabled="false" style={{flex: '1 1 0', paddingLeft: 16, paddingRight: 16, paddingTop: 12, paddingBottom: 12, background: 'var(--semantic-color-bg-subtle, #F7F8FA)', borderRadius: 16, justifyContent: 'center', alignItems: 'center', gap: 10, display: 'flex'}}>
+              <div style={{color: 'var(--semantic-color-text-primary, #16191D)', fontSize: 16, fontFamily: 'Pretendard', fontWeight: '400', lineHeight: 24, wordWrap: 'break-word'}}>대휴</div>
+            </div>
+          </div>
+        </div>
+        <div style={{alignSelf: 'stretch', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 8, display: 'flex'}}>
+          <div data-showrequiredbadge="true" style={{alignSelf: 'stretch', justifyContent: 'flex-start', alignItems: 'center', gap: 4, display: 'inline-flex'}}>
+            <div style={{color: 'var(--semantic-color-text-primary, #16191D)', fontSize: 16, fontFamily: 'Pretendard', fontWeight: '400', wordWrap: 'break-word'}}>휴가 단위</div>
+            <div data-size="small" data-tone="red" style={{width: 4, height: 4, position: 'relative'}}>
+              <div style={{width: 4, height: 4, left: 0, top: 0, position: 'absolute', background: 'var(--semantic-color-icon-danger, #F03E3E)', borderRadius: 999}} />
+            </div>
+          </div>
+          <div style={{alignSelf: 'stretch', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 8, display: 'inline-flex'}}>
+            <div data-isactive="true" data-isdisabled="false" style={{flex: '1 1 0', paddingLeft: 16, paddingRight: 16, paddingTop: 12, paddingBottom: 12, background: 'var(--semantic-color-bg-muted, #EEF0F3)', borderRadius: 16, justifyContent: 'center', alignItems: 'center', gap: 10, display: 'flex'}}>
+              <div style={{color: 'var(--semantic-color-text-primary, #16191D)', fontSize: 16, fontFamily: 'Pretendard', fontWeight: '400', lineHeight: 24, wordWrap: 'break-word'}}>종일</div>
+            </div>
+            <div data-isactive="false" data-isdisabled="false" style={{flex: '1 1 0', paddingLeft: 16, paddingRight: 16, paddingTop: 12, paddingBottom: 12, background: 'var(--semantic-color-bg-subtle, #F7F8FA)', borderRadius: 16, justifyContent: 'center', alignItems: 'center', gap: 10, display: 'flex'}}>
+              <div style={{color: 'var(--semantic-color-text-primary, #16191D)', fontSize: 16, fontFamily: 'Pretendard', fontWeight: '400', lineHeight: 24, wordWrap: 'break-word'}}>반차</div>
+            </div>
+            <div data-isactive="false" data-isdisabled="false" style={{flex: '1 1 0', paddingLeft: 16, paddingRight: 16, paddingTop: 12, paddingBottom: 12, background: 'var(--semantic-color-bg-subtle, #F7F8FA)', borderRadius: 16, justifyContent: 'center', alignItems: 'center', gap: 10, display: 'flex'}}>
+              <div style={{color: 'var(--semantic-color-text-primary, #16191D)', fontSize: 16, fontFamily: 'Pretendard', fontWeight: '400', lineHeight: 24, wordWrap: 'break-word'}}>반반차</div>
+            </div>
+          </div>
+        </div>
+        <div style={{alignSelf: 'stretch', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 8, display: 'flex'}}>
+          <div data-showrequiredbadge="true" style={{alignSelf: 'stretch', justifyContent: 'flex-start', alignItems: 'center', gap: 4, display: 'inline-flex'}}>
+            <div style={{color: 'var(--semantic-color-text-primary, #16191D)', fontSize: 16, fontFamily: 'Pretendard', fontWeight: '400', wordWrap: 'break-word'}}>시간대</div>
+            <div data-size="small" data-tone="red" style={{width: 4, height: 4, position: 'relative'}}>
+              <div style={{width: 4, height: 4, left: 0, top: 0, position: 'absolute', background: 'var(--semantic-color-icon-danger, #F03E3E)', borderRadius: 999}} />
+            </div>
+          </div>
+          <div style={{alignSelf: 'stretch', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 8, display: 'inline-flex'}}>
+            <div data-isactive="true" data-isdisabled="false" style={{flex: '1 1 0', paddingLeft: 16, paddingRight: 16, paddingTop: 12, paddingBottom: 12, background: 'var(--semantic-color-bg-muted, #EEF0F3)', borderRadius: 16, justifyContent: 'center', alignItems: 'center', gap: 10, display: 'flex'}}>
+              <div style={{color: 'var(--semantic-color-text-primary, #16191D)', fontSize: 16, fontFamily: 'Pretendard', fontWeight: '400', lineHeight: 24, wordWrap: 'break-word'}}>오전</div>
+            </div>
+            <div data-isactive="false" data-isdisabled="false" style={{flex: '1 1 0', paddingLeft: 16, paddingRight: 16, paddingTop: 12, paddingBottom: 12, background: 'var(--semantic-color-bg-subtle, #F7F8FA)', borderRadius: 16, justifyContent: 'center', alignItems: 'center', gap: 10, display: 'flex'}}>
+              <div style={{color: 'var(--semantic-color-text-primary, #16191D)', fontSize: 16, fontFamily: 'Pretendard', fontWeight: '400', lineHeight: 24, wordWrap: 'break-word'}}>오후</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style={{flex: '1 1 0', alignSelf: 'stretch', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 16, display: 'inline-flex'}}>
+      <div style={{alignSelf: 'stretch', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 24, display: 'flex'}}>
+        <div style={{alignSelf: 'stretch', color: 'var(--semantic-color-text-primary, #16191D)', fontSize: 20, fontFamily: 'Pretendard', fontWeight: '700', wordWrap: 'break-word'}}>휴가 기간 및 사유 입력</div>
+        <div style={{alignSelf: 'stretch', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 16, display: 'flex'}}>
+          <div data-hascaption="false" data-isfilled="false" data-isfocused="false" data-isinvalid="false" style={{alignSelf: 'stretch', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 8, display: 'flex'}}>
+            <div data-showrequiredbadge="true" style={{width: 300, justifyContent: 'flex-start', alignItems: 'center', gap: 4, display: 'inline-flex'}}>
+              <div style={{color: 'var(--semantic-color-text-primary, #16191D)', fontSize: 16, fontFamily: 'Pretendard', fontWeight: '400', wordWrap: 'break-word'}}>휴가 시작일</div>
+              <div data-size="small" data-tone="red" style={{width: 4, height: 4, position: 'relative'}}>
+                <div style={{width: 4, height: 4, left: 0, top: 0, position: 'absolute', background: 'var(--semantic-color-icon-danger, #F03E3E)', borderRadius: 999}} />
+              </div>
+            </div>
+            <div style={{alignSelf: 'stretch', padding: 16, background: 'var(--semantic-color-bg-subtle, #F7F8FA)', overflow: 'hidden', borderRadius: 16, justifyContent: 'flex-start', alignItems: 'center', gap: 10, display: 'inline-flex'}}>
+              <div style={{flex: '1 1 0', color: 'var(--semantic-color-text-placeholder, #6B7480)', fontSize: 16, fontFamily: 'Pretendard', fontWeight: '400', lineHeight: 24, wordWrap: 'break-word'}}>YYYY-MM-DD</div>
+              <div style={{width: 24, height: 24, position: 'relative', overflow: 'hidden'}}>
+                <div style={{width: 18, height: 18, left: 3, top: 3, position: 'absolute', background: 'var(--semantic-color-icon-subtle, #6B7480)'}} />
+              </div>
+            </div>
+          </div>
+          <div data-hascaption="false" data-isfilled="false" data-isfocused="false" data-isinvalid="false" style={{alignSelf: 'stretch', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 8, display: 'flex'}}>
+            <div data-showrequiredbadge="true" style={{width: 300, justifyContent: 'flex-start', alignItems: 'center', gap: 4, display: 'inline-flex'}}>
+              <div style={{color: 'var(--semantic-color-text-primary, #16191D)', fontSize: 16, fontFamily: 'Pretendard', fontWeight: '400', wordWrap: 'break-word'}}>휴가 종료일</div>
+              <div data-size="small" data-tone="red" style={{width: 4, height: 4, position: 'relative'}}>
+                <div style={{width: 4, height: 4, left: 0, top: 0, position: 'absolute', background: 'var(--semantic-color-icon-danger, #F03E3E)', borderRadius: 999}} />
+              </div>
+            </div>
+            <div style={{alignSelf: 'stretch', padding: 16, background: 'var(--semantic-color-bg-subtle, #F7F8FA)', overflow: 'hidden', borderRadius: 16, justifyContent: 'flex-start', alignItems: 'center', gap: 10, display: 'inline-flex'}}>
+              <div style={{flex: '1 1 0', color: 'var(--semantic-color-text-placeholder, #6B7480)', fontSize: 16, fontFamily: 'Pretendard', fontWeight: '400', lineHeight: 24, wordWrap: 'break-word'}}>YYYY-MM-DD</div>
+              <div style={{width: 24, height: 24, position: 'relative', overflow: 'hidden'}}>
+                <div style={{width: 18, height: 18, left: 3, top: 3, position: 'absolute', background: 'var(--semantic-color-icon-subtle, #6B7480)'}} />
+              </div>
+            </div>
+          </div>
+          <div data-hascaption="false" data-hastitle="true" data-isfilled="false" data-isfocused="false" data-isinvalid="false" style={{alignSelf: 'stretch', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 8, display: 'flex'}}>
+            <div data-showrequiredbadge="false" style={{alignSelf: 'stretch', justifyContent: 'flex-start', alignItems: 'center', gap: 4, display: 'inline-flex'}}>
+              <div style={{color: 'var(--semantic-color-text-primary, #16191D)', fontSize: 16, fontFamily: 'Pretendard', fontWeight: '400', wordWrap: 'break-word'}}>사유</div>
+            </div>
+            <div style={{alignSelf: 'stretch', padding: 16, background: 'var(--semantic-color-bg-subtle, #F7F8FA)', overflow: 'hidden', borderRadius: 16, justifyContent: 'flex-start', alignItems: 'flex-start', gap: 10, display: 'inline-flex'}}>
+              <div style={{flex: '1 1 0', color: 'var(--semantic-color-text-placeholder, #6B7480)', fontSize: 16, fontFamily: 'Pretendard', fontWeight: '400', lineHeight: 24, wordWrap: 'break-word'}}>사유를 간단히 입력해 주세요.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style={{alignSelf: 'stretch', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 16, display: 'flex'}}>
+        <div style={{alignSelf: 'stretch', color: 'var(--semantic-color-text-primary, #16191D)', fontSize: 16, fontFamily: 'Pretendard', fontWeight: '500', wordWrap: 'break-word'}}>사용 후 잔여 휴가</div>
+        <div style={{alignSelf: 'stretch', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 8, display: 'flex'}}>
+          <div style={{alignSelf: 'stretch', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 8, display: 'inline-flex'}}>
+            <div style={{flex: '1 1 0', color: 'var(--semantic-color-text-tertiary, #6B7480)', fontSize: 15, fontFamily: 'Pretendard', fontWeight: '400', wordWrap: 'break-word'}}>연차</div>
+            <div style={{textAlign: 'right'}}><span style="color: 'var(--semantic-color-text-primary, #16191D)', fontSize: 15, fontFamily: 'Pretendard', fontWeight: '400', wordWrap: 'break-word'">10.25일</span><span style="color: 'var(--semantic-color-text-danger, #A63034)', fontSize: 15, fontFamily: 'Pretendard', fontWeight: '400', wordWrap: 'break-word'">(-3일)</span></div>
+          </div>
+          <div style={{alignSelf: 'stretch', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 8, display: 'inline-flex'}}>
+            <div style={{flex: '1 1 0', color: 'var(--semantic-color-text-tertiary, #6B7480)', fontSize: 15, fontFamily: 'Pretendard', fontWeight: '400', wordWrap: 'break-word'}}>병가</div>
+            <div style={{textAlign: 'right', color: 'var(--semantic-color-text-primary, #16191D)', fontSize: 15, fontFamily: 'Pretendard', fontWeight: '400', wordWrap: 'break-word'}}>30일</div>
+          </div>
+          <div style={{alignSelf: 'stretch', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 8, display: 'inline-flex'}}>
+            <div style={{flex: '1 1 0', color: 'var(--semantic-color-text-tertiary, #6B7480)', fontSize: 15, fontFamily: 'Pretendard', fontWeight: '400', wordWrap: 'break-word'}}>대휴</div>
+            <div style={{textAlign: 'right', color: 'var(--semantic-color-text-primary, #16191D)', fontSize: 15, fontFamily: 'Pretendard', fontWeight: '400', wordWrap: 'break-word'}}>3일</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div data-direction="horizontal" style={{alignSelf: 'stretch', justifyContent: 'flex-start', alignItems: 'center', gap: 16, display: 'inline-flex'}}>
+    <div data-hierachy="tertiary" data-isdisabled="false" data-showicon="false" data-showlabel="true" data-size="regular" data-state="default" style={{flex: '1 1 0', paddingLeft: 16, paddingRight: 16, paddingTop: 12, paddingBottom: 12, background: 'var(--semantic-color-bg-subtle, #F7F8FA)', borderRadius: 16, justifyContent: 'center', alignItems: 'center', gap: 8, display: 'flex'}}>
+      <div style={{textAlign: 'center', color: 'var(--semantic-color-text-primary, #16191D)', fontSize: 16, fontFamily: 'Pretendard', fontWeight: '400', lineHeight: 24, wordWrap: 'break-word'}}>닫기</div>
+    </div>
+    <div data-hierachy="primary" data-isdisabled="false" data-showicon="false" data-showlabel="true" data-size="regular" data-state="default" style={{flex: '1 1 0', paddingLeft: 16, paddingRight: 16, paddingTop: 12, paddingBottom: 12, background: 'var(--semantic-color-primary-default, #0088FF)', borderRadius: 16, justifyContent: 'center', alignItems: 'center', gap: 8, display: 'flex'}}>
+      <div style={{textAlign: 'center', color: 'var(--semantic-color-text-inverse, white)', fontSize: 16, fontFamily: 'Pretendard', fontWeight: '400', lineHeight: 24, wordWrap: 'break-word'}}>3일 신청하기</div>
+    </div>
+  </div>
+</div>

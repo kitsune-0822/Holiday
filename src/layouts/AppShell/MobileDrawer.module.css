@@ -1,0 +1,26 @@
+.root { position: fixed; inset: 0; z-index: var(--semantic-z-index-drawer); }
+.backdrop {
+  position: absolute;
+  inset: 0;
+  background: var(--semantic-color-bg-overlay);
+  opacity: 0;
+  transition: opacity var(--semantic-motion-duration-normal) var(--semantic-motion-easing-default);
+}
+.panel {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: min(var(--semantic-size-layout-sidebar-expanded), calc(100vw - var(--semantic-spacing-4xl)));
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  background: var(--semantic-color-bg-default);
+  box-shadow: var(--semantic-shadow-lg);
+  transform: translateX(-100%);
+  transition: transform var(--semantic-motion-duration-normal) var(--semantic-motion-easing-sheet);
+  outline: none;
+}
+.root[data-state='open'] .backdrop { opacity: 1; }
+.root[data-state='open'] .panel { transform: none; }
+.close { position: absolute; top: calc(env(safe-area-inset-top) + var(--semantic-spacing-xl)); right: var(--semantic-spacing-sm); z-index: var(--semantic-z-index-overlay); }
+/* 드로어 안의 사이드바는 패널 폭을 그대로 쓴다 */
+.panel > aside { width: 100%; }
+.panel > aside > div { width: 100%; border-right: 0; }

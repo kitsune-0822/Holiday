@@ -1,0 +1,42 @@
+<div data-hasfooter="false" data-hasheader="true" style={{width: 800, height: 648, padding: 24, background: 'white', overflow: 'hidden', borderRadius: 24, flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 32, display: 'inline-flex'}}>
+  <div data-hasdescription="false" data-hasdissmissbutton="true" style={{alignSelf: 'stretch', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 8, display: 'inline-flex'}}>
+    <div style={{flex: '1 1 0', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 8, display: 'inline-flex'}}>
+      <div style={{alignSelf: 'stretch', color: 'var(--semantic-color-text-primary, #16191D)', fontSize: 32, fontFamily: 'Pretendard', fontWeight: '700', wordWrap: 'break-word'}}>알림</div>
+    </div>
+    <div data-property-1="Default" style={{padding: 12, background: 'var(--semantic-color-bg-subtle, #F7F8FA)', borderRadius: 16, justifyContent: 'flex-start', alignItems: 'center', display: 'flex'}}>
+      <div style={{width: 24, height: 24, overflow: 'hidden', justifyContent: 'center', alignItems: 'center', gap: 10, display: 'flex'}}>
+        <div style={{width: 24, height: 24, position: 'relative', overflow: 'hidden'}}>
+          <div style={{width: 16, height: 16, left: 4, top: 4, position: 'absolute', background: 'var(--semantic-color-icon-subtle, #6B7480)'}} />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style={{alignSelf: 'stretch', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 48, display: 'inline-flex'}}>
+    <div style={{flex: '1 1 0', overflow: 'hidden', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 24, display: 'inline-flex'}}>
+      <div style={{alignSelf: 'stretch', overflow: 'hidden', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', display: 'flex'}}>
+        <div style={{alignSelf: 'stretch', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 16, display: 'inline-flex'}}>
+          <div style={{width: 32, height: 32, position: 'relative', overflow: 'hidden'}}>
+            <div style={{width: 26.67, height: 26.67, left: 2.67, top: 2.67, position: 'absolute', background: 'var(--semantic-color-icon-success, #12B886)'}} />
+          </div>
+          <div style={{flex: '1 1 0', flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start', gap: 8, display: 'inline-flex'}}>
+            <div style={{alignSelf: 'stretch', color: 'var(--semantic-color-text-primary, #16191D)', fontSize: 20, fontFamily: 'Pretendard', fontWeight: '500', lineHeight: 30, wordWrap: 'break-word'}}>10월 19일(월) ~ 10월 23일(금) 연차가 승인되었습니다.</div>
+            <div style={{alignSelf: 'stretch', color: 'var(--semantic-color-text-secondary, #565E69)', fontSize: 16, fontFamily: 'Pretendard', fontWeight: '400', lineHeight: 24, wordWrap: 'break-word'}}>윤호님, 여행 잘 다녀오세요!</div>
+          </div>
+          <div style={{textAlign: 'right', color: 'var(--semantic-color-text-secondary, #565E69)', fontSize: 16, fontFamily: 'Pretendard', fontWeight: '400', lineHeight: 24, wordWrap: 'break-word'}}>3시간 전</div>
+        </div>
+      </div>
+      <div style={{alignSelf: 'stretch', overflow: 'hidden', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', display: 'flex'}}>
+        <div style={{alignSelf: 'stretch', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 16, display: 'inline-flex'}}>
+          <div style={{width: 32, height: 32, position: 'relative', overflow: 'hidden'}}>
+            <div style={{width: 26.67, height: 26.67, left: 2.67, top: 2.67, position: 'absolute', background: 'var(--semantic-color-icon-danger, #F03E3E)'}} />
+          </div>
+          <div style={{flex: '1 1 0', flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start', gap: 8, display: 'inline-flex'}}>
+            <div style={{alignSelf: 'stretch', color: 'var(--semantic-color-text-primary, #16191D)', fontSize: 20, fontFamily: 'Pretendard', fontWeight: '500', lineHeight: 30, wordWrap: 'break-word'}}>10월 26일(월) 연차가 반려되었습니다.</div>
+            <div style={{alignSelf: 'stretch', color: 'var(--semantic-color-text-secondary, #565E69)', fontSize: 16, fontFamily: 'Pretendard', fontWeight: '400', lineHeight: 24, wordWrap: 'break-word'}}>윤호님, 이 날은 반드시 부탁드리고 싶은 일이 있어요.</div>
+          </div>
+          <div style={{textAlign: 'right', color: 'var(--semantic-color-text-secondary, #565E69)', fontSize: 16, fontFamily: 'Pretendard', fontWeight: '400', lineHeight: 24, wordWrap: 'break-word'}}>3시간 전</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

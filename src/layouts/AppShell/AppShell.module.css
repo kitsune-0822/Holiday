@@ -1,0 +1,74 @@
+.shell {
+  display: flex;
+  min-height: 100dvh;
+  background: var(--semantic-color-bg-default);
+}
+
+.sidebar {
+  position: sticky;
+  top: 0;
+  z-index: var(--semantic-z-index-drawer);
+  height: 100dvh;
+  flex-shrink: 0;
+}
+
+.main {
+  flex: 1;
+  min-width: 0;
+  padding: var(--semantic-padding-page-desktop);
+  outline: none;
+}
+
+.skip {
+  position: absolute;
+  top: var(--semantic-spacing-2xs);
+  left: var(--semantic-spacing-2xs);
+  z-index: var(--semantic-z-index-toast);
+  padding: var(--semantic-padding-sm) var(--semantic-padding-md);
+  border-radius: var(--semantic-radius-md);
+  background: var(--semantic-color-bg-inverse);
+  color: var(--semantic-color-text-inverse);
+  transform: translateY(-200%);
+}
+.skip:focus { transform: none; }
+
+/* 모바일 상단 바 */
+.topBar {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: var(--semantic-z-index-sticky);
+  display: flex;
+  align-items: center;
+  gap: var(--semantic-spacing-3xs);
+  height: calc(var(--semantic-size-layout-topbar-height) + env(safe-area-inset-top));
+  padding: env(safe-area-inset-top) var(--semantic-padding-sm) 0;
+  border-bottom: var(--semantic-border-width-default) solid var(--semantic-color-border-subtle);
+  background: var(--semantic-color-bg-default);
+}
+.topLogo { display: flex; flex: 1; justify-content: center; }
+.topActions { display: flex; align-items: center; }
+.bell {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--semantic-size-control-sm);
+  height: var(--semantic-size-control-sm);
+  border-radius: var(--semantic-radius-button);
+  color: var(--semantic-color-icon-subtle);
+}
+.bell svg { width: var(--semantic-size-icon-lg); height: var(--semantic-size-icon-lg); }
+.bell:hover { background: var(--semantic-color-bg-hover); }
+.bellDot { position: absolute; top: var(--semantic-spacing-2xs); right: var(--semantic-spacing-2xs); }
+
+@media (max-width: 1279px) {
+  .main { padding: var(--semantic-padding-page-tablet); }
+}
+
+@media (max-width: 767px) {
+  .shell { flex-direction: column; }
+  .main {
+    padding: calc(var(--semantic-size-layout-topbar-height) + env(safe-area-inset-top) + var(--semantic-padding-page-mobile))
+      var(--semantic-padding-page-mobile) calc(var(--semantic-spacing-3xl) + env(safe-area-inset-bottom));
+  }
+}
