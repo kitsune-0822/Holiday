@@ -3,23 +3,23 @@ import { requestedDays } from '@/features/vacation/calc';
 import type { DayPeriod, VacationType, VacationUnit } from '@/features/vacation/types';
 import { addBusinessDaysISO, addDaysISO, mondayOf } from '@/lib/date';
 
-/** 관리자 화면 목업. 날짜는 오늘을 기준으로 만든다. */
+/** 팀장(나)이 결재하는 팀원 목업. 날짜는 오늘을 기준으로 만든다. */
 export const teamMembers: Member[] = [
-  { id: 'm1', name: '김민준', dept: '개발팀', role: '백엔드 엔지니어', granted: 15, used: 6 },
-  { id: 'm2', name: '이서연', dept: '디자인팀', role: '프로덕트 디자이너', granted: 15, used: 8.5 },
-  { id: 'm3', name: '박지호', dept: '영업팀', role: '영업 매니저', granted: 17, used: 11 },
-  { id: 'm4', name: '최유나', dept: '마케팅팀', role: '콘텐츠 마케터', granted: 15, used: 4 },
-  { id: 'm5', name: '정도윤', dept: '개발팀', role: '프론트엔드 엔지니어', granted: 15, used: 9 },
-  { id: 'm6', name: '한지민', dept: 'CS팀', role: '고객 상담', granted: 16, used: 7 },
-  { id: 'm7', name: '강하준', dept: '영업팀', role: '영업 담당', granted: 15, used: 10 },
-  { id: 'm8', name: '윤서준', dept: '개발팀', role: 'iOS 엔지니어', granted: 15, used: 5.5 },
-  { id: 'm9', name: '임채원', dept: '디자인팀', role: 'UX 리서처', granted: 15, used: 12 },
-  { id: 'm10', name: '오태윤', dept: '영업팀', role: '영업 팀장', granted: 20, used: 6 },
-  { id: 'm11', name: '서하은', dept: '마케팅팀', role: '퍼포먼스 마케터', granted: 15, used: 3 },
-  { id: 'm12', name: '신우진', dept: 'CS팀', role: '고객 상담', granted: 15, used: 13.5 },
-  { id: 'm13', name: '조예린', dept: '개발팀', role: 'QA 엔지니어', granted: 15, used: 7 },
-  { id: 'm14', name: '배준혁', dept: '인사팀', role: '인사 담당', granted: 16, used: 5 },
-  { id: 'm15', name: '홍수아', dept: 'CS팀', role: 'CS 리드', granted: 18, used: 9 },
+  { id: 'm1', name: '김민준', role: '백엔드 엔지니어', granted: { annual: 15, sick: 10, comp: 2 }, used: { annual: 6, sick: 0, comp: 0 } },
+  { id: 'm2', name: '이서연', role: '프로덕트 디자이너', granted: { annual: 15, sick: 10, comp: 0 }, used: { annual: 8.5, sick: 1, comp: 0 } },
+  { id: 'm3', name: '박지호', role: '영업 매니저', granted: { annual: 17, sick: 10, comp: 1 }, used: { annual: 11, sick: 3, comp: 0 } },
+  { id: 'm4', name: '최유나', role: '콘텐츠 마케터', granted: { annual: 15, sick: 10, comp: 0 }, used: { annual: 4, sick: 0, comp: 0 } },
+  { id: 'm5', name: '정도윤', role: '프론트엔드 엔지니어', granted: { annual: 15, sick: 10, comp: 1 }, used: { annual: 9, sick: 0, comp: 0 } },
+  { id: 'm6', name: '한지민', role: '고객 상담', granted: { annual: 16, sick: 10, comp: 3 }, used: { annual: 7, sick: 2, comp: 2 } },
+  { id: 'm7', name: '강하준', role: '영업 담당', granted: { annual: 15, sick: 10, comp: 1 }, used: { annual: 10, sick: 0, comp: 0 } },
+  { id: 'm8', name: '윤서준', role: 'iOS 엔지니어', granted: { annual: 15, sick: 10, comp: 0 }, used: { annual: 5.5, sick: 0, comp: 0 } },
+  { id: 'm9', name: '임채원', role: 'UX 리서처', granted: { annual: 15, sick: 10, comp: 0 }, used: { annual: 12, sick: 1, comp: 0 } },
+  { id: 'm10', name: '오태윤', role: '영업 팀장', granted: { annual: 20, sick: 10, comp: 2 }, used: { annual: 6, sick: 0, comp: 1 } },
+  { id: 'm11', name: '서하은', role: '퍼포먼스 마케터', granted: { annual: 15, sick: 10, comp: 0 }, used: { annual: 3, sick: 2, comp: 0 } },
+  { id: 'm12', name: '신우진', role: '고객 상담', granted: { annual: 15, sick: 10, comp: 1 }, used: { annual: 13.5, sick: 0, comp: 0 } },
+  { id: 'm13', name: '조예린', role: 'QA 엔지니어', granted: { annual: 15, sick: 10, comp: 0 }, used: { annual: 7, sick: 0, comp: 0 } },
+  { id: 'm14', name: '배준혁', role: '인사 담당', granted: { annual: 16, sick: 10, comp: 3 }, used: { annual: 5, sick: 0, comp: 0 } },
+  { id: 'm15', name: '홍수아', role: 'CS 리드', granted: { annual: 18, sick: 10, comp: 1 }, used: { annual: 9, sick: 2, comp: 0 } },
 ];
 
 export function createTeamLeaves(today: string): TeamLeave[] {

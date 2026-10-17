@@ -10,7 +10,16 @@ import {
   Users,
 } from 'lucide-react';
 import { Link, useLocation, useNavigate, type Location } from 'react-router';
-import { NavGroup, NavGroupItem, NavItem, useToast, type SidebarAction } from '@/components';
+import {
+  CalendarCheckFilled,
+  ClipboardCheckFilled,
+  NavGroup,
+  NavGroupItem,
+  NavItem,
+  SettingsFilled,
+  useToast,
+  type SidebarAction,
+} from '@/components';
 import { useApprovals } from '@/features/approvals/ApprovalsContext';
 import { useVacation } from '@/features/vacation/VacationContext';
 import { useI18n } from '@/i18n';
@@ -55,7 +64,7 @@ export function useNavigationModel() {
       </NavGroup>
       <NavGroup title={n.vacationGroup}>
         <NavGroupItem>
-          <NavItem as={Link} to="/vacations" icon={<CalendarCheck />} label={n.status} selected={isStatus} />
+          <NavItem as={Link} to="/vacations" icon={<CalendarCheck />} selectedIcon={<CalendarCheckFilled />} label={n.status} selected={isStatus} />
         </NavGroupItem>
       </NavGroup>
       <NavGroup title={n.adminGroup}>
@@ -64,6 +73,7 @@ export function useNavigationModel() {
             as={Link}
             to="/approvals"
             icon={<ClipboardCheck />}
+            selectedIcon={<ClipboardCheckFilled />}
             label={n.approvals}
             count={pending.length}
             selected={base.pathname === '/approvals'}
@@ -82,7 +92,7 @@ export function useNavigationModel() {
         <NavItem icon={<User />} label={n.profile} disabled />
       </NavGroupItem>
       <NavGroupItem>
-        <NavItem as={Link} to="/settings" icon={<Settings />} label={n.settings} selected={base.pathname === '/settings'} />
+        <NavItem as={Link} to="/settings" icon={<Settings />} selectedIcon={<SettingsFilled />} label={n.settings} selected={base.pathname === '/settings'} />
       </NavGroupItem>
       <NavGroupItem>
         <NavItem

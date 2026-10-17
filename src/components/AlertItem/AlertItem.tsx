@@ -1,6 +1,6 @@
-import { CircleCheck, CircleX, Info } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { cx } from '@/lib/cx';
+import { CircleCheckFilled, CircleXFilled, InfoFilled } from '../Icon/FilledIcons';
 import styles from './AlertItem.module.css';
 
 export interface AlertItemProps {
@@ -14,7 +14,7 @@ export interface AlertItemProps {
   dateTime?: string;
 }
 
-const icons = { success: CircleCheck, danger: CircleX, info: Info };
+const icons = { success: CircleCheckFilled, danger: CircleXFilled, info: InfoFilled };
 
 export function AlertItem({ tone, title, message, time, dateTime }: AlertItemProps) {
   const Icon = icons[tone];

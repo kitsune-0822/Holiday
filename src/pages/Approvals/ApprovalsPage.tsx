@@ -1,14 +1,12 @@
 import { ChevronDown, ChevronLeft, ChevronRight, Download, Maximize2, Search } from 'lucide-react';
 import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import {
-  Avatar,
   Button,
   Card,
   Chip,
   DataTable,
   IconButton,
   PageHeader,
-  Select,
   Sheet,
   Tag,
   Text,
@@ -19,9 +17,7 @@ import {
 import { useApprovals } from '@/features/approvals/ApprovalsContext';
 import {
   covers,
-  deductsAnnual,
   focusWeekStart,
-  isUrgent,
   kindOf,
   kindTone,
   leaveLabel,
@@ -30,7 +26,6 @@ import {
   remainingOf,
   requestedText,
   returnText,
-  startsInText,
   teamOverlaps,
   toCsv,
   weekRows,
@@ -58,27 +53,24 @@ export function ApprovalsPage() {
   useDocumentTitle(t.title);
   const { today, members, leaves, pending, decide } = useApprovals();
   const toast = useToast();
-  const ids = { search: useId(), dept: useId(), list: useId() };
+  const ids = { search: useId(), list: useId() };
 
   const [kind, setKind] = useState<KindFilter>('all');
-  const [dept, setDept] = useState('');
   const [query, setQuery] = useState('');
   const [selected, setSelected] = useState<Set<string>>(new Set());
   const [detailId, setDetailId] = useState<string | null>(null);
   const [rejectIds, setRejectIds] = useState<string[]>([]);
 
-  const depts = useMemo(() => [...new Set(Object.values(members).map((m) => m.dept))], [members]);
   const rows = useMemo(() => {
     const q = query.trim();
     return pending.filter((l) => {
       const m = members[l.memberId];
       return (
         (kind === 'all' || kindOf(l) === kind) &&
-        (!dept || m.dept === dept) &&
         (!q || m.name.includes(q) || l.reason.includes(q))
       );
     });
-  }, [pending, members, kind, dept, query]);
+  }, [pending, members, kind, query]);
 
   const detailLeave = leaves.find((l) => l.id === detailId) ?? null;
   // 선택은 지금 보이는 대기 목록 안에서만 유지한다
@@ -113,20 +105,14 @@ export function ApprovalsPage() {
       render: (l) => {
         const m = members[l.memberId];
         return (
-          <span className={styles.person}>
-            <Avatar name={m.name} colorKey={m.id} />
-            <span className={styles.personText}>
-              <button
-                type="button"
-                className={cx(styles.nameButton, 'text-title-sm')}
-                aria-label={t.detailLabel(m.name)}
-                onClick={() => setDetailId(l.id)}
-              >
-                {m.name}
-              </button>
-              <span className={cx(styles.sub, 'text-caption-md')}>{m.dept}</span>
-            </span>
-          </span>
+          <button
+            type="button"
+            className={cx(styles.nameButton, 'text-title-sm')}
+            aria-label={t.detailLabel(m.name)}
+            onClick={() => setDetailId(l.id)}
+          >
+            {m.name}
+          </button>
         );
       },
     },
@@ -135,16 +121,7 @@ export function ApprovalsPage() {
       key: 'period',
       header: t.columns.period,
       align: 'start',
-      render: (l) => (
-        <span className={styles.stack}>
-          <span>{periodText(l, tx, f)}</span>
-          {isUrgent(l, today) ? (
-            <Tag tone="warning">{startsInText(l, today, tx)}</Tag>
-          ) : (
-            <span className={cx(styles.sub, 'text-caption-md')}>{startsInText(l, today, tx)}</span>
-          )}
-        </span>
-      ),
+      render: (l) => periodText(l, tx, f),
     },
     { key: 'days', header: t.columns.days, align: 'end', render: (l) => f.days(l.days) },
     {
@@ -162,14 +139,12 @@ export function ApprovalsPage() {
       header: t.columns.team,
       align: 'start',
       render: (l) => {
-        const ov = teamOverlaps(l, leaves, members);
-        return ov.length ? (
-          <span className={styles.stack}>
-            <Text tone="danger" variant="label-md">
-              {t.overlap(ov.length)}
-            </Text>
-            <span className={cx(styles.sub, 'text-caption-md')}>{ov.map((o) => members[o.memberId].name).join(', ')}</span>
-          </span>
+        // 같은 사람이 여러 번 쉬어도 한 번만 센다
+        const names = [...new Set(teamOverlaps(l, leaves).map((o) => members[o.memberId].name))];
+        return names.length ? (
+          <Text tone="danger" variant="label-md" title={names.join(', ')}>
+            {t.overlapNames(names[0], names.length - 1)}
+          </Text>
         ) : (
           <span className={cx(styles.sub, 'text-caption-md')}>{t.noOverlap}</span>
         );
@@ -180,15 +155,9 @@ export function ApprovalsPage() {
       header: t.columns.balance,
       align: 'end',
       render: (l) => {
-        if (!deductsAnnual(l)) return <span className={cx(styles.sub, 'text-caption-md')}>{t.noDeduct}</span>;
-        const m = members[l.memberId];
-        const after = remainingOf(m) - l.days;
-        return (
-          <span>
-            {f.days(remainingOf(m))}{' '}
-            <Text tone={after < LOW_BALANCE ? 'danger' : 'tertiary'}>→ {f.days(after)}</Text>
-          </span>
-        );
+        // 신청한 휴가 종류의 잔여 (병가면 남은 병가)
+        const after = remainingOf(members[l.memberId], l.type) - l.days;
+        return <Text tone={after < LOW_BALANCE ? 'danger' : 'inherit'}>{f.days(after)}</Text>;
       },
     },
     { key: 'requested', header: t.columns.requested, mobile: 'hidden', render: (l) => <span className={styles.sub}>{requestedText(l.requestedAt, today, tx)}</span> },
@@ -251,15 +220,6 @@ export function ApprovalsPage() {
             })}
           </div>
           <div className={styles.toolbarFields}>
-            <Select
-              id={ids.dept}
-              label={t.dept}
-              hideLabel
-              size="sm"
-              value={dept}
-              onChange={(e) => setDept(e.target.value)}
-              options={[{ value: '', label: t.allDepts }, ...depts.map((d) => ({ value: d, label: d }))]}
-            />
             <TextField
               id={ids.search}
               type="search"
@@ -358,12 +318,9 @@ function TodayCard() {
             const m = members[l.memberId];
             return (
               <li key={l.id}>
-                <Avatar name={m.name} colorKey={m.id} />
                 <span className={styles.personText}>
                   <span className="text-title-sm">{m.name}</span>
-                  <span className={cx(styles.sub, 'text-caption-md')}>
-                    {m.dept} · {returnText(l, today, tx, f)}
-                  </span>
+                  <span className={cx(styles.sub, 'text-caption-md')}>{returnText(l, today, tx, f)}</span>
                 </span>
                 <Tag tone={kindTone[kindOf(l)]}>{leaveLabel(l, tx)}</Tag>
               </li>
@@ -503,10 +460,10 @@ function WeekSheet({
         <div className={styles.weekNav}>
           <div className={styles.weekNavButtons}>
             <IconButton size="sm" label={t.prevWeek} icon={<ChevronLeft />} onClick={() => setStart(addDaysISO(start, -7))} />
-            <Button hierarchy="tertiary" size="sm" onClick={() => setStart(mondayOf(today))} disabled={start === mondayOf(today)}>
-              {tx.common.today}
-            </Button>
             <IconButton size="sm" label={t.nextWeekButton} icon={<ChevronRight />} onClick={() => setStart(addDaysISO(start, 7))} />
+            <Button hierarchy="tertiary" size="sm" onClick={() => setStart(mondayOf(today))} disabled={start === mondayOf(today)}>
+              {t.thisWeekButton}
+            </Button>
           </div>
           <Legend />
         </div>

@@ -1,11 +1,9 @@
 import type { TagTone } from '@/components';
 import { daysBetween } from '@/features/vacation/calc';
+import type { VacationType } from '@/features/vacation/types';
 import type { Formatters, Messages } from '@/i18n';
 import { addDaysISO, isWeekend, mondayOf } from '@/lib/date';
 import type { Member, TeamLeave } from './types';
-
-/** 이 일수 안에 시작하면 '급함'으로 표시한다 */
-export const URGENT_WITHIN_DAYS = 2;
 
 export type LeaveKind = 'annual' | 'half' | 'sick' | 'comp';
 
@@ -24,29 +22,13 @@ export function leaveLabel(l: TeamLeave, m: Messages): string {
   return l.period ? m.vacation.partial(m.vacation.periods[l.period], unit) : unit;
 }
 
-/** 연차만 연차 잔여에서 차감한다 */
-export function deductsAnnual(l: TeamLeave): boolean {
-  return l.type === 'annual';
-}
-
-export function remainingOf(m: Member): number {
-  return m.granted - m.used;
+/** 그 사람의 해당 휴가 종류 잔여 일수 (승인된 것만 뺀 값) */
+export function remainingOf(m: Member, type: VacationType): number {
+  return m.granted[type] - m.used[type];
 }
 
 export function periodText(l: TeamLeave, m: Messages, f: Formatters): string {
   return l.startDate === l.endDate ? f.monthDay(l.startDate) : m.date.range(f.monthDay(l.startDate), f.monthDay(l.endDate));
-}
-
-export function startsInText(l: TeamLeave, today: string, m: Messages): string {
-  const n = daysBetween(today, l.startDate);
-  if (n < 0) return m.approvals.started;
-  if (n === 0) return m.approvals.startsToday;
-  if (n === 1) return m.approvals.startsTomorrow;
-  return m.approvals.startsIn(n);
-}
-
-export function isUrgent(l: TeamLeave, today: string): boolean {
-  return daysBetween(today, l.startDate) <= URGENT_WITHIN_DAYS;
 }
 
 export function requestedText(iso: string, today: string, m: Messages): string {
@@ -64,11 +46,10 @@ export function pendingSorted(leaves: TeamLeave[]): TeamLeave[] {
     .sort((a, b) => a.startDate.localeCompare(b.startDate) || a.requestedAt.localeCompare(b.requestedAt));
 }
 
-/** 같은 부서에서 기간이 겹치는 다른 휴가 (반려 제외) */
-export function teamOverlaps(l: TeamLeave, leaves: TeamLeave[], members: Record<string, Member>): TeamLeave[] {
-  const dept = members[l.memberId].dept;
+/** 팀에서 기간이 겹치는 다른 사람의 휴가 (반려 제외). 결재자는 팀장이라 목록 전체가 한 팀이다. */
+export function teamOverlaps(l: TeamLeave, leaves: TeamLeave[]): TeamLeave[] {
   return leaves.filter(
-    (o) => o.id !== l.id && o.status !== 'rejected' && members[o.memberId].dept === dept && overlaps(o, l.startDate, l.endDate),
+    (o) => o.memberId !== l.memberId && o.status !== 'rejected' && overlaps(o, l.startDate, l.endDate),
   );
 }
 
@@ -120,7 +101,7 @@ export interface DecisionResult {
 
 /**
  * 대기 중인 신청을 한꺼번에 승인·반려한다.
- * 승인한 연차만 사용량에 더하고, 이미 결정된 신청은 건너뛴다.
+ * 승인하면 그 휴가 종류의 사용량에 더하고, 이미 결정된 신청은 건너뛴다.
  */
 export function applyDecision(
   state: DecisionResult,
@@ -132,9 +113,9 @@ export function applyDecision(
   const members = { ...state.members };
   const leaves = state.leaves.map((l) => {
     if (!target.has(l.id) || l.status !== 'pending') return l;
-    if (decision === 'approved' && deductsAnnual(l)) {
+    if (decision === 'approved') {
       const m = members[l.memberId];
-      members[l.memberId] = { ...m, used: m.used + l.days };
+      members[l.memberId] = { ...m, used: { ...m.used, [l.type]: m.used[l.type] + l.days } };
     }
     return { ...l, status: decision, rejectReason: decision === 'rejected' ? rejectReason : undefined };
   });
@@ -147,7 +128,7 @@ export function toCsv(rows: TeamLeave[], members: Record<string, Member>, m: Mes
   const esc = (v: string | number) => `"${String(v).replaceAll('"', '""')}"`;
   const lines = rows.map((l) => {
     const member = members[l.memberId];
-    return [member.name, member.dept, leaveLabel(l, m), l.startDate, l.endDate, l.days, l.reason, l.requestedAt].map(esc).join(',');
+    return [member.name, leaveLabel(l, m), l.startDate, l.endDate, l.days, l.reason, l.requestedAt].map(esc).join(',');
   });
   return '﻿' + [header.map(esc).join(','), ...lines].join('\n');
 }

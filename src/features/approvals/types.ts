@@ -1,15 +1,14 @@
 import type { VacationStatus } from '@/components';
-import type { DayPeriod, VacationType, VacationUnit } from '@/features/vacation/types';
+import type { Balance, DayPeriod, VacationType, VacationUnit } from '@/features/vacation/types';
 
 export interface Member {
   id: string;
   name: string;
-  dept: string;
   role: string;
-  /** 올해 받은 연차 */
-  granted: number;
-  /** 승인되어 쓴 연차 */
-  used: number;
+  /** 휴가 종류별로 올해 받은 일수 */
+  granted: Balance;
+  /** 휴가 종류별로 승인되어 쓴 일수 */
+  used: Balance;
 }
 
 export interface TeamLeave {

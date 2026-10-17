@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { decide, pendingDaysByType } from './requests';
+import { decide, overlaps, pendingDaysByType } from './requests';
 import type { VacationRequest } from './types';
 
 const base = { unit: 'full', period: null, requestedAt: '2026-10-16', startDate: '2026-11-02', endDate: '2026-11-04', reason: '' } as const;
@@ -31,5 +31,22 @@ describe('결재와 잔여 휴가', () => {
     const r = decide(requests, balance, '3', 'approved');
     expect(r.balance).toEqual(balance);
     expect(r.requests).toBe(requests);
+  });
+});
+
+describe('기간 겹침', () => {
+  const day = (period: 'am' | 'pm' | null) => ({ startDate: '2026-10-28', endDate: '2026-10-28', period });
+
+  it('같은 날 오전·오후 반차는 겹치지 않는다', () => {
+    expect(overlaps(day('am'), day('pm'))).toBe(false);
+  });
+
+  it('같은 반나절이거나 종일이 끼면 겹친다', () => {
+    expect(overlaps(day('pm'), day('pm'))).toBe(true);
+    expect(overlaps(day(null), day('am'))).toBe(true);
+  });
+
+  it('날짜가 다르면 겹치지 않는다', () => {
+    expect(overlaps(day(null), { startDate: '2026-10-29', endDate: '2026-10-30', period: null })).toBe(false);
   });
 });

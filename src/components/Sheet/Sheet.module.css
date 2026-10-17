@@ -54,7 +54,8 @@
 }
 .desktop .panel {
   max-width: var(--semantic-size-layout-sheet-max-width);
-  max-height: calc(100dvh - 2 * var(--semantic-padding-xl));
+  /* 내용 양과 상관없이 늘 최대 높이로 연다 (본문만 스크롤) */
+  height: calc(100dvh - 2 * var(--semantic-padding-xl));
   border-radius: var(--semantic-radius-modal);
   opacity: 0;
   transform: translateY(var(--semantic-spacing-sm)) scale(0.98);
@@ -69,7 +70,7 @@
 .mobile { align-items: flex-end; }
 .mobile .panel {
   /* 위쪽 상태 표시줄 + 줄어든 뒤 화면이 살짝 보이도록 남긴다 */
-  max-height: calc(100dvh - env(safe-area-inset-top) - var(--semantic-spacing-xs));
+  height: calc(100dvh - env(safe-area-inset-top) - var(--semantic-spacing-xs));
   border-radius: var(--semantic-radius-sheet) var(--semantic-radius-sheet) 0 0;
   transform: translateY(100%);
   transition: transform var(--semantic-motion-duration-slow) var(--semantic-motion-easing-sheet);

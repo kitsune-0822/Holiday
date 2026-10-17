@@ -1,6 +1,5 @@
 import { useRef } from 'react';
 import {
-  Avatar,
   Button,
   ButtonGroup,
   Callout,
@@ -12,15 +11,12 @@ import {
 } from '@/components';
 import { currentUser } from '@/data/mock';
 import {
-  deductsAnnual,
-  isUrgent,
   kindOf,
   kindTone,
   leaveLabel,
   periodText,
   remainingOf,
   requestedText,
-  startsInText,
   teamOverlaps,
 } from '@/features/approvals/logic';
 import { useApprovals } from '@/features/approvals/ApprovalsContext';
@@ -83,23 +79,19 @@ function DetailBody({
   const { m: tx, f } = useI18n();
   const t = tx.approvals.detail;
   const m = members[leave.memberId];
-  const overlaps = teamOverlaps(leave, leaves, members);
-  const deduct = deductsAnnual(leave);
-  const remaining = remainingOf(m);
-  const after = remaining - (deduct ? leave.days : 0);
+  const overlaps = teamOverlaps(leave, leaves);
+  const type = leave.type;
+  const after = remainingOf(m, type) - leave.days;
 
   return (
     <div className={styles.detail}>
       <div className={styles.detailPerson}>
-        <Avatar name={m.name} colorKey={m.id} size="xl" />
-        <div>
-          <Text as="p" variant="title-lg">
-            {m.name}
-          </Text>
-          <Text as="p" variant="body-md" tone="tertiary">
-            {m.dept} · {m.role}
-          </Text>
-        </div>
+        <Text as="p" variant="title-lg">
+          {m.name}
+        </Text>
+        <Text as="p" variant="body-md" tone="tertiary">
+          {m.role}
+        </Text>
       </div>
 
       <dl className={styles.detailList}>
@@ -110,8 +102,8 @@ function DetailBody({
         <dt>{t.period}</dt>
         <dd>
           {periodText(leave, tx, f)}{' '}
-          <Text tone={isUrgent(leave, today) ? 'danger' : 'tertiary'} variant="body-md">
-            {t.periodNote(f.days(leave.days), startsInText(leave, today, tx))}
+          <Text tone="tertiary" variant="body-md">
+            {t.periodNote(f.days(leave.days))}
           </Text>
         </dd>
         <dt>{t.reason}</dt>
@@ -127,27 +119,22 @@ function DetailBody({
 
       <section className={styles.detailSection} aria-labelledby="detail-balance">
         <Text as="h3" id="detail-balance" variant="title-md">
-          {t.balance}
+          {t.balance(tx.vacation.types[type])}
         </Text>
         <div className={styles.balanceBox}>
-          {!deduct && (
-            <Text as="p" variant="body-md" tone="tertiary">
-              {t.notDeducted(leaveLabel(leave, tx))}
-            </Text>
-          )}
           <KeyValueList
             items={[
-              { label: t.granted, value: f.days(m.granted) },
-              { label: t.used, value: f.days(m.used) },
-              { label: t.thisRequest, value: deduct ? `−${f.days(leave.days)}` : f.days(0) },
+              { label: t.granted, value: f.days(m.granted[type]) },
+              { label: t.used, value: f.days(m.used[type]) },
+              { label: t.thisRequest, value: `−${f.days(leave.days)}` },
             ]}
           />
           <Meter
-            max={m.granted}
-            label={t.meter(f.days(m.granted), f.days(m.used), deduct ? f.days(leave.days) : null)}
+            max={Math.max(m.granted[type], m.used[type] + leave.days)}
+            label={t.meter(f.days(m.granted[type]), f.days(m.used[type]), f.days(leave.days))}
             segments={[
-              { value: m.used, tone: 'strong' },
-              { value: deduct ? leave.days : 0, tone: 'light' },
+              { value: m.used[type], tone: 'strong' },
+              { value: leave.days, tone: 'light' },
             ]}
           />
           <div className={styles.balanceTotal}>
@@ -161,19 +148,18 @@ function DetailBody({
 
       <section className={styles.detailSection} aria-labelledby="detail-team">
         <Text as="h3" id="detail-team" variant="title-md">
-          {t.team(m.dept)}
+          {t.team}
         </Text>
         {overlaps.length ? (
           <>
             <Callout tone="warning">
-              {t.teamWarning(m.dept, overlaps.length + 1)}
+              {t.teamWarning(new Set(overlaps.map((o) => o.memberId)).size + 1)}
             </Callout>
             <ul className={styles.overlapList}>
               {overlaps.map((o) => {
                 const om = members[o.memberId];
                 return (
                   <li key={o.id}>
-                    <Avatar name={om.name} colorKey={om.id} size="sm" />
                     <span className="text-body-md">{om.name}</span>
                     <Tag tone={kindTone[kindOf(o)]}>{leaveLabel(o, tx)}</Tag>
                     {o.status === 'pending' && <Tag>{tx.vacation.status.pending}</Tag>}

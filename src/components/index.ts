@@ -21,6 +21,15 @@ export {
   type DateRange,
   type FilterFieldProps,
 } from './FilterGrid/FilterGrid';
+export {
+  BellFilled,
+  CalendarCheckFilled,
+  CircleCheckFilled,
+  CircleXFilled,
+  ClipboardCheckFilled,
+  InfoFilled,
+  SettingsFilled,
+} from './Icon/FilledIcons';
 export { IconButton, type IconButtonProps } from './IconButton/IconButton';
 export { KeyValueList, type KeyValueItem, type KeyValueListProps } from './KeyValueList/KeyValueList';
 export { Meter, type MeterProps, type MeterSegment } from './Meter/Meter';

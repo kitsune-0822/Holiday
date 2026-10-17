@@ -2,7 +2,7 @@ import { BookOpen, Code2, ExternalLink, FileCode, FolderGit2, Languages, Palette
 import { useEffect, useRef, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import { useLocation } from 'react-router';
-import { Avatar, Checkbox, IconButton, ScrollArea, Select, Text } from '@/components';
+import { Checkbox, IconButton, ScrollArea, Select, Text } from '@/components';
 import { localeList, locales, useI18n, type Locale } from '@/i18n';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { cx } from '@/lib/cx';
@@ -57,7 +57,6 @@ export function TweaksPanel() {
           <ScrollArea className={styles.panelScroll}>
             <div className={styles.panelBody}>
               <section className={styles.profile}>
-                <Avatar name={site.author.name} size="lg" colorKey="author" />
                 <div>
                   <Text as="p" variant="title-md">
                     {site.author.name}

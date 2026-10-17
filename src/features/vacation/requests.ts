@@ -26,3 +26,15 @@ export function decide(
     balance: decision === 'approved' ? { ...balance, [target.type]: balance[target.type] - target.days } : balance,
   };
 }
+
+/**
+ * 두 신청의 기간이 겹치는지. 반차·반반차는 하루짜리라
+ * 같은 날이라도 오전·오후가 다르면 겹치지 않는다.
+ */
+export function overlaps(
+  a: Pick<VacationRequest, 'startDate' | 'endDate' | 'period'>,
+  b: Pick<VacationRequest, 'startDate' | 'endDate' | 'period'>,
+): boolean {
+  if (a.startDate > b.endDate || a.endDate < b.startDate) return false;
+  return !(a.period && b.period && a.period !== b.period);
+}

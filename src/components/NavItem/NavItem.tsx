@@ -10,6 +10,8 @@ type NavItemOwnProps<T extends ElementType> = {
   /** 렌더할 요소. 라우터 링크를 쓰려면 `as={NavLink}`와 `to`를 넘긴다. 기본은 button. */
   as?: T;
   icon: ReactNode;
+  /** 선택됐을 때 바꿔 보여줄 아이콘 (채운 아이콘) */
+  selectedIcon?: ReactNode;
   label: string;
   /**
    * 알림 개수. Figma의 `hasNotifications`를 대체한다.
@@ -31,6 +33,7 @@ export type NavItemProps<T extends ElementType> = NavItemOwnProps<T> &
 export function NavItem<T extends ElementType = "button">({
   as,
   icon,
+  selectedIcon,
   label,
   count = 0,
   selected,
@@ -70,7 +73,7 @@ export function NavItem<T extends ElementType = "button">({
       {...rest}
     >
       <span className={styles.icon} aria-hidden="true">
-        {icon}
+        {selected && selectedIcon ? selectedIcon : icon}
         {collapsed && hasCount && (
           <Dot className={styles.dot} tone="danger" size="md" />
         )}

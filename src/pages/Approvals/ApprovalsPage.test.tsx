@@ -1,4 +1,4 @@
-import { render, screen, waitFor, within } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { App } from '@/app/App';
@@ -16,13 +16,13 @@ describe('결재 대기 신청', () => {
   it('승인하면 목록에서 빠지고, 되돌리기로 돌아온다', async () => {
     render(<App />);
     const table = await screen.findByRole('table', { name: '결재 대기 신청' });
-    expect(within(table).getAllByRole('row')).toHaveLength(9); // 머리글 + 8건
-    expect(navCount()).toHaveTextContent('8');
+    expect(within(table).getAllByRole('row')).toHaveLength(10); // 머리글 + 팀원 8건 + 내 신청 1건
+    expect(navCount()).toHaveTextContent('9');
 
     await userEvent.click(within(table).getByRole('button', { name: '신우진 신청 승인' }));
     expect(await screen.findByText('신우진님 신청을 승인했어요.')).toBeInTheDocument();
     expect(within(screen.getByRole('table')).queryByText('신우진')).not.toBeInTheDocument();
-    expect(navCount()).toHaveTextContent('7');
+    expect(navCount()).toHaveTextContent('8');
 
     await userEvent.click(screen.getByRole('button', { name: '되돌리기' }));
     expect(within(screen.getByRole('table')).getByText('신우진')).toBeInTheDocument();
@@ -51,7 +51,7 @@ describe('결재 대기 신청', () => {
     expect(screen.getByText('2건 선택됨')).toBeInTheDocument();
     await userEvent.click(screen.getByRole('button', { name: '선택 승인' }));
     expect(await screen.findByText(/외 1건을 승인했어요/)).toBeInTheDocument();
-    expect(within(screen.getByRole('table')).getAllByRole('row')).toHaveLength(7);
+    expect(within(screen.getByRole('table')).getAllByRole('row')).toHaveLength(8);
   });
 
   it('행을 누르면 상세가 열리고 같은 팀 일정을 보여준다', async () => {
@@ -59,7 +59,7 @@ describe('결재 대기 신청', () => {
     const table = await screen.findByRole('table', { name: '결재 대기 신청' });
     await userEvent.click(within(table).getByRole('button', { name: '윤서준 신청 상세 보기' }));
     const dialog = await screen.findByRole('dialog', { name: '휴가 신청 상세' });
-    expect(within(dialog).getByText(/개발팀에서 \d명이 자리를 비워요/)).toBeInTheDocument();
+    expect(within(dialog).getByText(/팀에서 \d명이 자리를 비워요/)).toBeInTheDocument();
     expect(within(dialog).getByRole('img', { name: /15일 중 5.5일 사용, 이번 신청 3일/ })).toBeInTheDocument();
   });
 
@@ -74,6 +74,38 @@ describe('결재 대기 신청', () => {
   });
 });
 
+describe('내가 낸 신청', () => {
+  it('결재 목록에 나오고, 승인하면 내 잔여 연차에서 빠지고 알림이 온다', async () => {
+    render(<App />);
+    const table = await screen.findByRole('table', { name: '결재 대기 신청' });
+    // 목업의 내 대기 신청: 10/28 오후 반차 (사유: 병원 진료)
+    const row = within(table).getByText('병원 진료').closest('tr')!;
+    expect(within(row).getByRole('button', { name: '윤호 신청 상세 보기' })).toBeInTheDocument();
+    await userEvent.click(within(row).getByRole('button', { name: '윤호 신청 승인' }));
+    expect(await screen.findByText('윤호님 신청을 승인했어요.')).toBeInTheDocument();
+
+    await userEvent.click(screen.getByRole('link', { name: /휴가 현황/ }));
+    // 연차 13.25일 → 반차 승인 후 12.75일
+    await screen.findByRole('heading', { name: '휴가 현황', level: 1 });
+    expect(within(document.getElementById('balance')!).getByText('12.75일')).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /알림/ })).toHaveTextContent('4');
+  });
+
+  it('새로 낸 신청이 바로 결재 목록에 나온다', async () => {
+    window.history.pushState({}, '', '/vacation-request');
+    render(<App />);
+    const dialog = await screen.findByRole('dialog', { name: '휴가 신청하기' });
+    fireEvent.change(within(dialog).getByLabelText(/휴가 시작일/), { target: { value: '2026-11-02' } });
+    fireEvent.change(within(dialog).getByLabelText(/휴가 종료일/), { target: { value: '2026-11-03' } });
+    fireEvent.change(within(dialog).getByLabelText('사유'), { target: { value: '이사' } });
+    await userEvent.click(within(dialog).getByRole('button', { name: '2일 신청하기' }));
+    await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument());
+    await userEvent.click(screen.getByRole('link', { name: /결재 대기 신청/ }));
+    const table = await screen.findByRole('table', { name: '결재 대기 신청' });
+    expect(within(table).getByText('이사')).toBeInTheDocument();
+  });
+});
+
 describe('주간 휴가 일정', () => {
   it('크게 보기로 넓은 시트가 열리고, 다음 주로 넘겨 볼 수 있다', async () => {
     render(<App />);
@@ -82,7 +114,7 @@ describe('주간 휴가 일정', () => {
     expect(dialog).toHaveAccessibleDescription(/10\/19\(월\) – 10\/25\(일\)/);
     await userEvent.click(within(dialog).getByRole('button', { name: '다음 주' }));
     expect(dialog).toHaveAccessibleDescription(/10\/26\(월\) – 11\/1\(일\)/);
-    await userEvent.click(within(dialog).getByRole('button', { name: '오늘' }));
+    await userEvent.click(within(dialog).getByRole('button', { name: '이번 주' }));
     expect(dialog).toHaveAccessibleDescription(/10\/19\(월\)/);
   });
 

@@ -147,3 +147,17 @@ describe("휴가 신청 내역 필터", () => {
     );
   });
 });
+
+describe('기간 중복', () => {
+  it('이미 신청한 휴가와 기간이 겹치면 신청할 수 없다', async () => {
+    window.history.pushState({}, '', '/vacation-request');
+    render(<App />);
+    const dialog = await screen.findByRole('dialog', { name: '휴가 신청하기' });
+    // 목업: 10/19~10/23 연차 승인됨
+    fireEvent.change(within(dialog).getByLabelText(/휴가 시작일/), { target: { value: '2026-10-21' } });
+    fireEvent.change(within(dialog).getByLabelText(/휴가 종료일/), { target: { value: '2026-10-27' } });
+    expect(within(dialog).getByText('이미 신청한 휴가(10월 19일(월) ~ 10월 23일(금))와 기간이 겹쳐요.')).toBeInTheDocument();
+    await userEvent.click(within(dialog).getByRole('button', { name: /신청하기/ }));
+    expect(screen.getByRole('dialog', { name: '휴가 신청하기' })).toBeInTheDocument();
+  });
+});

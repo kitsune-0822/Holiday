@@ -37,10 +37,8 @@
   box-shadow: inset var(--semantic-border-width-strong) 0 0 var(--semantic-color-primary-default);
 }
 
-.person { display: flex; min-width: 0; align-items: center; gap: var(--semantic-spacing-2xs); padding-inline: var(--semantic-padding-lg) var(--semantic-padding-md); }
-.personText { display: flex; min-width: 0; flex-direction: column; }
+.person { display: flex; min-width: 0; align-items: center; padding-inline: var(--semantic-padding-lg) var(--semantic-padding-md); }
 .name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.dept { color: var(--semantic-color-text-tertiary); }
 
 .track {
   position: relative;
@@ -48,8 +46,11 @@
   grid-column: 2 / span 7;
   display: grid;
   grid-template-columns: repeat(14, 1fr);
-  align-items: center;
-  height: var(--semantic-size-control-md);
+  /* 줄 수는 겹치는 휴가 수에 따라 인라인으로 정한다 */
+  align-content: center;
+  row-gap: var(--semantic-spacing-3xs);
+  min-height: var(--semantic-size-control-md);
+  padding-block: var(--semantic-padding-sm);
 }
 
 .bar {
@@ -77,6 +78,9 @@
   color: var(--semantic-color-primary-on-subtle);
   cursor: pointer;
 }
+.continuesBefore { margin-left: 0; border-top-left-radius: 0; border-bottom-left-radius: 0; }
+.continuesAfter { margin-right: 0; border-top-right-radius: 0; border-bottom-right-radius: 0; }
+
 .pending:hover { background: var(--semantic-color-primary-subtle-hover); }
 
 .empty { padding: var(--semantic-spacing-xl) var(--semantic-padding-lg); color: var(--semantic-color-text-tertiary); text-align: center; }

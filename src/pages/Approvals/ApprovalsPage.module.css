@@ -103,7 +103,6 @@
 }
 .bulkActions { display: flex; flex-wrap: wrap; gap: var(--semantic-spacing-2xs); }
 
-.person { display: inline-flex; align-items: center; gap: var(--semantic-spacing-xs); }
 .personText { display: flex; min-width: 0; flex-direction: column; align-items: flex-start; }
 .nameButton {
   padding: 0;
@@ -124,7 +123,7 @@
 
 /* ── 상세 시트 ── */
 .detail { display: flex; flex-direction: column; gap: var(--semantic-spacing-lg); }
-.detailPerson { display: flex; align-items: center; gap: var(--semantic-spacing-sm); }
+.detailPerson { display: flex; flex-direction: column; gap: var(--semantic-spacing-3xs); }
 .detailList {
   display: grid;
   grid-template-columns: var(--semantic-size-layout-mobile-label) 1fr;

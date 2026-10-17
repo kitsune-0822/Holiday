@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from 'react';
 import { Button, ButtonGroup, DateField, KeyValueList, SegmentedControl, Sheet, Text, TextArea, useToast } from '@/components';
 import { remainingAfter, requestedDays } from '@/features/vacation/calc';
+import { overlaps } from '@/features/vacation/requests';
 import {
   dayPeriods,
   vacationTypes,
@@ -32,7 +33,7 @@ export function VacationRequestSheet() {
   useDocumentTitle(t.title);
   const sheet = useRouteSheet();
   const toast = useToast();
-  const { balance, pendingDays, submitRequest } = useVacation();
+  const { balance, pendingDays, requests, submitRequest } = useVacation();
 
   const [type, setType] = useState<VacationType>('annual');
   const [unit, setUnit] = useState<VacationUnit>('full');
@@ -54,6 +55,16 @@ export function VacationRequestSheet() {
   if (isFullDay && !end) errors.end = t.errors.end;
   else if (isFullDay && end < start) errors.end = t.errors.order;
   if (!isFullDay && !period) errors.period = t.errors.period;
+  // 이미 낸 신청(반려 제외)과 기간이 겹치면 막는다
+  const clash =
+    start && endDate && !errors.start && !errors.end
+      ? requests.find(
+          (r) =>
+            r.status !== 'rejected' &&
+            overlaps(r, { startDate: start, endDate, period: isFullDay ? null : period }),
+        )
+      : undefined;
+  if (clash) errors.start = t.errors.overlap(f.dateSpan(clash.startDate, clash.endDate));
   if (start && endDate && !errors.end && days === 0) errors.days = t.errors.noWeekday;
   else if (days > balance[type] - pendingDays[type]) {
     // 잔여 휴가는 승인될 때 빠지므로, 결재 대기 중인 일수까지 합쳐 넘지 않게 한다

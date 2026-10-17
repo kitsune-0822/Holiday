@@ -1,7 +1,7 @@
 import type { Balance, VacationAlert, VacationRequest } from '@/features/vacation/types';
 
 /** 서버 연동 전 목업 데이터 */
-export const currentUser = { name: '윤호' };
+export const currentUser = { name: '윤호', role: '팀장' };
 
 export const initialBalance: Balance = { annual: 13.25, sick: 30, comp: 3 };
 /** 다음 지급일에 받을 휴가 */

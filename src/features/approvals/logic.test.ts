@@ -12,7 +12,6 @@ import {
   onLeaveToday,
   pendingSorted,
   returnText,
-  startsInText,
   teamOverlaps,
   toCsv,
   weekRows,
@@ -46,18 +45,17 @@ describe('결재 목록', () => {
     expect(list).toHaveLength(8);
   });
 
-  it('같은 부서에서 겹치는 휴가만 찾는다', () => {
-    const m8 = byMember('m8'); // 개발팀, T3~T5
-    const names = teamOverlaps(m8, leaves, members).map((l) => members[l.memberId].name);
-    expect(names).toContain('조예린'); // 개발팀 T4 반반차
-    expect(names).not.toContain('홍수아'); // CS팀
+  it('기간이 겹치는 다른 팀원의 휴가를 찾는다 (본인·반려 제외)', () => {
+    const m8 = byMember('m8'); // T3~T5
+    const names = teamOverlaps(m8, leaves).map((l) => members[l.memberId].name);
+    expect(names).toContain('조예린'); // T4 반반차
+    expect(names).not.toContain('윤서준');
+    expect(names).not.toContain('오태윤'); // T10~
   });
 
   it('표시 문구', () => {
     expect(leaveLabel(byMember('m13'), m)).toBe('오전 반반차');
     expect(leaveLabel(byMember('m11'), m)).toBe('병가');
-    expect(startsInText(byMember('m11'), today, m)).toBe('오늘 시작');
-    expect(startsInText(byMember('m9'), today, m)).toBe('내일 시작');
     expect(returnText(byMember('m2'), today, m, f)).toBe('오후 출근');
     expect(returnText(byMember('m1'), today, m, f)).toBe('10/23(금) 복귀');
   });
@@ -72,16 +70,18 @@ describe('결재 목록', () => {
 describe('승인·반려', () => {
   const state = { leaves, members };
 
-  it('연차를 승인하면 사용량에 더한다', () => {
+  it('승인하면 그 휴가 종류의 사용량에만 더한다', () => {
     const l = byMember('m12');
     const next = applyDecision(state, [l.id], 'approved');
     expect(next.leaves.find((x) => x.id === l.id)?.status).toBe('approved');
-    expect(next.members.m12.used).toBe(members.m12.used + 1);
+    expect(next.members.m12.used.annual).toBe(members.m12.used.annual + 1);
+    expect(next.members.m12.used.sick).toBe(members.m12.used.sick);
   });
 
-  it('병가·대휴는 연차에서 빼지 않는다', () => {
+  it('병가를 승인하면 병가에서 뺀다', () => {
     const next = applyDecision(state, [byMember('m11').id], 'approved');
-    expect(next.members.m11.used).toBe(members.m11.used);
+    expect(next.members.m11.used.sick).toBe(members.m11.used.sick + 1);
+    expect(next.members.m11.used.annual).toBe(members.m11.used.annual);
   });
 
   it('반려하면 사유를 남기고 사용량은 그대로', () => {
@@ -99,7 +99,7 @@ describe('승인·반려', () => {
 
   it('CSV는 BOM과 머리글로 시작한다', () => {
     const csv = toCsv(pendingSorted(leaves).slice(0, 1), members, m);
-    expect(csv.startsWith('﻿"신청자","부서"')).toBe(true);
+    expect(csv.startsWith('﻿"신청자","유형"')).toBe(true);
     expect(csv.split('\n')).toHaveLength(2);
   });
 });
