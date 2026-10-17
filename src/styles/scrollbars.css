@@ -1,0 +1,27 @@
+@import 'overlayscrollbars/overlayscrollbars.css';
+
+/* OverlayScrollbars 테마: 얇고, 내용 위에 겹치며, 마우스가 올라갔을 때만 보인다 */
+.os-theme-holiday {
+  --os-size: var(--semantic-size-scrollbar);
+  --os-padding-perpendicular: 2px;
+  --os-padding-axis: 2px;
+  --os-track-border-radius: var(--semantic-radius-pill);
+  --os-handle-border-radius: var(--semantic-radius-pill);
+  --os-handle-bg: var(--semantic-color-scrollbar-thumb);
+  --os-handle-bg-hover: var(--semantic-color-scrollbar-thumb-hover);
+  --os-handle-bg-active: var(--semantic-color-scrollbar-thumb-hover);
+  --os-handle-min-size: 32px;
+  --os-handle-interactive-area-offset: 4px;
+}
+
+/*
+ * OverlayScrollbars를 붙이지 않은 나머지(textarea 등)의 기본 스크롤바.
+ * 얇게, 마우스가 올라간 요소에서만 손잡이가 보인다.
+ */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+*:hover {
+  scrollbar-color: var(--semantic-color-scrollbar-thumb) transparent;
+}

@@ -1,0 +1,51 @@
+.fieldset { min-width: 0; margin: 0; padding: 0; border: 0; }
+.legend {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--semantic-spacing-3xs);
+  margin-bottom: var(--semantic-spacing-2xs);
+  padding: 0;
+  color: var(--semantic-color-text-primary);
+}
+.options { display: flex; gap: var(--semantic-spacing-2xs); }
+.option { display: flex; flex: 1 1 0; min-width: 0; }
+
+.segment {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--semantic-size-control-md);
+  padding: var(--semantic-padding-button-y-md) var(--semantic-padding-button-x);
+  border-radius: var(--semantic-radius-button);
+  background: var(--semantic-color-bg-subtle);
+  color: var(--semantic-color-text-secondary);
+  text-align: center;
+  cursor: pointer;
+  transition: background-color var(--semantic-motion-duration-fast) var(--semantic-motion-easing-default);
+  user-select: none;
+}
+.segment:hover { background: var(--semantic-color-bg-muted); }
+
+/* 선택: 브랜드 틴트 배경으로 미선택(회색)과 확실히 구분한다 */
+input:checked + .segment {
+  background: var(--semantic-color-primary-subtle);
+  color: var(--semantic-color-primary-on-subtle);
+  font-weight: var(--semantic-typography-title-md-font-weight);
+}
+input:checked + .segment:hover { background: var(--semantic-color-primary-subtle-hover); }
+input:focus-visible + .segment {
+  outline: var(--semantic-border-width-focus) solid var(--semantic-color-border-focus);
+  outline-offset: 2px;
+}
+input:disabled + .segment,
+.fieldset:disabled .segment { opacity: var(--semantic-opacity-disabled); cursor: not-allowed; }
+input:disabled + .segment:hover,
+.fieldset:disabled .segment:hover { background: var(--semantic-color-bg-subtle); }
+
+.error { margin-top: var(--semantic-spacing-2xs); color: var(--semantic-color-text-danger); }
+
+@media (max-width: 767px) {
+  .options { gap: var(--semantic-spacing-3xs); }
+  .segment { padding-inline: var(--semantic-padding-md); }
+}

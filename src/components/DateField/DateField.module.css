@@ -1,0 +1,4 @@
+/* 기본 달력 아이콘은 숨기고 디자인의 아이콘을 쓴다. 상자 어디를 눌러도 선택기가 열린다. */
+.input::-webkit-calendar-picker-indicator { display: none; }
+.input { cursor: pointer; }
+.empty { color: var(--semantic-color-text-placeholder); }

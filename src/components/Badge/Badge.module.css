@@ -1,0 +1,11 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--semantic-padding-badge-y) var(--semantic-padding-badge-x);
+  border-radius: var(--semantic-radius-badge);
+  white-space: nowrap;
+}
+
+.pending { background: var(--semantic-color-bg-muted); color: var(--semantic-color-text-secondary); }
+.approved { background: var(--semantic-color-status-success-subtle); color: var(--semantic-color-text-success); }
+.rejected { background: var(--semantic-color-status-danger-subtle); color: var(--semantic-color-text-danger); }

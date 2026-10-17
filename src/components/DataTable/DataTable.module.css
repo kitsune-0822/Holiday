@@ -1,0 +1,46 @@
+.scroll { width: 100%; }
+.scroll :global([data-overlayscrollbars-viewport]):focus-visible { outline-offset: -2px; }
+
+.table {
+  width: 100%;
+  min-width: var(--semantic-size-layout-table-min-width);
+  border-collapse: collapse;
+  /* 열 폭은 내용에 맞추고, 표가 영역보다 넓으면 가로로 스크롤한다 */
+  table-layout: auto;
+}
+
+.th,
+.td {
+  height: var(--semantic-size-control-sm);
+  padding: var(--semantic-padding-table-cell-y) var(--semantic-padding-table-cell-x);
+  /* 테두리는 셀 경계에 정확히 1px로 겹친다 (Figma의 -0.5px 오프셋 문제 해결) */
+  border: var(--semantic-border-width-default) solid var(--semantic-color-border-default);
+  white-space: nowrap;
+}
+.th { background: var(--semantic-color-bg-subtle); font-weight: inherit; }
+.td { background: var(--semantic-color-bg-default); }
+tbody tr:hover .td { background: var(--semantic-color-bg-subtle); }
+
+.center { text-align: center; }
+.start { text-align: start; }
+
+.cards { display: flex; flex-direction: column; gap: var(--semantic-spacing-xs); }
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--semantic-spacing-xs);
+  padding: var(--semantic-padding-lg);
+  border: var(--semantic-border-width-default) solid var(--semantic-color-border-default);
+  border-radius: var(--semantic-radius-xl);
+}
+.cardList { display: flex; flex-direction: column; gap: var(--semantic-spacing-3xs); }
+.cardRow { display: flex; align-items: baseline; gap: var(--semantic-spacing-sm); }
+.cardLabel { flex: 0 0 var(--semantic-size-layout-mobile-label); color: var(--semantic-color-text-tertiary); }
+
+.empty {
+  padding: var(--semantic-spacing-3xl) var(--semantic-padding-lg);
+  border: var(--semantic-border-width-default) dashed var(--semantic-color-border-default);
+  border-radius: var(--semantic-radius-xl);
+  color: var(--semantic-color-text-secondary);
+  text-align: center;
+}

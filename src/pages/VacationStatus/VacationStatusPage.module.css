@@ -1,0 +1,42 @@
+.page { display: flex; flex-direction: column; gap: var(--semantic-spacing-3xl); container-type: inline-size; }
+
+.title {
+  font-family: var(--semantic-typography-display-lg-font-family);
+  font-size: var(--semantic-typography-display-lg-font-size);
+  line-height: var(--semantic-typography-display-lg-line-height);
+  font-weight: var(--semantic-typography-display-lg-font-weight);
+  letter-spacing: var(--semantic-typography-display-lg-letter-spacing);
+}
+
+.cards { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--semantic-spacing-sm); }
+/* 본문 폭이 넉넉할 때만 카드 3개를 나란히 (숫자가 줄바꿈되지 않게) */
+@container (min-width: 1080px) {
+  .cards { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+.highlight { box-shadow: 0 0 0 var(--semantic-border-width-focus) var(--semantic-color-border-focus); }
+.cards > :focus { outline: none; }
+
+.history { display: flex; flex-direction: column; gap: var(--semantic-spacing-lg); }
+.historyHeader { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--semantic-spacing-sm); }
+.historyActions { display: flex; gap: var(--semantic-spacing-2xs); }
+.flip { transform: rotate(180deg); }
+.empty { display: inline-flex; flex-direction: column; align-items: center; gap: var(--semantic-spacing-sm); }
+
+/* 태블릿: 카드를 한 줄에 하나씩 */
+@media (max-width: 1279px) {
+  .page { gap: var(--semantic-spacing-xl); }
+  .title {
+    font-size: var(--semantic-typography-heading-xl-font-size);
+    line-height: var(--semantic-typography-heading-xl-line-height);
+    letter-spacing: var(--semantic-typography-heading-xl-letter-spacing);
+  }
+}
+
+@media (max-width: 767px) {
+  .page { gap: var(--semantic-spacing-lg); }
+  .title {
+    font-size: var(--semantic-typography-heading-lg-font-size);
+    line-height: var(--semantic-typography-heading-lg-line-height);
+  }
+  .cards { gap: var(--semantic-spacing-xs); }
+}

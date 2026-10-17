@@ -1,0 +1,121 @@
+.root {
+  position: fixed;
+  inset: 0;
+  z-index: var(--semantic-z-index-sheet);
+  display: flex;
+}
+
+.backdrop {
+  position: absolute;
+  inset: 0;
+  background: var(--semantic-color-bg-overlay);
+  opacity: 0;
+  transition: opacity var(--semantic-motion-duration-slow) var(--semantic-motion-easing-sheet);
+}
+.root[data-state='open'] .backdrop { opacity: calc(1 - var(--sheet-drag-progress, 0)); }
+
+.panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background: var(--semantic-color-bg-default);
+  box-shadow: var(--semantic-shadow-lg);
+  outline: none;
+}
+
+.dragArea { flex-shrink: 0; }
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--semantic-spacing-2xs);
+  padding: var(--semantic-padding-modal) var(--semantic-padding-modal) 0;
+}
+.titles { display: flex; flex: 1; min-width: 0; flex-direction: column; gap: var(--semantic-spacing-2xs); }
+.description { color: var(--semantic-color-text-secondary); }
+
+.scroll { flex: 1; }
+.scroll :global([data-overlayscrollbars-viewport]) { overscroll-behavior: contain; }
+.body { padding: var(--semantic-spacing-xl) var(--semantic-padding-modal); }
+
+.footer {
+  flex-shrink: 0;
+  padding: var(--semantic-padding-lg) var(--semantic-padding-modal) var(--semantic-padding-modal);
+  /* 본문이 길어 스크롤될 때 버튼 영역과 경계를 둔다 */
+  border-top: var(--semantic-border-width-default) solid var(--semantic-color-border-subtle);
+}
+
+/* ── 태블릿·데스크탑: 가운데 다이얼로그 ── */
+.desktop {
+  align-items: center;
+  justify-content: center;
+  padding: var(--semantic-padding-xl);
+}
+.desktop .panel {
+  max-width: var(--semantic-size-layout-sheet-max-width);
+  max-height: calc(100dvh - 2 * var(--semantic-padding-xl));
+  border-radius: var(--semantic-radius-modal);
+  opacity: 0;
+  transform: translateY(var(--semantic-spacing-sm)) scale(0.98);
+  transition:
+    opacity var(--semantic-motion-duration-normal) var(--semantic-motion-easing-default),
+    transform var(--semantic-motion-duration-normal) var(--semantic-motion-easing-default);
+}
+.desktop[data-state='open'] .panel { opacity: 1; transform: none; }
+
+/* ── 모바일: iOS bottom sheet ── */
+.mobile { align-items: flex-end; }
+.mobile .panel {
+  /* 위쪽 상태 표시줄 + 줄어든 뒤 화면이 살짝 보이도록 남긴다 */
+  max-height: calc(100dvh - env(safe-area-inset-top) - var(--semantic-spacing-xs));
+  border-radius: var(--semantic-radius-sheet) var(--semantic-radius-sheet) 0 0;
+  transform: translateY(100%);
+  transition: transform var(--semantic-motion-duration-slow) var(--semantic-motion-easing-sheet);
+  will-change: transform;
+}
+.mobile[data-state='open'] .panel { transform: translateY(var(--sheet-drag, 0px)); }
+.mobile[data-dragging] .panel,
+.mobile[data-dragging] .backdrop { transition: none; }
+
+.mobile .dragArea { touch-action: none; cursor: grab; user-select: none; -webkit-user-select: none; }
+.mobile[data-dragging] .dragArea { cursor: grabbing; }
+
+.grabber {
+  width: var(--semantic-size-grabber-width);
+  height: var(--semantic-size-grabber-height);
+  margin: var(--semantic-spacing-2xs) auto 0;
+  border-radius: var(--semantic-radius-pill);
+  background: var(--semantic-color-border-strong);
+}
+
+.mobile .header { padding: var(--semantic-spacing-xs) var(--semantic-padding-page-mobile) 0; }
+.mobile .body { padding: var(--semantic-spacing-lg) var(--semantic-padding-page-mobile); }
+.mobile .footer {
+  padding: var(--semantic-padding-md) var(--semantic-padding-page-mobile)
+    calc(var(--semantic-padding-md) + env(safe-area-inset-bottom));
+  border-top: var(--semantic-border-width-default) solid var(--semantic-color-border-subtle);
+}
+/* 푸터가 없을 때도 홈 인디케이터를 피한다 */
+.mobile .scroll:last-child .body { padding-bottom: calc(var(--semantic-spacing-lg) + env(safe-area-inset-bottom)); }
+
+/* 뒤 화면 축소 (iOS 카드 시트). 앱 루트에 data-sheet-background를 붙인다. */
+@media (max-width: 767px) {
+  :global(html[data-sheet-open]) {
+    background: var(--semantic-color-bg-inverse);
+  }
+  :global(html[data-sheet-open]) body {
+    background: var(--semantic-color-bg-inverse);
+  }
+  :global([data-sheet-background]) {
+    transform-origin: 50% 0;
+    transition:
+      transform var(--semantic-motion-duration-slow) var(--semantic-motion-easing-sheet),
+      border-radius var(--semantic-motion-duration-slow) var(--semantic-motion-easing-sheet);
+  }
+  :global(html[data-sheet-open='true']) :global([data-sheet-background]) {
+    overflow: hidden;
+    border-radius: var(--semantic-radius-xl);
+    transform: translateY(calc(env(safe-area-inset-top) + var(--semantic-spacing-xs))) scale(0.93);
+  }
+}

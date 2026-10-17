@@ -1,0 +1,42 @@
+/* TextField · TextArea · DateField가 공유하는 입력 상자 */
+.box {
+  display: flex;
+  align-items: center;
+  gap: var(--semantic-spacing-2xs);
+  width: 100%;
+  min-height: var(--semantic-size-control-lg);
+  padding: 0 var(--semantic-padding-input-x);
+  border-radius: var(--semantic-radius-input);
+  background: var(--semantic-color-bg-subtle);
+  /* 테두리는 안쪽(inset)에 그려 상태가 바뀌어도 크기가 그대로다 */
+  box-shadow: inset 0 0 0 var(--semantic-border-width-default) transparent;
+  transition: box-shadow var(--semantic-motion-duration-fast) var(--semantic-motion-easing-default);
+  cursor: text;
+}
+
+.box:hover { background: var(--semantic-color-bg-muted); }
+
+/* 포커스: 2px 링. 오류 중이어도 포커스는 보인다(빨간 2px 링). */
+.box:focus-within { box-shadow: inset 0 0 0 var(--semantic-border-width-focus) var(--semantic-color-border-focus); }
+.invalid { box-shadow: inset 0 0 0 var(--semantic-border-width-default) var(--semantic-color-border-danger); }
+.invalid:focus-within { box-shadow: inset 0 0 0 var(--semantic-border-width-focus) var(--semantic-color-border-danger); }
+
+.disabled { background: var(--semantic-color-bg-disabled); opacity: var(--semantic-opacity-disabled); cursor: not-allowed; }
+.disabled:hover { background: var(--semantic-color-bg-disabled); }
+
+.input {
+  flex: 1;
+  min-width: 0;
+  padding: var(--semantic-padding-input-y) 0;
+  border: 0;
+  background: transparent;
+  outline: none;
+  color: var(--semantic-color-text-primary);
+}
+.input::placeholder { color: var(--semantic-color-text-placeholder); opacity: 1; }
+.input:disabled { cursor: not-allowed; }
+
+.icon { width: var(--semantic-size-icon-lg); height: var(--semantic-size-icon-lg); color: var(--semantic-color-icon-subtle); }
+
+.textarea { align-items: stretch; }
+.textarea .input { min-height: var(--semantic-size-textarea-min-height); resize: vertical; }

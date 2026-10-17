@@ -1,0 +1,48 @@
+.checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--semantic-spacing-2xs);
+  min-height: var(--semantic-size-icon-lg);
+  cursor: pointer;
+  user-select: none;
+}
+
+/* 24px 아이콘 영역 가운데에 20px 상자 */
+.box {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--semantic-size-icon-lg);
+  height: var(--semantic-size-icon-lg);
+}
+.box::after {
+  content: '';
+  position: absolute;
+  width: var(--semantic-size-icon-md);
+  height: var(--semantic-size-icon-md);
+  border-radius: var(--semantic-radius-checkbox);
+  box-shadow: inset 0 0 0 var(--semantic-border-width-strong) var(--semantic-color-border-strong);
+  transition: background-color var(--semantic-motion-duration-fast) var(--semantic-motion-easing-default);
+}
+.mark {
+  position: relative;
+  z-index: 1;
+  width: var(--semantic-size-icon-sm);
+  height: var(--semantic-size-icon-sm);
+  color: var(--semantic-color-icon-inverse);
+  opacity: 0;
+}
+
+input:checked + .box::after { background: var(--semantic-color-primary-default); box-shadow: none; }
+input:checked + .box .mark { opacity: 1; }
+input:focus-visible + .box::after {
+  outline: var(--semantic-border-width-focus) solid var(--semantic-color-border-focus);
+  outline-offset: 2px;
+}
+.checkbox:hover input:not(:checked):not(:disabled) + .box::after { background: var(--semantic-color-bg-hover); }
+.disabled { opacity: var(--semantic-opacity-disabled); cursor: not-allowed; }
+
+.group { min-width: 0; margin: 0; padding: 0; border: 0; }
+.legend { margin-bottom: var(--semantic-spacing-2xs); padding: 0; }
+.options { display: flex; flex-wrap: wrap; column-gap: var(--semantic-spacing-sm); row-gap: var(--semantic-spacing-2xs); }
