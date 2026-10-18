@@ -16,6 +16,8 @@
   flex: 1;
   min-width: 0;
   padding: var(--semantic-padding-page-desktop);
+  /* 떠 있는 포트폴리오 도구 버튼이 마지막 줄(결재 버튼 등)을 가리지 않게 그 높이만큼 아래를 비운다 */
+  padding-bottom: calc(var(--semantic-size-control-md) + 2 * var(--semantic-spacing-lg));
   outline: none;
 }
 
@@ -63,7 +65,10 @@
 .bellDot { position: absolute; top: var(--semantic-spacing-2xs); right: var(--semantic-spacing-2xs); }
 
 @media (max-width: 1279px) {
-  .main { padding: var(--semantic-padding-page-tablet); }
+  .main {
+    padding: var(--semantic-padding-page-tablet);
+    padding-bottom: calc(var(--semantic-size-control-md) + 2 * var(--semantic-spacing-lg));
+  }
 }
 
 @media (max-width: 767px) {

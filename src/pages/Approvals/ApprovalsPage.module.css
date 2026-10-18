@@ -88,7 +88,7 @@
 
 .toolbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--semantic-spacing-xs); }
 .kinds { display: flex; flex-wrap: wrap; gap: var(--semantic-spacing-2xs); }
-.chipCount { color: var(--semantic-color-text-tertiary); }
+.chipCount { color: var(--semantic-color-text-secondary); }
 .toolbarFields { display: flex; flex-wrap: wrap; gap: var(--semantic-spacing-2xs); }
 .toolbarFields > :first-child { width: var(--semantic-size-layout-column-sm); }
 .toolbarFields > :last-child { width: calc(var(--semantic-size-layout-sidebar-expanded) - var(--semantic-spacing-xl)); }
@@ -108,6 +108,8 @@
 
 .personText { display: flex; min-width: 0; flex-direction: column; align-items: flex-start; }
 .nameButton {
+  /* 누르는 영역 최소 24px (WCAG 2.5.8) */
+  min-height: var(--semantic-size-icon-lg);
   padding: 0;
   border: 0;
   background: none;
@@ -117,7 +119,7 @@
 .nameButton:hover { color: var(--semantic-color-text-link); text-decoration: underline; }
 .reason {
   display: block;
-  max-width: var(--semantic-size-layout-column-md);
+  max-width: var(--semantic-size-layout-column-sm);
   overflow: hidden;
   color: var(--semantic-color-text-secondary);
   text-overflow: ellipsis;

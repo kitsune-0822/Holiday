@@ -25,6 +25,13 @@ tbody tr:hover .td { background: var(--semantic-color-bg-subtle); }
 tr.selected .td { background: var(--semantic-color-primary-subtle); }
 tr.selected:hover .td { background: var(--semantic-color-primary-subtle-hover); }
 
+.sticky {
+  position: sticky;
+  right: 0;
+  z-index: 1;
+  /* 스크롤 중 아래로 지나가는 칸과 구분되게 왼쪽에 그림자 */
+  box-shadow: calc(-1 * var(--semantic-spacing-3xs)) 0 var(--semantic-spacing-2xs) calc(-1 * var(--semantic-spacing-3xs)) var(--semantic-color-border-default);
+}
 .center { text-align: center; }
 .start { text-align: start; }
 .end { text-align: end; }

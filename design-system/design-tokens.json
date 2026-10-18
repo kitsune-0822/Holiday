@@ -1788,7 +1788,7 @@
       "primary": {
         "default": {
           "$type": "color",
-          "$value": "{primitive.color.blue.500}",
+          "$value": "{primitive.color.blue.600}",
           "$extensions": {
             "com.figma.scopes": [
               "ALL_FILLS",
@@ -1798,7 +1798,7 @@
         },
         "hover": {
           "$type": "color",
-          "$value": "{primitive.color.blue.600}",
+          "$value": "{primitive.color.blue.700}",
           "$extensions": {
             "com.figma.scopes": [
               "ALL_FILLS",
@@ -1808,7 +1808,7 @@
         },
         "pressed": {
           "$type": "color",
-          "$value": "{primitive.color.blue.700}",
+          "$value": "{primitive.color.blue.800}",
           "$extensions": {
             "com.figma.scopes": [
               "ALL_FILLS",
@@ -1930,7 +1930,7 @@
         },
         "success": {
           "$type": "color",
-          "$value": "{primitive.color.green.700}",
+          "$value": "{primitive.color.green.800}",
           "$extensions": {
             "com.figma.scopes": [
               "TEXT_FILL"
@@ -2181,7 +2181,7 @@
       "status": {
         "danger": {
           "$type": "color",
-          "$value": "{primitive.color.red.500}",
+          "$value": "{primitive.color.red.600}",
           "$extensions": {
             "com.figma.scopes": [
               "ALL_FILLS",
@@ -2191,7 +2191,7 @@
         },
         "danger-hover": {
           "$type": "color",
-          "$value": "{primitive.color.red.600}",
+          "$value": "{primitive.color.red.700}",
           "$extensions": {
             "com.figma.scopes": [
               "ALL_FILLS",
@@ -2201,7 +2201,7 @@
         },
         "danger-pressed": {
           "$type": "color",
-          "$value": "{primitive.color.red.700}",
+          "$value": "{primitive.color.red.800}",
           "$extensions": {
             "com.figma.scopes": [
               "ALL_FILLS",
@@ -2345,7 +2345,7 @@
       "timeline": {
         "annual": {
           "$type": "color",
-          "$value": "{primitive.color.blue.500}",
+          "$value": "{primitive.color.blue.600}",
           "$extensions": {
             "com.figma.scopes": [
               "FRAME_FILL",
@@ -2374,7 +2374,7 @@
         },
         "sick": {
           "$type": "color",
-          "$value": "{primitive.color.red.500}",
+          "$value": "{primitive.color.red.600}",
           "$extensions": {
             "com.figma.scopes": [
               "FRAME_FILL",
@@ -2384,7 +2384,7 @@
         },
         "comp": {
           "$type": "color",
-          "$value": "{primitive.color.green.500}",
+          "$value": "{primitive.color.green.700}",
           "$extensions": {
             "com.figma.scopes": [
               "FRAME_FILL",

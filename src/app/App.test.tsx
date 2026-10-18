@@ -69,7 +69,7 @@ describe("휴가 신청 흐름", () => {
       balance().getByText("결재 대기 중인 3.5일은 승인되면 빠져요"),
     ).toBeInTheDocument();
     const table = screen.getByRole("table", { name: "휴가 신청 내역" });
-    expect(within(table).getByText("2026-11-02")).toBeInTheDocument();
+    expect(within(table).getByText("11/2(월)")).toBeInTheDocument();
   });
 
   it("반차는 시간대가 필요하고 종료일이 시작일을 따른다", async () => {
@@ -135,6 +135,9 @@ describe("휴가 신청 내역 필터", () => {
     render(<App />);
     const table = await screen.findByRole("table", { name: "휴가 신청 내역" });
     expect(within(table).getAllByRole("row")).toHaveLength(7);
+    // 검색 조건은 기본으로 접혀 있다
+    expect(screen.queryByRole("group", { name: "상태" })).not.toBeInTheDocument();
+    await userEvent.click(screen.getByRole("button", { name: "검색 조건" }));
     const statusGroup = screen.getByRole("group", { name: "상태" });
     await userEvent.click(within(statusGroup).getByLabelText("승인"));
     await userEvent.click(within(statusGroup).getByLabelText("반려"));

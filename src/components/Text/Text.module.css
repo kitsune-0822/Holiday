@@ -5,4 +5,5 @@
 .brand { color: var(--semantic-color-brand-default); }
 .danger { color: var(--semantic-color-text-danger); }
 .success { color: var(--semantic-color-text-success); }
+.warning { color: var(--semantic-color-text-warning); }
 .inherit { color: inherit; }

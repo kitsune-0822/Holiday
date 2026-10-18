@@ -170,10 +170,11 @@ semantic = {
         "brand": {
             "default": c("blue.500", ANY_FILL),
         },
+        # 흰 글자를 얹는 채움이라 한 단계 진하게 (blue.500은 흰 글자와 3.5:1로 AA 미달, 600은 4.6:1)
         "primary": {
-            "default": c("blue.500", ANY_FILL),
-            "hover": c("blue.600", ANY_FILL),
-            "pressed": c("blue.700", ANY_FILL),
+            "default": c("blue.600", ANY_FILL),
+            "hover": c("blue.700", ANY_FILL),
+            "pressed": c("blue.800", ANY_FILL),
             "subtle": c("blue.50", ANY_FILL),
             "subtle-hover": c("blue.100", ANY_FILL),
             "on-primary": c("gray.0", TEXT),
@@ -188,7 +189,7 @@ semantic = {
             "inverse": c("gray.0", TEXT),
             "link": c("blue.700", TEXT),
             "danger": c("red.700", TEXT),
-            "success": c("green.700", TEXT),
+            "success": c("green.800", TEXT),
             "warning": c("orange.700", TEXT),
         },
         "icon": {
@@ -222,9 +223,9 @@ semantic = {
             "danger": c("red.500", STROKE),
         },
         "status": {
-            "danger": c("red.500", ANY_FILL),
-            "danger-hover": c("red.600", ANY_FILL),
-            "danger-pressed": c("red.700", ANY_FILL),
+            "danger": c("red.600", ANY_FILL),
+            "danger-hover": c("red.700", ANY_FILL),
+            "danger-pressed": c("red.800", ANY_FILL),
             "danger-subtle": c("red.50", ANY_FILL),
             "success": c("green.500", ANY_FILL),
             "success-subtle": c("green.50", ANY_FILL),
@@ -240,11 +241,12 @@ semantic = {
         },
         # 주간 휴가 타임라인 막대
         "timeline": {
-            "annual": c("blue.500", FILL),
+            # 흰 글자를 얹는 막대: 흰 글자와 4.5:1 이상
+            "annual": c("blue.600", FILL),
             "half": c("blue.300", FILL),
             "on-half": c("blue.900", TEXT),
-            "sick": c("red.500", FILL),
-            "comp": c("green.500", FILL),
+            "sick": c("red.600", FILL),
+            "comp": c("green.700", FILL),
             "pending": c("blue.50", FILL),
             "pending-border": c("blue.500", STROKE),
             "today": c("blue.50", FILL),
@@ -437,6 +439,6 @@ for v in SPACING:
 print(counts)
 for name, p in [("text.secondary", "gray.600"), ("text.tertiary", "gray.500"), ("text.placeholder", "gray.500"),
                 ("text.link", "blue.700"), ("primary.on-subtle", "blue.700"), ("text.danger", "red.700"),
-                ("text.success", "green.700"), ("text.warning", "orange.700"), ("on-primary/blue.500", "blue.500")]:
+                ("text.success", "green.800"), ("text.warning", "orange.700"), ("on-primary/blue.600", "blue.600"), ("on-danger/red.600", "red.600"), ("on-comp/green.700", "green.700")]:
     hx = resolve("primitive.color." + p)["$value"]["hex"]
     print(f"{name:22} {hx} vs white: {contrast(hx, '#FFFFFF'):.2f}")

@@ -11,6 +11,7 @@ export type TextTone =
   | 'brand'
   | 'danger'
   | 'success'
+  | 'warning'
   | 'inherit';
 
 type TextProps<T extends ElementType> = {

@@ -142,7 +142,7 @@ export function ApprovalsPage() {
         // 같은 사람이 여러 번 쉬어도 한 번만 센다
         const names = [...new Set(teamOverlaps(l, leaves).map((o) => members[o.memberId].name))];
         return names.length ? (
-          <Text tone="danger" variant="label-md" title={names.join(', ')}>
+          <Text tone="warning" variant="label-md" title={names.join(', ')}>
             {t.overlapNames(names[0], names.length - 1)}
           </Text>
         ) : (
@@ -166,6 +166,7 @@ export function ApprovalsPage() {
       header: t.columns.actions,
       align: 'end',
       mobile: 'full',
+      sticky: true,
       render: (l) => {
         const name = members[l.memberId].name;
         return (

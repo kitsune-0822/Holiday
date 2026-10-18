@@ -15,6 +15,8 @@ export interface DataTableColumn<R> {
   align?: 'start' | 'center' | 'end';
   /** 모바일 카드에서 hidden: 숨김 / full: 라벨 없이 한 줄 전체 (버튼 묶음 등) */
   mobile?: 'hidden' | 'full';
+  /** 가로로 스크롤해도 오른쪽 끝에 붙어 보이게 한다 (결재 버튼처럼 늘 보여야 하는 열) */
+  sticky?: boolean;
 }
 
 export interface DataTableSelection<R> {
@@ -165,7 +167,7 @@ export function DataTable<R>({
               </th>
             )}
             {columns.map((col) => (
-              <th key={col.key} scope="col" className={cx(styles.th, styles[col.align ?? 'center'], 'text-body-lg')}>
+              <th key={col.key} scope="col" className={cx(styles.th, styles[col.align ?? 'center'], col.sticky && styles.sticky, 'text-body-lg')}>
                 {col.header}
               </th>
             ))}
@@ -188,7 +190,7 @@ export function DataTable<R>({
                   </td>
                 )}
                 {columns.map((col) => (
-                  <td key={col.key} className={cx(styles.td, styles[col.align ?? 'center'], 'text-body-lg')}>
+                  <td key={col.key} className={cx(styles.td, styles[col.align ?? 'center'], col.sticky && styles.sticky, 'text-body-lg')}>
                     {col.render(row)}
                   </td>
                 ))}

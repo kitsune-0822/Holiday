@@ -19,26 +19,25 @@ import {
 import { upcomingGrant } from '@/data/mock';
 import { dayPeriods, vacationTypes, vacationUnits, type VacationRequest } from '@/features/vacation/types';
 import { useVacation } from '@/features/vacation/VacationContext';
-import { useIsMobile } from '@/hooks/useMediaQuery';
 import { useDocumentTitle } from '@/hooks/useDocumentTitle';
 import { daysBetween } from '@/features/vacation/calc';
-import { useI18n, type Messages } from '@/i18n';
+import { useI18n, type Formatters, type Messages } from '@/i18n';
 import { todayISO } from '@/lib/date';
 import { useRequestFilters } from './useRequestFilters';
 import styles from './VacationStatusPage.module.css';
 
 const RECENT_DAYS = 7;
 
-function columnsFor(m: Messages): DataTableColumn<VacationRequest>[] {
+function columnsFor(m: Messages, f: Formatters): DataTableColumn<VacationRequest>[] {
   const c = m.status.columns;
   return [
-    { key: 'id', header: c.id, render: (r) => r.id },
-    { key: 'type', header: c.type, render: (r) => m.vacation.types[r.type] },
-    { key: 'unit', header: c.unit, render: (r) => m.vacation.units[r.unit] },
-    { key: 'period', header: c.period, render: (r) => (r.period ? m.vacation.periods[r.period] : '-') },
-    { key: 'requestedAt', header: c.requestedAt, render: (r) => r.requestedAt },
-    { key: 'startDate', header: c.startDate, render: (r) => r.startDate },
-    { key: 'endDate', header: c.endDate, render: (r) => r.endDate },
+    { key: 'id', header: c.id, align: 'end', render: (r) => r.id },
+    { key: 'type', header: c.type, align: 'start', render: (r) => m.vacation.types[r.type] },
+    { key: 'unit', header: c.unit, align: 'start', render: (r) => m.vacation.units[r.unit] },
+    { key: 'period', header: c.period, align: 'start', render: (r) => (r.period ? m.vacation.periods[r.period] : '-') },
+    { key: 'requestedAt', header: c.requestedAt, align: 'start', render: (r) => f.date(r.requestedAt) },
+    { key: 'startDate', header: c.startDate, align: 'start', render: (r) => f.date(r.startDate) },
+    { key: 'endDate', header: c.endDate, align: 'start', render: (r) => f.date(r.endDate) },
     { key: 'status', header: c.status, render: (r) => <Badge status={r.status} /> },
     { key: 'reason', header: c.reason, align: 'start', width: 'var(--semantic-size-layout-column-md)', render: (r) => r.reason || '-' },
   ];
@@ -54,7 +53,6 @@ export function VacationStatusPage() {
   const { requests, balance, pendingDays } = useVacation();
   const pendingTotal = vacationTypes.reduce((sum, t) => sum + pendingDays[t], 0);
   const { filters, rows, update, reset, activeCount } = useRequestFilters(requests);
-  const isMobile = useIsMobile();
   const [filtersOpen, setFiltersOpen] = useState(false);
   const ids = { id: useId(), reason: useId(), filters: useId(), results: useId() };
 
@@ -66,8 +64,6 @@ export function VacationStatusPage() {
     });
     return statuses.map((s) => ({ label: m.vacation.status[s], value: m.common.count(list.filter((r) => r.status === s).length) }));
   }, [requests, m]);
-
-  const showFilters = !isMobile || filtersOpen;
 
   return (
     <div className={styles.page}>
@@ -95,18 +91,17 @@ export function VacationStatusPage() {
             {m.status.history} <Text tone="tertiary" variant="title-lg">{m.common.count(rows.length)}</Text>
           </h2>
           <div className={styles.historyActions}>
-            {isMobile && (
-              <Button
-                hierarchy="tertiary"
-                size="sm"
-                aria-expanded={filtersOpen}
-                aria-controls={ids.filters}
-                onClick={() => setFiltersOpen((o) => !o)}
-                icon={<ChevronDown className={filtersOpen ? styles.flip : undefined} />}
-              >
-                {activeCount ? m.status.filtersCount(activeCount) : m.status.filters}
-              </Button>
-            )}
+            {/* 기본은 접어서 첫 화면에 표가 보이게 한다. 조건을 바꾸면 버튼에 개수가 남는다 */}
+            <Button
+              hierarchy="tertiary"
+              size="sm"
+              aria-expanded={filtersOpen}
+              aria-controls={ids.filters}
+              onClick={() => setFiltersOpen((o) => !o)}
+              icon={<ChevronDown className={filtersOpen ? styles.flip : undefined} />}
+            >
+              {activeCount ? m.status.filtersCount(activeCount) : m.status.filters}
+            </Button>
             {activeCount > 0 && (
               <Button hierarchy="tertiary" size="sm" icon={<RotateCcw />} onClick={reset}>
                 {m.common.reset}
@@ -115,7 +110,7 @@ export function VacationStatusPage() {
           </div>
         </div>
 
-        {showFilters && (
+        {filtersOpen && (
           <div id={ids.filters}>
             <FilterGrid>
               <FilterRow>
@@ -159,7 +154,7 @@ export function VacationStatusPage() {
 
         <DataTable
           caption={m.status.caption}
-          columns={columnsFor(m)}
+          columns={columnsFor(m, f)}
           rows={rows}
           getRowKey={(r) => r.id}
           mobileTitleKey="type"

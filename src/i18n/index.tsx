@@ -34,6 +34,8 @@ export interface Formatters {
   days: (v: number) => string;
   /** '10/20(화)' / 'Tue, 10/20' */
   monthDay: (iso: string) => string;
+  /** 표 속 날짜: 올해면 monthDay, 다른 해면 연도까지 ('2025. 9. 12.') */
+  date: (iso: string) => string;
   /** 문장 속 날짜·기간: '10월 19일(월) ~ 10월 23일(금)' / 'Mon, Oct 19 – Fri, Oct 23' */
   dateSpan: (from: string, to: string) => string;
   /** '2026년 10월 18일 일요일' / 'Sunday, October 18, 2026' */
@@ -62,13 +64,16 @@ export function createFormatters(m: Messages): Formatters {
   const rtf = new Intl.RelativeTimeFormat(m.meta.intl, { numeric: 'auto' });
   const long = new Intl.DateTimeFormat(m.meta.intl, { dateStyle: 'full' });
   const weekday = (iso: string) => m.date.weekdays[parse(iso).getDay()];
+  const withYear = new Intl.DateTimeFormat(m.meta.intl, { dateStyle: 'medium' });
+  const monthDay = (iso: string) => {
+    const d = parse(iso);
+    return m.date.monthDay(d.getMonth() + 1, d.getDate(), weekday(iso));
+  };
   return {
     days: m.common.days,
     weekday,
-    monthDay: (iso) => {
-      const d = parse(iso);
-      return m.date.monthDay(d.getMonth() + 1, d.getDate(), weekday(iso));
-    },
+    monthDay,
+    date: (iso) => (parse(iso).getFullYear() === new Date().getFullYear() ? monthDay(iso) : withYear.format(parse(iso))),
     dateSpan: (from, to) => {
       const one = (iso: string) => {
         const d = parse(iso);
