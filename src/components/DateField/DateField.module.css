@@ -2,3 +2,6 @@
 .input::-webkit-calendar-picker-indicator { display: none; }
 .input { cursor: pointer; }
 .empty { color: var(--semantic-color-text-placeholder); }
+/* iOS Safari는 고른 날짜를 가운데 정렬한다. 다른 입력칸처럼 왼쪽에 맞춘다. */
+.input { text-align: start; }
+.input::-webkit-date-and-time-value { text-align: start; }

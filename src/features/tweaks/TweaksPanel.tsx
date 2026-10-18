@@ -95,7 +95,12 @@ export function TweaksPanel() {
                   onChange={(e) => setLocale(e.target.value as Locale)}
                   options={localeList.map((l) => ({ value: l, label: locales[l].meta.languageName }))}
                 />
-                <button type="button" className={cx(styles.toolRow, 'text-body-md')} onClick={() => setL10nOpen(true)}>
+                <button type="button" className={cx(styles.toolRow, 'text-body-md')} onClick={() => {
+                    // 패널이 시트 위에 떠 있으면 시트의 포커스 가두기와 충돌한다. 패널을 닫고 시트만 남긴다.
+                    setOpen(false);
+                    setL10nOpen(true);
+                  }}
+                >
                   <Languages aria-hidden="true" />
                   {t.l10n.open}
                 </button>
