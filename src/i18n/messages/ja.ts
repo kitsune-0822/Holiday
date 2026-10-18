@@ -101,7 +101,7 @@ export const ja: Messages = {
     oneDayOnly: (unit) => `${unit}は1日のみ申請できます。`,
     reason: '理由',
     reasonPlaceholder: '理由を簡単に入力してください。',
-    afterApproval: '承認後の残日数',
+    balanceCols: { type: '種類', now: '現在', after: '承認後' },
     submit: '申請する',
     submitDays: (days) => `${days}を申請`,
     toast: (type, days) => `${type}を${days}申請しました。`,

@@ -4,7 +4,7 @@ import { Button, ButtonGroup, IconButton, type ButtonHierarchy, type ButtonSize 
 import { Demo, DemoGrid, Playground, PropMap, Section, SelectControl, TextControl, ToggleControl } from '../ui';
 
 const hierarchies = ['primary', 'secondary', 'tertiary'] as const;
-const sizes = ['sm', 'md', 'lg'] as const;
+const sizes = ['xs', 'sm', 'md', 'lg'] as const;
 
 export function Actions() {
   const [hierarchy, setHierarchy] = useState<ButtonHierarchy>('primary');

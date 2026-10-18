@@ -58,6 +58,9 @@ describe('결재 목록', () => {
     expect(leaveLabel(byMember('m11'), m)).toBe('병가');
     expect(returnText(byMember('m2'), today, m, f)).toBe('오후 출근');
     expect(returnText(byMember('m1'), today, m, f)).toBe('10/23(금) 복귀');
+    // 금요일에 끝나면 월요일 복귀
+    const friday = { ...byMember('m1'), startDate: '2026-10-19', endDate: '2026-10-23' };
+    expect(returnText(friday, today, m, f)).toBe('10/26(월) 복귀');
   });
 
   it('오늘 휴가자와 주간 행', () => {

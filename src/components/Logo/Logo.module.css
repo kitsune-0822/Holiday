@@ -1,10 +1,9 @@
 .logo {
   display: inline-flex;
   align-items: center;
-  gap: var(--semantic-spacing-xs);
+  gap: var(--semantic-spacing-2xs);
   color: var(--semantic-color-brand-default);
 }
-.sm .mark { width: var(--semantic-size-logo-sm); height: var(--semantic-size-logo-sm); }
-.md .mark { width: var(--semantic-size-logo-md); height: var(--semantic-size-logo-md); }
-.sm { gap: var(--semantic-spacing-2xs); }
-.name { white-space: nowrap; }
+.mark { flex-shrink: 0; width: var(--semantic-size-logo); height: var(--semantic-size-logo); }
+/* 글자 줄 높이를 마크 높이에 맞춰 세로 중심을 맞춘다 */
+.name { line-height: var(--semantic-size-logo); white-space: nowrap; }

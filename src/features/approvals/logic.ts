@@ -2,7 +2,7 @@ import type { TagTone } from '@/components';
 import { daysBetween } from '@/features/vacation/calc';
 import type { VacationType } from '@/features/vacation/types';
 import type { Formatters, Messages } from '@/i18n';
-import { addDaysISO, isWeekend, mondayOf } from '@/lib/date';
+import { addBusinessDaysISO, addDaysISO, isWeekend, mondayOf } from '@/lib/date';
 import type { Member, TeamLeave } from './types';
 
 export type LeaveKind = 'annual' | 'half' | 'sick' | 'comp';
@@ -64,7 +64,8 @@ export function returnText(l: TeamLeave, today: string, m: Messages, f: Formatte
     if (l.unit !== 'full') return l.period === 'am' ? m.approvals.afternoonIn : m.approvals.afternoonOff;
     return m.approvals.returnTomorrow;
   }
-  return m.approvals.returnOn(f.monthDay(addDaysISO(l.endDate, 1)));
+  // 주말을 건너뛴 다음 평일에 복귀한다
+  return m.approvals.returnOn(f.monthDay(addBusinessDaysISO(l.endDate, 1)));
 }
 
 /** 보여줄 주의 월요일. 주말에는 다가오는 주를 보여준다. */

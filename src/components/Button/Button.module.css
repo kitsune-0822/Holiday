@@ -12,6 +12,13 @@
   user-select: none;
 }
 
+.xs {
+  min-height: var(--semantic-size-control-xs);
+  padding: 0 var(--semantic-padding-md);
+  gap: var(--semantic-spacing-3xs);
+  border-radius: var(--semantic-radius-lg);
+}
+.xs .icon { width: var(--semantic-size-icon-md); height: var(--semantic-size-icon-md); }
 .sm { min-height: var(--semantic-size-control-sm); padding-block: var(--semantic-padding-button-y-sm); }
 .md { min-height: var(--semantic-size-control-md); padding-block: var(--semantic-padding-button-y-md); }
 .lg { min-height: var(--semantic-size-control-lg); padding-block: var(--semantic-padding-button-y-lg); }

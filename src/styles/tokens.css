@@ -312,8 +312,7 @@
   --semantic-size-grabber-height: var(--primitive-spacing-4);
   --semantic-size-card-min-height: var(--primitive-size-200);
   --semantic-size-textarea-min-height: var(--primitive-size-120);
-  --semantic-size-logo-sm: var(--primitive-spacing-24);
-  --semantic-size-logo-md: var(--primitive-size-44);
+  --semantic-size-logo: var(--primitive-spacing-24);
   --semantic-size-layout-sidebar-expanded: var(--primitive-size-250);
   --semantic-size-layout-sidebar-collapsed: var(--primitive-size-88);
   --semantic-size-layout-sheet-max-width: var(--primitive-size-800);

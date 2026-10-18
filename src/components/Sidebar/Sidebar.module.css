@@ -34,7 +34,8 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--semantic-spacing-sm);
-  min-height: var(--semantic-size-logo-md);
+  /* 로고(24)보다 큰 접기 버튼(32) 높이에 맞춘다 */
+  min-height: var(--semantic-size-control-xs);
   padding-inline: var(--semantic-padding-lg);
   white-space: nowrap;
 }

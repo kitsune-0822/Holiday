@@ -3197,23 +3197,12 @@
         }
       },
       "logo": {
-        "sm": {
-          "$type": "number",
-          "$value": "{primitive.spacing.24}",
-          "$extensions": {
-            "com.figma.scopes": [
-              "WIDTH_HEIGHT"
-            ]
-          }
-        },
-        "md": {
-          "$type": "number",
-          "$value": "{primitive.size.44}",
-          "$extensions": {
-            "com.figma.scopes": [
-              "WIDTH_HEIGHT"
-            ]
-          }
+        "$type": "number",
+        "$value": "{primitive.spacing.24}",
+        "$extensions": {
+          "com.figma.scopes": [
+            "WIDTH_HEIGHT"
+          ]
         }
       },
       "layout": {

@@ -1,7 +1,27 @@
 .form { container-type: inline-size; }
-.columns { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--semantic-spacing-xl); }
+/* 1열일 때는 섹션 사이도 섹션 안 항목 간격과 같게 둔다 */
+.columns { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--semantic-spacing-lg); }
 .column { display: flex; min-width: 0; flex-direction: column; gap: var(--semantic-spacing-lg); }
 .group { display: flex; flex-direction: column; gap: var(--semantic-spacing-sm); }
+.form { display: flex; flex-direction: column; gap: var(--semantic-spacing-lg); }
+
+.balance { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.balance th,
+.balance td {
+  padding: var(--semantic-spacing-2xs) 0;
+  border-bottom: var(--semantic-border-width-default) solid var(--semantic-color-border-subtle);
+  font-weight: inherit;
+  text-align: end;
+}
+.balance th:first-child { text-align: start; }
+/* 강조 줄 배경이 글자에 붙지 않게 양 끝을 띄운다 */
+.balance th:first-child { padding-inline-start: var(--semantic-spacing-2xs); }
+.balance :is(th, td):last-child { padding-inline-end: var(--semantic-spacing-2xs); }
+.balance thead th { color: var(--semantic-color-text-tertiary); }
+.balance tbody th { color: var(--semantic-color-text-secondary); }
+/* 지금 고른 휴가 유형의 줄을 강조 */
+.balance tbody .current th { color: var(--semantic-color-text-primary); }
+.current { background: var(--semantic-color-bg-subtle); }
 
 /* 시트가 넓으면 Figma처럼 2열 (왼쪽: 종류, 오른쪽: 기간·사유) */
 @container (min-width: 640px) {

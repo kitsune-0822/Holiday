@@ -299,7 +299,8 @@ semantic = {
         "grabber": {"width": size(40), "height": size(4)},
         "card-min-height": layout(200),
         "textarea-min-height": layout(120),
-        "logo": {"sm": size(24), "md": layout(44)},
+        # 로고 마크는 사이드바가 펼쳐지든 접히든 같은 크기
+        "logo": size(24),
         "layout": {
             "sidebar-expanded": layout(250),
             "sidebar-collapsed": layout(88),

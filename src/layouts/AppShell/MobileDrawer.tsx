@@ -29,7 +29,14 @@ export function MobileDrawer({ open, onClose, children }: { open: boolean; onClo
 
   useFocusTrap(panelRef, mounted);
   useEffect(() => {
-    if (mounted) return lockBodyScroll();
+    if (!mounted) return;
+    const unlock = lockBodyScroll();
+    // 떠 있는 포트폴리오 도구 버튼이 메뉴를 가리지 않게 표시한다
+    document.documentElement.dataset.drawerOpen = 'true';
+    return () => {
+      unlock();
+      delete document.documentElement.dataset.drawerOpen;
+    };
   }, [mounted]);
   useEffect(() => {
     if (!open) return;

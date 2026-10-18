@@ -1,4 +1,4 @@
-import { ChevronDown, ChevronLeft, ChevronRight, Download, Maximize2, Search } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Download, Maximize2, Search } from 'lucide-react';
 import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import {
   Button,
@@ -170,10 +170,10 @@ export function ApprovalsPage() {
         const name = members[l.memberId].name;
         return (
           <span className={styles.rowActions}>
-            <Button hierarchy="tertiary" tone="danger" size="sm" aria-label={t.rejectLabel(name)} onClick={() => setRejectIds([l.id])}>
+            <Button hierarchy="tertiary" tone="danger" size="xs" aria-label={t.rejectLabel(name)} onClick={() => setRejectIds([l.id])}>
               {t.reject}
             </Button>
-            <Button size="sm" aria-label={t.approveLabel(name)} onClick={() => runDecision([l.id], 'approved')}>
+            <Button size="xs" aria-label={t.approveLabel(name)} onClick={() => runDecision([l.id], 'approved')}>
               {t.approve}
             </Button>
           </span>
@@ -294,59 +294,102 @@ export function ApprovalsPage() {
 }
 
 function TodayCard() {
-  const { today, members, leaves } = useApprovals();
+  const { today, leaves } = useApprovals();
   const { m: tx, f } = useI18n();
   const t = tx.approvals;
   const list = onLeaveToday(leaves, today);
+  const listRef = useRef<HTMLDivElement>(null);
+  const overflowing = useOverflow(listRef);
+  const [expanded, setExpanded] = useState(false);
+
+  return (
+    <>
+      <Card
+        title={
+          <>
+            {t.today} <span className={styles.count}>{list.length}</span>
+          </>
+        }
+        description={f.longDate(today)}
+        compact
+        action={
+          list.length > 0 && (
+            <IconButton variant="ghost" size="xs" label={t.expand(t.today)} icon={<Maximize2 />} onClick={() => setExpanded(true)} />
+          )
+        }
+        className={cx(styles.overviewCard, styles.previewCard)}
+      >
+        <TodaySplit list={list} />
+        {/* 명단이 넘치면 주간 카드처럼 아래를 흐리게 하고 '모두 보기'를 둔다 */}
+        <div className={styles.preview}>
+          <div ref={listRef} className={styles.previewInner}>
+            {list.length ? (
+              <TodayList list={list} />
+            ) : (
+              <Text as="p" variant="body-md" tone="tertiary" className={styles.emptyText}>
+                {isWeekend(today) ? t.weekend : t.todayEmpty}
+              </Text>
+            )}
+          </div>
+          {overflowing && (
+            <div className={styles.previewFade}>
+              <Button hierarchy="secondary" size="sm" icon={<Maximize2 />} onClick={() => setExpanded(true)}>
+                {t.showAll(list.length)}
+              </Button>
+            </div>
+          )}
+        </div>
+      </Card>
+      <Sheet open={expanded} onClose={() => setExpanded(false)} title={t.today} description={f.longDate(today)}>
+        <div className={styles.todaySheet}>
+          <TodaySplit list={list} />
+          <TodayList list={list} />
+        </div>
+      </Sheet>
+    </>
+  );
+}
+
+/** 종일 · 오전 부재 · 오후 부재 인원 */
+function TodaySplit({ list }: { list: TeamLeave[] }) {
+  const { m } = useI18n();
+  const t = m.approvals;
   const full = list.filter((l) => l.unit === 'full').length;
   const am = list.filter((l) => l.unit !== 'full' && l.period === 'am').length;
   const pm = list.filter((l) => l.unit !== 'full' && l.period === 'pm').length;
-
   return (
-    <Card
-      title={
-        <>
-          {t.today} <span className={styles.count}>{list.length}</span>
-        </>
-      }
-      description={f.longDate(today)}
-      className={styles.overviewCard}
-    >
-      {list.length ? (
-        <ul className={styles.todayList}>
-          {list.map((l) => {
-            const m = members[l.memberId];
-            return (
-              <li key={l.id}>
-                <span className={styles.personText}>
-                  <span className="text-title-sm">{m.name}</span>
-                  <span className={cx(styles.sub, 'text-caption-md')}>{returnText(l, today, tx, f)}</span>
-                </span>
-                <Tag tone={kindTone[kindOf(l)]}>{leaveLabel(l, tx)}</Tag>
-              </li>
-            );
-          })}
-        </ul>
-      ) : (
-        <Text as="p" variant="body-md" tone="tertiary" className={styles.emptyText}>
-          {isWeekend(today) ? t.weekend : t.todayEmpty}
-        </Text>
-      )}
-      <dl className={styles.split}>
-        <div>
-          <dt className="text-caption-md">{t.split.full}</dt>
-          <dd className="text-title-lg">{full}</dd>
-        </div>
-        <div>
-          <dt className="text-caption-md">{t.split.am}</dt>
-          <dd className="text-title-lg">{am}</dd>
-        </div>
-        <div>
-          <dt className="text-caption-md">{t.split.pm}</dt>
-          <dd className="text-title-lg">{pm}</dd>
-        </div>
-      </dl>
-    </Card>
+    <dl className={styles.split}>
+      <div>
+        <dt className="text-caption-md">{t.split.full}</dt>
+        <dd className="text-title-lg">{full}</dd>
+      </div>
+      <div>
+        <dt className="text-caption-md">{t.split.am}</dt>
+        <dd className="text-title-lg">{am}</dd>
+      </div>
+      <div>
+        <dt className="text-caption-md">{t.split.pm}</dt>
+        <dd className="text-title-lg">{pm}</dd>
+      </div>
+    </dl>
+  );
+}
+
+function TodayList({ list }: { list: TeamLeave[] }) {
+  const { today, members } = useApprovals();
+  const { m: tx, f } = useI18n();
+  return (
+    <ul className={styles.todayList}>
+      {list.map((l) => (
+        <li key={l.id}>
+          <span className={styles.personText}>
+            <span className="text-title-sm">{members[l.memberId].name}</span>
+            <span className={cx(styles.sub, 'text-caption-md')}>{returnText(l, today, tx, f)}</span>
+          </span>
+          <Tag tone={kindTone[kindOf(l)]}>{leaveLabel(l, tx)}</Tag>
+        </li>
+      ))}
+    </ul>
   );
 }
 
@@ -374,11 +417,11 @@ function WeekCard({ onOpen }: { onOpen: (l: TeamLeave) => void }) {
             <IconButton variant="ghost" size="xs" label={tx.approvals.expand(title)} icon={<Maximize2 />} onClick={() => setExpanded(true)} />
           </div>
         }
-        className={cx(styles.overviewCard, styles.weekCard)}
+        className={cx(styles.overviewCard, styles.previewCard)}
       >
         {/* 미리보기: 옆 카드 높이에 맞춰 잘라 보여주고, 넘치면 아래를 흐리게 한 뒤 '모두 보기'를 둔다 */}
-        <div className={styles.weekPreview}>
-          <div ref={previewRef} className={styles.weekPreviewInner}>
+        <div className={styles.preview}>
+          <div ref={previewRef} className={styles.previewInner}>
             <WeekTimeline
               weekStart={start}
               today={today}
@@ -388,8 +431,8 @@ function WeekCard({ onOpen }: { onOpen: (l: TeamLeave) => void }) {
             />
           </div>
           {overflowing && (
-            <div className={styles.weekFade}>
-              <Button hierarchy="secondary" size="sm" icon={<ChevronDown />} onClick={() => setExpanded(true)}>
+            <div className={styles.previewFade}>
+              <Button hierarchy="secondary" size="sm" icon={<Maximize2 />} onClick={() => setExpanded(true)}>
                 {tx.approvals.showAll(rows.length)}
               </Button>
             </div>

@@ -58,6 +58,8 @@ export function AppShell() {
         <>
           <header className={styles.topBar}>
             <IconButton variant="ghost" size="sm" label={m.nav.openMenu} icon={<Menu />} onClick={() => setDrawerOpen(true)} />
+            {/* 오른쪽 버튼이 2개라 왼쪽에도 버튼 1개만큼 비워 로고를 가운데에 둔다 */}
+            <span className={styles.topSpacer} aria-hidden="true" />
             <Link to="/vacations" className={styles.topLogo} aria-label={m.nav.home}>
               <Logo size="sm" />
             </Link>

@@ -11,16 +11,18 @@ export interface CardProps extends Omit<HTMLAttributes<HTMLElement>, 'title'> {
   /** 본문. Figma의 빈 76px frame 자리에 들어가는 slot. */
   children?: ReactNode;
   headingLevel?: 2 | 3;
+  /** 제목과 설명 사이를 좁힌다 (2xs) */
+  compact?: boolean;
 }
 
 /** 높이는 내용에 맞추고(min-height 200), 폭은 부모를 채운다. */
-export function Card({ title, description, action, children, headingLevel = 2, className, ...rest }: CardProps) {
+export function Card({ title, description, action, children, headingLevel = 2, compact = false, className, ...rest }: CardProps) {
   const Heading = `h${headingLevel}` as const;
   return (
     <section data-component="Card" className={cx(styles.card, className)} {...rest}>
       {(title || action) && (
         <header className={styles.header}>
-          <div className={styles.titles}>
+          <div className={cx(styles.titles, compact && styles.compact)}>
             {title && <Heading className="text-heading-md">{title}</Heading>}
             {description && <p className={cx(styles.description, 'text-body-lg')}>{description}</p>}
           </div>

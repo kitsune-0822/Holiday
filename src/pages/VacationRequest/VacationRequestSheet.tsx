@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from 'react';
-import { Button, ButtonGroup, DateField, KeyValueList, SegmentedControl, Sheet, Text, TextArea, useToast } from '@/components';
+import { Button, ButtonGroup, DateField, SegmentedControl, Sheet, Text, TextArea, useToast } from '@/components';
 import { remainingAfter, requestedDays } from '@/features/vacation/calc';
 import { overlaps } from '@/features/vacation/requests';
 import {
@@ -109,24 +109,6 @@ export function VacationRequestSheet() {
             <Text as="h3" id="request-type-title" variant="heading-sm">
               {t.typeSection}
             </Text>
-            <div className={styles.group}>
-              <Text as="h4" variant="label-lg">
-                {t.balance}
-              </Text>
-              <KeyValueList
-                items={vacationTypes.map((t) => ({
-                  label: m.vacation.types[t],
-                  value:
-                    pendingDays[t] > 0 ? (
-                      <>
-                        {f.days(balance[t])} <Text tone="tertiary">{m.request.pendingNote(f.days(pendingDays[t]))}</Text>
-                      </>
-                    ) : (
-                      f.days(balance[t])
-                    ),
-                }))}
-              />
-            </div>
             <SegmentedControl
               label={t.type}
               required
@@ -188,32 +170,49 @@ export function VacationRequestSheet() {
               description={`${reason.length}/${REASON_MAX}`}
               onChange={(e) => setReason(e.target.value)}
             />
-            <div className={styles.group} aria-live="polite">
-              <Text as="h4" variant="label-lg">
-                {t.afterApproval}
-              </Text>
-              <KeyValueList
-                items={vacationTypes.map((v) => ({
-                  label: m.vacation.types[v],
-                  value:
-                    v === type && days > 0 ? (
+          </section>
+        </div>
+
+        {/* 지금 잔여와 승인 후 잔여를 한 표로 비교한다 (2열일 때 양쪽 높이를 맞추려 아래 전체 폭에 둔다) */}
+        <section className={styles.group} aria-labelledby="request-balance-title" aria-live="polite">
+          <Text as="h3" id="request-balance-title" variant="label-lg">
+            {t.balance}
+          </Text>
+          <table className={styles.balance}>
+            <thead className="text-caption-md">
+              <tr>
+                <th scope="col">{t.balanceCols.type}</th>
+                <th scope="col">{t.balanceCols.now}</th>
+                <th scope="col">{t.balanceCols.after}</th>
+              </tr>
+            </thead>
+            <tbody className="text-body-md">
+              {vacationTypes.map((v) => (
+                <tr key={v} className={v === type ? styles.current : undefined}>
+                  <th scope="row">{m.vacation.types[v]}</th>
+                  <td>
+                    {f.days(balance[v])}
+                    {pendingDays[v] > 0 && <Text tone="tertiary"> {t.pendingNote(f.days(pendingDays[v]))}</Text>}
+                  </td>
+                  <td>
+                    {v === type && days > 0 ? (
                       <>
-                        {f.days(after[v])}
-                        <Text tone="danger">(-{f.days(days)})</Text>
+                        {f.days(after[v])} <Text tone="danger">(-{f.days(days)})</Text>
                       </>
                     ) : (
                       f.days(balance[v])
-                    ),
-                }))}
-              />
-              {show('days', Boolean(start && endDate)) && (
-                <Text as="p" role="alert" variant="body-md" tone="danger">
-                  {errors.days}
-                </Text>
-              )}
-            </div>
-          </section>
-        </div>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          {show('days', Boolean(start && endDate)) && (
+            <Text as="p" role="alert" variant="body-md" tone="danger">
+              {errors.days}
+            </Text>
+          )}
+        </section>
       </form>
     </Sheet>
   );

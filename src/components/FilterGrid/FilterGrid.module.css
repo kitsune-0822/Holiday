@@ -15,9 +15,9 @@
 }
 .label {
   flex: 0 0 var(--semantic-size-layout-filter-label);
-  justify-content: center;
+  justify-content: flex-start;
   background: var(--semantic-color-bg-subtle);
-  text-align: center;
+  text-align: start;
 }
 .control { flex: 1; min-width: 0; gap: var(--semantic-spacing-sm); background: var(--semantic-color-bg-default); }
 .grid { padding: 0 0 var(--semantic-border-width-default) var(--semantic-border-width-default); }

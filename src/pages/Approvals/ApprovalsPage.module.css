@@ -11,21 +11,23 @@
 }
 .overviewCard { justify-content: flex-start; min-width: 0; }
 
-/* ── 주간 미리보기 ── */
+/* ── 잘라 보여주는 미리보기 (오늘·주간 카드 공용) ── */
 .weekActions { display: flex; align-items: center; gap: var(--semantic-spacing-2xs); }
 /* 좁은 화면에서는 범례를 숨겨 제목이 꺾이지 않게 한다 (크게 보기에서 보여준다) */
 @container (max-width: 599px) {
   .weekActions .legend { display: none; }
 }
-.weekCard { min-height: 0; }
-.weekPreview {
+/* 쌓여 보일 때(좁은 화면): 카드는 내용만큼만 차지하고, 두 카드 모두 같은 최대 높이를 넘으면 명단을 잘라 '모두 보기'를 둔다 */
+.previewCard { min-height: 0; max-height: calc(var(--semantic-size-control-md) * 10); }
+.preview {
   position: relative;
-  flex: 1;
-  /* 쌓여 보일 때(좁은 화면): 머리글 + 약 3명 */
-  height: calc(var(--semantic-size-control-md) * 5);
+  display: flex;
+  flex: 0 1 auto;
+  min-height: 0;
+  flex-direction: column;
 }
-.weekPreviewInner { height: 100%; overflow: hidden; }
-.weekFade {
+.previewInner { flex: 0 1 auto; min-height: 0; overflow: hidden; }
+.previewFade {
   position: absolute;
   inset: auto 0 0 0;
   display: flex;
@@ -36,12 +38,13 @@
   background: linear-gradient(to bottom, transparent, var(--semantic-color-bg-default) 70%);
   pointer-events: none;
 }
-.weekFade > * { pointer-events: auto; }
+.previewFade > * { pointer-events: auto; }
 
 /* 나란히 놓일 때: 미리보기는 행 높이에 영향을 주지 않고 오늘 휴가자 카드 높이를 따른다 */
 @container (min-width: 1080px) {
-  .weekPreview { height: auto; min-height: calc(var(--semantic-size-control-md) * 5); }
-  .weekPreviewInner { position: absolute; inset: 0; }
+  .previewCard { max-height: none; }
+  .preview { flex: 1; min-height: calc(var(--semantic-size-control-md) * 5); }
+  .previewInner { position: absolute; inset: 0; }
 }
 
 /* ── 주간 크게 보기 ── */
@@ -52,15 +55,15 @@
 .todayList { display: flex; flex-direction: column; gap: var(--semantic-spacing-sm); }
 .todayList li { display: flex; align-items: center; gap: var(--semantic-spacing-xs); }
 .todayList li > :last-child { margin-left: auto; }
+.todaySheet { display: flex; flex-direction: column; gap: var(--semantic-spacing-lg); }
 .emptyText { padding-block: var(--semantic-spacing-lg); text-align: center; }
 
 .split {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: var(--semantic-spacing-2xs);
-  margin-top: auto;
-  padding-top: var(--semantic-padding-lg);
-  border-top: var(--semantic-border-width-default) solid var(--semantic-color-border-subtle);
+  padding-bottom: var(--semantic-padding-lg);
+  border-bottom: var(--semantic-border-width-default) solid var(--semantic-color-border-subtle);
 }
 .split dt { color: var(--semantic-color-text-tertiary); }
 

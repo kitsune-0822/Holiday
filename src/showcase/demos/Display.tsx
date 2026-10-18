@@ -72,7 +72,7 @@ export function Display() {
           </Demo>
         </DemoGrid>
         <Text as="p" variant="body-md" tone="tertiary">
-          Figma의 로고 도형은 자리표시자라서 임시 아이콘을 넣었습니다. 실제 로고 SVG를 주시면 바꿉니다.
+          마크는 크기와 상관없이 24px이고, 글자 줄 높이를 마크 높이에 맞춰 세로 중심을 맞춥니다.
         </Text>
       </Section>
 

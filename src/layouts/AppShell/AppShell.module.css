@@ -45,8 +45,9 @@
   border-bottom: var(--semantic-border-width-default) solid var(--semantic-color-border-subtle);
   background: var(--semantic-color-bg-default);
 }
+.topSpacer { flex-shrink: 0; width: var(--semantic-size-control-sm); }
 .topLogo { display: flex; flex: 1; justify-content: center; }
-.topActions { display: flex; align-items: center; }
+.topActions { display: flex; align-items: center; gap: var(--semantic-spacing-3xs); }
 .bell {
   position: relative;
   display: inline-flex;

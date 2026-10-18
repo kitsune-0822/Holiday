@@ -103,7 +103,7 @@ export const en: Messages = {
     oneDayOnly: (unit) => `A ${unit.toLowerCase()} can only be one day.`,
     reason: 'Reason',
     reasonPlaceholder: 'Add a short reason.',
-    afterApproval: 'Balance after approval',
+    balanceCols: { type: 'Type', now: 'Now', after: 'After approval' },
     submit: 'Submit',
     submitDays: (days) => `Request ${days}`,
     toast: (type, days) => `Requested ${days} of ${type.toLowerCase()}.`,

@@ -87,6 +87,9 @@
 .footer { text-align: center; }
 
 @media (max-width: 767px) {
+  /* 모바일에서는 시트·메뉴가 열려 있으면 하단 버튼을 가리지 않도록 숨긴다 */
+  :global(html[data-sheet-open]) .root,
+  :global(html[data-drawer-open]) .root { display: none; }
   .root { right: var(--semantic-spacing-sm); bottom: calc(var(--semantic-spacing-sm) + env(safe-area-inset-bottom)); left: var(--semantic-spacing-sm); }
   .panel { width: 100%; }
   .stats { grid-template-columns: repeat(2, 1fr); }

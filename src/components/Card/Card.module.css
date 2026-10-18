@@ -13,6 +13,7 @@
 
 .header { display: flex; align-items: flex-start; gap: var(--semantic-spacing-sm); }
 .titles { display: flex; flex: 1; min-width: 0; flex-direction: column; gap: var(--semantic-spacing-sm); }
+.compact { gap: var(--semantic-spacing-2xs); }
 .description { color: var(--semantic-color-text-secondary); }
 
 @media (max-width: 767px) {

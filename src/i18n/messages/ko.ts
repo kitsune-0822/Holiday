@@ -106,7 +106,7 @@ export const ko = {
     oneDayOnly: (unit: string) => `${unit}는 하루만 신청할 수 있어요.`,
     reason: '사유',
     reasonPlaceholder: '사유를 간단히 입력해 주세요.',
-    afterApproval: '승인 후 잔여 휴가',
+    balanceCols: { type: '종류', now: '지금', after: '승인 후' },
     submit: '신청하기',
     submitDays: (days: string) => `${days} 신청하기`,
     toast: (type: string, days: string) => `${type} ${days}을 신청했어요.`,
