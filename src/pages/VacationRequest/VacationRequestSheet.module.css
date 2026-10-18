@@ -3,7 +3,6 @@
 .columns { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--semantic-spacing-lg); }
 .column { display: flex; min-width: 0; flex-direction: column; gap: var(--semantic-spacing-lg); }
 .group { display: flex; flex-direction: column; gap: var(--semantic-spacing-sm); }
-.form { display: flex; flex-direction: column; gap: var(--semantic-spacing-lg); }
 
 .balance { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
 .balance th,
@@ -25,5 +24,13 @@
 
 /* 시트가 넓으면 Figma처럼 2열 (왼쪽: 종류, 오른쪽: 기간·사유) */
 @container (min-width: 640px) {
-  .columns { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--semantic-spacing-3xl); }
+  .columns {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    /* 오른쪽(기간·사유)이 두 줄을 차지하고, 왼쪽은 종류 선택 아래 바로 표가 온다 */
+    grid-template-rows: auto 1fr;
+    align-items: start;
+    gap: var(--semantic-spacing-lg) var(--semantic-spacing-3xl);
+  }
+  .periodSection { grid-column: 2; grid-row: 1 / span 2; }
+  .balanceSection { grid-column: 1; grid-row: 2; }
 }

@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from 'react';
 import { Button, ButtonGroup, DateField, SegmentedControl, Sheet, Text, TextArea, useToast } from '@/components';
+import { cx } from '@/lib/cx';
 import { remainingAfter, requestedDays } from '@/features/vacation/calc';
 import { overlaps } from '@/features/vacation/requests';
 import {
@@ -137,7 +138,7 @@ export function VacationRequestSheet() {
             />
           </section>
 
-          <section className={styles.column} aria-labelledby="request-period-title">
+          <section className={cx(styles.column, styles.periodSection)} aria-labelledby="request-period-title">
             <Text as="h3" id="request-period-title" variant="heading-sm">
               {t.periodSection}
             </Text>
@@ -171,10 +172,9 @@ export function VacationRequestSheet() {
               onChange={(e) => setReason(e.target.value)}
             />
           </section>
-        </div>
 
-        {/* 지금 잔여와 승인 후 잔여를 한 표로 비교한다 (2열일 때 양쪽 높이를 맞추려 아래 전체 폭에 둔다) */}
-        <section className={styles.group} aria-labelledby="request-balance-title" aria-live="polite">
+          {/* 지금 잔여와 승인 후 잔여를 한 표로 비교한다. 1열에선 맨 아래, 2열에선 시간대 아래 */}
+          <section className={cx(styles.group, styles.balanceSection)} aria-labelledby="request-balance-title" aria-live="polite">
           <Text as="h3" id="request-balance-title" variant="label-lg">
             {t.balance}
           </Text>
@@ -213,6 +213,7 @@ export function VacationRequestSheet() {
             </Text>
           )}
         </section>
+        </div>
       </form>
     </Sheet>
   );
