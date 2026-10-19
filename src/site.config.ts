@@ -8,7 +8,7 @@ export const site = {
     role: 'UX Engineer',
   },
   repo: {
-    url: 'https://github.com/kitsune-0822/Holiday_Shiftee',
+    url: 'https://github.com/kitsune-0822/Holiday',
     branch: 'main',
   },
   /** 비워 두면 패널에서 숨긴다 */

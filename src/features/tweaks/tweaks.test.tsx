@@ -48,7 +48,7 @@ describe('포트폴리오 도구', () => {
     const panel = screen.getByRole('dialog', { name: '이 프로젝트에 대해' });
     expect(within(panel).getByRole('link', { name: /이 페이지 소스 보기/ })).toHaveAttribute(
       'href',
-      'https://github.com/kitsune-0822/Holiday_Shiftee/blob/main/src/pages/Approvals/ApprovalsPage.tsx',
+      'https://github.com/kitsune-0822/Holiday/blob/main/src/pages/Approvals/ApprovalsPage.tsx',
     );
     expect(within(panel).getByRole('link', { name: /컴포넌트 쇼케이스/ })).toHaveAttribute('href', '/showcase/');
     expect(within(panel).getByRole('link', { name: /GitHub 저장소/ })).toHaveAttribute('target', '_blank');

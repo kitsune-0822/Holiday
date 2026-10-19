@@ -1,4 +1,4 @@
-# Holiday_Shiftee
+# Holiday
 
 휴가 신청·현황 관리 웹 (React + TypeScript + Vite)
 
@@ -13,7 +13,7 @@ npm run build      # 타입 검사 + 빌드 (dist/)
 
 ## 배포
 
-- 프로덕션: https://holiday-shiftee.vercel.app (쇼케이스: `/showcase/`)
+- 프로덕션: https://holiday-kitsune.vercel.app (쇼케이스: `/showcase/`)
 - `vercel.json`: 모든 주소를 앱(`index.html`)으로, `/showcase/*`는 쇼케이스로 보낸다 (새로고침·직접 진입 시 404 방지)
 - GitHub `main`과 연결돼 있어 push하면 프로덕션에 자동 배포된다.
 - 수동 배포: `vercel build --prod && vercel deploy --prebuilt --prod` (로컬 빌드라 커밋 해시가 패널에 표시된다)
